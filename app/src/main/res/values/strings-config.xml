@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="sd_path">/mdd</string>
+    <string name="crash_path">/crash</string>
+
+    <string name="api_url_test">http://beautician.meididi88.com/index.php/v</string>
+    <string name="api_url_release">http://tbeautician.meididi88.com/index.php/v</string>
+</resources>

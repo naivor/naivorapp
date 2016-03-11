@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="layout_background">#88e1e1e1</color>
+    <!-- 黑色透明 -->
+
+    <color name="one_color_black">#333333</color>
+    <!-- 黑色透明 -->
+    <color name="one_color_orienge">#F64C3B</color>
+    <!-- 黑色透明 -->
+    <color name="one_color_red">#F04877</color>
+    <!-- 黑色透明 -->
+    <color name="two_color">#666666</color>
+    <!-- 黑色透明 -->
+    <color name="three_color">#999999</color>
+    <!-- 黑色透明 -->
+    <color name="three_color_66">#66999999</color>
+    <!-- 黑色透明 -->
+    <color name="four_color">#FFFFFF</color>
+    <!-- 黑色透明 -->
+
+</resources>
