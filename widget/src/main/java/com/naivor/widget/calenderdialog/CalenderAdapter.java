@@ -1,4 +1,4 @@
-package com.naivor.calenderdialog;
+package com.naivor.widget.calenderdialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

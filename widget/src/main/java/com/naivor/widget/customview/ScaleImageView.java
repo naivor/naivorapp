@@ -1,4 +1,4 @@
-package com.naivor.customview;
+package com.naivor.widget.customview;
 
 
 import android.content.Context;

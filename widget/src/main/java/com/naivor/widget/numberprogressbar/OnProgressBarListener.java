@@ -1,4 +1,4 @@
-package com.naivor.numberprogressbar;
+package com.naivor.widget.numberprogressbar;
 
 /**
  * Created by lelexxx on 15-4-23.

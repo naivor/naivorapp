@@ -1,4 +1,4 @@
-package com.naivor.draggridview;
+package com.naivor.widget.draggridview;
 
 import android.widget.BaseAdapter;
 

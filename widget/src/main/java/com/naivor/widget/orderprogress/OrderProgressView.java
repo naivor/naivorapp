@@ -1,4 +1,4 @@
-package com.naivor.orderprogress;
+package com.naivor.widget.orderprogress;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

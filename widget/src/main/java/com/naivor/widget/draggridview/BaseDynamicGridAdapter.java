@@ -1,10 +1,11 @@
-package com.naivor.draggridview;
+package com.naivor.widget.draggridview;
 
 import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
 import com.naivor.widget.R;
+import com.naivor.widget.draggridview.AbstractDynamicGridAdapter;
 
 /**
  * Author: alex askerov

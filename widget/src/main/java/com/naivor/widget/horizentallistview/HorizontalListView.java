@@ -1,4 +1,4 @@
-package com.naivor.horizentallistview;
+package com.naivor.widget.horizentallistview;
 
 /*
  * HorizontalListView.java v1.5

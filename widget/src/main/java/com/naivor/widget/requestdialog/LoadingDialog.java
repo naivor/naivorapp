@@ -1,4 +1,4 @@
-package com.naivor.requestdialog;
+package com.naivor.widget.requestdialog;
 
 
 import android.app.Dialog;

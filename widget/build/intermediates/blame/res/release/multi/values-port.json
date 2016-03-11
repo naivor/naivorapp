@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/tianlai/workspace/eclipse/naivorapp/widget/build/intermediates/res/merged/release/values-port/values-port.xml",
+        "outputFile": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/values-port/values-port.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 106
                 },
                 "from": {
-                    "file": "/home/tianlai/workspace/eclipse/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-port/values-port.xml",
+                    "file": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-port/values-port.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

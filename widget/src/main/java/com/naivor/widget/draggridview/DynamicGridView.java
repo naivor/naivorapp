@@ -1,4 +1,4 @@
-package com.naivor.draggridview;
+package com.naivor.widget.draggridview;
 
 import java.util.ArrayList;
 import java.util.Collections;

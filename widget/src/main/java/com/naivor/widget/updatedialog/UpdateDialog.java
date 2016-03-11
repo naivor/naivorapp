@@ -1,4 +1,4 @@
-package com.naivor.updatedialog;
+package com.naivor.widget.updatedialog;
 
 import android.app.Dialog;
 import android.content.Context;

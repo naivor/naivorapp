@@ -1,4 +1,4 @@
-package com.naivor.calenderdialog;
+package com.naivor.widget.calenderdialog;
 
 
 import android.app.Dialog;
@@ -12,6 +12,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.naivor.widget.R;
+import com.naivor.widget.calenderdialog.CalenderAdapter;
 
 public class CalenderDialog extends Dialog {
 	private DisplayMetrics metrics;
@@ -20,7 +21,7 @@ public class CalenderDialog extends Dialog {
 	private  TextView  titleView;
 	private  ImageView  homeImage;
 	
-	private  CalenderAdapter  adapter;
+	private CalenderAdapter adapter;
 	
 	private  long  time;
 	

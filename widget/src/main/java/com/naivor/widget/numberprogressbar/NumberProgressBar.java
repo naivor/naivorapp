@@ -1,4 +1,4 @@
-package com.naivor.numberprogressbar;
+package com.naivor.widget.numberprogressbar;
 
 
 import android.content.Context;
@@ -153,7 +153,7 @@ public class NumberProgressBar extends View {
     /**
      * Listener
      */
-    private com.naivor.numberprogressbar.OnProgressBarListener mListener;
+    private OnProgressBarListener mListener;
 
     public enum ProgressTextVisibility {
         Visible, Invisible

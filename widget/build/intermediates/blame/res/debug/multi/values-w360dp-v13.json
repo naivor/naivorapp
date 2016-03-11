@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/tianlai/workspace/eclipse/naivorapp/widget/build/intermediates/res/merged/debug/values-w360dp-v13/values-w360dp-v13.xml",
+        "outputFile": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/debug/values-w360dp-v13/values-w360dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 105
                 },
                 "from": {
-                    "file": "/home/tianlai/workspace/eclipse/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-w360dp/values-w360dp.xml",
+                    "file": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-w360dp/values-w360dp.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

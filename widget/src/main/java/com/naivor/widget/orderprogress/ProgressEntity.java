@@ -1,4 +1,4 @@
-package com.naivor.orderprogress;
+package com.naivor.widget.orderprogress;
 
 public class ProgressEntity {
 	private String statusName;

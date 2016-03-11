@@ -1,4 +1,4 @@
-package com.naivor.customlayout;
+package com.naivor.widget.customlayout;
 
 
 import android.app.Activity;

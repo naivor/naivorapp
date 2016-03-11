@@ -1,4 +1,4 @@
-package com.naivor.unscrollview;
+package com.naivor.widget.unscrollview;
 
 import android.content.Context;
 import android.util.AttributeSet;
