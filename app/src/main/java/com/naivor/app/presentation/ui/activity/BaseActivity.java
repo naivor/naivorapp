@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.naivor.app.ActivityManager;
 import com.naivor.app.AppApplication;
@@ -16,7 +17,8 @@ import com.naivor.app.presentation.di.component.ApplicationComponent;
 import com.naivor.app.presentation.di.component.DaggerActivityComponent;
 import com.naivor.app.presentation.di.module.ActivityModule;
 import com.naivor.app.presentation.presenter.BasePresenter;
-import com.naivor.requestdialog.LoadingDialog;
+import com.naivor.app.presentation.view.BaseUiView;
+import com.naivor.widget.requestdialog.LoadingDialog;
 
 import javax.inject.Inject;
 
@@ -28,7 +30,7 @@ import butterknife.ButterKnife;
  * <p>
  * Created by tianlai on 16-3-3.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements BaseUiView{
 
     private ActivityComponent activityComponent;
 
@@ -40,6 +42,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     protected Toolbar toolbar;
+
+    @Bind(R.id.rootView)
+    protected LinearLayout rootView;
 
     protected BasePresenter presenter;
 
@@ -62,13 +67,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         // 设置ActionBar
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        // 加载ContentView的内容
-        ViewGroup rootVieww = (ViewGroup) inflateView(R.layout.activity_base);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup
-                .LayoutParams.MATCH_PARENT);
-        rootVieww.addView(inflateView(getContentViewId()), params);
 
         //初始化加载数据对话框
         loadingDialog=initLoadingDialog();
@@ -94,6 +94,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    /**
+     * 获取内容部分布局,并且加入根布局
+     *
+     * @return
+     */
+    protected void setContentToRoot(View view) {
+        // 加载ContentView的内容
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout
+                .LayoutParams.MATCH_PARENT);
+        rootView.addView(view,params);
+    }
+
+    /**
+     * 获取内容部分布局的layoutId,并且加入根布局
+     *
+     * @return
+     */
+    protected void setContentToRoot(int layoutId) {
+        setContentToRoot(inflateView(layoutId));
     }
 
     /**
@@ -156,14 +177,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     /**
-     * 获取内容部分布局的layoutId
-     *
-     * @return
-     */
-    protected abstract int getContentViewId();
-
-
-    /**
      * 获取 ApplicationComponent
      *
      * @return
@@ -177,11 +190,17 @@ public abstract class BaseActivity extends AppCompatActivity {
      *
      * @return
      */
-    protected ActivityComponent getActivityComponent(){
+    public ActivityComponent getActivityComponent(){
 
         return activityComponent;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        presenter.onResume(this);
+    }
 
     @Override
     protected void onPause() {

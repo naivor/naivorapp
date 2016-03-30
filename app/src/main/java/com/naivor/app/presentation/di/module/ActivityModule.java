@@ -7,7 +7,7 @@ import com.naivor.app.presentation.di.PerActivity;
 import com.naivor.app.presentation.presenter.LoginPresenter;
 import com.naivor.app.presentation.presenter.SplashPresenter;
 import com.naivor.app.presentation.ui.activity.BaseActivity;
-import com.naivor.requestdialog.LoadingDialog;
+import com.naivor.widget.requestdialog.LoadingDialog;
 
 import dagger.Module;
 import dagger.Provides;
@@ -43,10 +43,6 @@ public class ActivityModule {
         return new SplashPresenter(spfManager,user,repository);
     }
 
-    @PerActivity
-    @Provides
-    LoginPresenter provideLoginPresenter() {
-        return new LoginPresenter();
-    }
+
 
 }

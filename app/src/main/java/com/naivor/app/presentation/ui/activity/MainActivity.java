@@ -1,11 +1,14 @@
 package com.naivor.app.presentation.ui.activity;
 
+import android.os.Bundle;
+import android.view.View;
+
 import com.naivor.app.R;
 import com.naivor.app.presentation.di.component.ActivityComponent;
 import com.naivor.app.presentation.presenter.BasePresenter;
 import com.naivor.app.presentation.presenter.MainPresenter;
 import com.naivor.app.presentation.view.MainView;
-import com.naivor.requestdialog.LoadingDialog;
+import com.naivor.widget.requestdialog.LoadingDialog;
 
 import javax.inject.Inject;
 
@@ -20,6 +23,15 @@ public class MainActivity extends BaseActivity implements MainView{
     MainPresenter  mainPresenter;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentToRoot(R.layout.activity_main);
+
+        toolbar.setTitle("app首页");
+    }
+
+    @Override
     protected LoadingDialog initLoadingDialog() {
         return dialog;
     }
@@ -32,11 +44,6 @@ public class MainActivity extends BaseActivity implements MainView{
     @Override
     protected BasePresenter getPresenter() {
         return mainPresenter;
-    }
-
-    @Override
-    protected int getContentViewId() {
-        return R.layout.activity_main;
     }
 
     @Override
@@ -59,10 +66,4 @@ public class MainActivity extends BaseActivity implements MainView{
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        presenter.onResume(this);
-    }
 }

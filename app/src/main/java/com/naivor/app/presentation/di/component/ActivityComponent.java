@@ -2,6 +2,7 @@ package com.naivor.app.presentation.di.component;
 
 import com.naivor.app.presentation.di.PerActivity;
 import com.naivor.app.presentation.di.module.ActivityModule;
+import com.naivor.app.presentation.di.module.FragmentModule;
 import com.naivor.app.presentation.ui.activity.LoginActivity;
 import com.naivor.app.presentation.ui.activity.SplashActivity;
 
@@ -22,5 +23,7 @@ public interface ActivityComponent {
     void inject(LoginActivity loginActivity);
 
     //要暴露给其他依赖本组件的组件的依赖方法
+
+    FragmentComponent plus(FragmentModule fragmentModule);
 
 }

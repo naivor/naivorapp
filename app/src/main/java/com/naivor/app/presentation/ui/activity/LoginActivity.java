@@ -1,13 +1,15 @@
 package com.naivor.app.presentation.ui.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.naivor.app.R;
+import com.naivor.app.extras.utils.FontUtil;
 import com.naivor.app.presentation.di.component.ActivityComponent;
 import com.naivor.app.presentation.presenter.BasePresenter;
 import com.naivor.app.presentation.presenter.LoginPresenter;
 import com.naivor.app.presentation.view.LoginView;
-import com.naivor.requestdialog.LoadingDialog;
+import com.naivor.widget.requestdialog.LoadingDialog;
 
 import javax.inject.Inject;
 
@@ -28,6 +30,10 @@ public class LoginActivity extends BaseActivity implements LoginView{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentToRoot(R.layout.activity_login);
+
+        toolbar.setTitle(FontUtil.addColor("#FF0000","登录页面"));
+
     }
 
     @Override
@@ -43,12 +49,6 @@ public class LoginActivity extends BaseActivity implements LoginView{
     @Override
     protected BasePresenter getPresenter() {
         return loginPresenter;
-    }
-
-
-    @Override
-    protected int getContentViewId() {
-        return R.layout.activity_login;
     }
 
     @Override
