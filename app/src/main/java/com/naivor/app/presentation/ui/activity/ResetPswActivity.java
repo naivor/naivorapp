@@ -27,7 +27,7 @@ import com.naivor.app.extras.utils.ToastUtil;
 import com.naivor.app.presentation.di.component.ActivityComponent;
 import com.naivor.app.presentation.presenter.BasePresenter;
 import com.naivor.app.presentation.presenter.ResetPswPresenter;
-import com.naivor.app.presentation.view.RegisterView;
+import com.naivor.app.presentation.view.ResetPswView;
 import com.naivor.widget.requestdialog.LoadingDialog;
 
 import javax.inject.Inject;
@@ -39,7 +39,7 @@ import butterknife.OnClick;
 /**
  * Created by naivor on 16-4-2.
  */
-public class ResetPswActivity extends BaseActivity implements RegisterView {
+public class ResetPswActivity extends BaseActivity implements ResetPswView {
 
     @Inject
     ResetPswPresenter resetPswPresenter;
@@ -69,9 +69,9 @@ public class ResetPswActivity extends BaseActivity implements RegisterView {
     public void onClick(View v){
         if (TextUtils.isEmpty(edtEmail.getText().toString())){
 
-            ToastUtil.showToast(context,"发送邮件成功");
-        }else {
             ToastUtil.showToast(context,"请填写您的注册邮箱");
+        }else {
+            ToastUtil.showToast(context,"发送邮件成功");
         }
     }
 

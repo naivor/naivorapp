@@ -26,7 +26,6 @@ import com.naivor.app.R;
 import com.naivor.app.presentation.di.component.ActivityComponent;
 import com.naivor.app.presentation.presenter.BasePresenter;
 import com.naivor.app.presentation.presenter.LoginPresenter;
-import com.naivor.app.presentation.presenter.ResetPswPresenter;
 import com.naivor.app.presentation.view.LoginView;
 import com.naivor.widget.requestdialog.LoadingDialog;
 
@@ -145,6 +144,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     public void toResetPasswdPage() {
-        startActivity(new Intent(this,ResetPswPresenter.class));
+        startActivity(new Intent(this,ResetPswActivity.class));
     }
 }
