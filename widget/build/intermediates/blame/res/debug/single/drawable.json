@@ -52,6 +52,10 @@
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_holo_light.xml"
     },
     {
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/debug/drawable/request_loading.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/src/main/res/drawable/request_loading.xml"
+    },
+    {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/debug/drawable/abc_seekbar_track_material.xml",
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_seekbar_track_material.xml"
     },

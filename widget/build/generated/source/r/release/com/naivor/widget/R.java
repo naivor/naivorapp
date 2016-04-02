@@ -19,7 +19,6 @@ public final class R {
         public static int abc_slide_in_top=0x7f040007;
         public static int abc_slide_out_bottom=0x7f040008;
         public static int abc_slide_out_top=0x7f040009;
-        public static int request_loading=0x7f04000a;
     }
     public static final class attr {
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
@@ -1728,9 +1727,10 @@ containing a value of this type.
         public static int loading_06=0x7f020058;
         public static int loading_07=0x7f020059;
         public static int loading_08=0x7f02005a;
-        public static int notification_template_icon_bg=0x7f02005d;
-        public static int update_download=0x7f02005b;
-        public static int update_icon=0x7f02005c;
+        public static int notification_template_icon_bg=0x7f02005e;
+        public static int request_loading=0x7f02005b;
+        public static int update_download=0x7f02005c;
+        public static int update_icon=0x7f02005d;
     }
     public static final class id {
         public static int action0=0x7f0b0064;
