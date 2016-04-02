@@ -1,125 +1,5 @@
 [
     {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_seekbar_thumb_material.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_seekbar_thumb_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_text_cursor_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_text_cursor_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_radio_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_radio_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_check_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_check_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_borderless_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_borderless_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_list_selector_holo_dark.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_holo_dark.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_default_mtrl_shape.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_default_mtrl_shape.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/bg_update.9.png",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/src/main/res/drawable/bg_update.9.png"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/icon_color_white.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/src/main/res/drawable/icon_color_white.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_list_selector_background_transition_holo_light.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_background_transition_holo_light.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_seekbar_track_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_seekbar_track_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_item_background_holo_dark.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_item_background_holo_dark.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_list_selector_background_transition_holo_light.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_background_transition_holo_light.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_check_material.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_check_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_textfield_search_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_textfield_search_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_ratingbar_full_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_ratingbar_full_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_item_background_holo_light.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_item_background_holo_light.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_list_selector_holo_light.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_holo_light.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_switch_thumb_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_switch_thumb_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/list_selector.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/src/main/res/drawable/list_selector.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_edit_text_material.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_edit_text_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/bg_btn_notdownload.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/src/main/res/drawable/bg_btn_notdownload.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_spinner_textfield_background_material.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_spinner_textfield_background_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_default_mtrl_shape.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_default_mtrl_shape.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_cab_background_top_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_cab_background_top_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_tab_indicator_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_tab_indicator_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_text_cursor_material.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_text_cursor_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_dialog_material_background_light.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_dialog_material_background_light.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_item_background_holo_dark.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_item_background_holo_dark.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_edit_text_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_edit_text_material.xml"
-    },
-    {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/bg_reload_btn.xml",
         "source": "/home/naivor/workspace/studio/naivorapp/widget/src/main/res/drawable/bg_reload_btn.xml"
     },
@@ -128,20 +8,16 @@
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_dialog_material_background_light.xml"
     },
     {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_item_background_holo_light.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_item_background_holo_light.xml"
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_seekbar_thumb_material.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_seekbar_thumb_material.xml"
     },
     {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_textfield_search_material.xml",
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_textfield_search_material.xml"
     },
     {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_colored_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_colored_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_dialog_material_background_dark.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_dialog_material_background_dark.xml"
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_list_selector_holo_dark.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_holo_dark.xml"
     },
     {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_seekbar_track_material.xml",
@@ -164,6 +40,10 @@
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_tab_indicator_material.xml"
     },
     {
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_ratingbar_full_material.xml",
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_ratingbar_full_material.xml"
     },
@@ -176,8 +56,8 @@
         "source": "/home/naivor/workspace/studio/naivorapp/widget/src/main/res/drawable/bg_btn_notdownload.xml"
     },
     {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_list_selector_holo_dark.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_holo_dark.xml"
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_check_material.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_check_material.xml"
     },
     {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_radio_material.xml",
@@ -188,8 +68,8 @@
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_dialog_material_background_dark.xml"
     },
     {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_list_selector_background_transition_holo_dark.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_item_background_holo_light.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_item_background_holo_light.xml"
     },
     {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_colored_material.xml",
@@ -200,8 +80,24 @@
         "source": "/home/naivor/workspace/studio/naivorapp/widget/src/main/res/drawable/icon_color_white.xml"
     },
     {
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_edit_text_material.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/list_selector.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/src/main/res/drawable/list_selector.xml"
+    },
+    {
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_spinner_textfield_background_material.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_spinner_textfield_background_material.xml"
+    },
+    {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_list_selector_background_transition_holo_dark.xml",
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_btn_default_mtrl_shape.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_default_mtrl_shape.xml"
     },
     {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/bg_update.9.png",
@@ -212,23 +108,11 @@
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_switch_thumb_material.xml"
     },
     {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/bg_reload_btn.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/src/main/res/drawable/bg_reload_btn.xml"
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_text_cursor_material.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_text_cursor_material.xml"
     },
     {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_cab_background_internal_bg.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_cab_background_internal_bg.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/list_selector.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/src/main/res/drawable/list_selector.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_spinner_textfield_background_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_spinner_textfield_background_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_seekbar_thumb_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_seekbar_thumb_material.xml"
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/release/drawable/abc_item_background_holo_dark.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_item_background_holo_dark.xml"
     }
 ]

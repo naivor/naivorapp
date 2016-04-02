@@ -2,9 +2,5 @@
     {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/debug/color-v23/abc_color_highlight_material.xml",
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color-v23/abc_color_highlight_material.xml"
-    },
-    {
-        "merged": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/res/merged/debug/color-v23/abc_color_highlight_material.xml",
-        "source": "/home/naivor/workspace/studio/appframe/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color-v23/abc_color_highlight_material.xml"
     }
 ]

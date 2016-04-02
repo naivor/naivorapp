@@ -1,4 +1,23 @@
 <resources>
-    <string name="app_name">我的安卓应用</string>
+    <string name="app_name">naivorAPP</string>
+
+    <string name="login_tip">用户登录</string>
+    <string name="forget_psw"><u>忘记密码？</u></string>
+    <string name="login_now">立即登录</string>
+    <string name="register_now">马上注册</string>
+
+    <string name="hint_account">用户名或邮箱</string>
+    <string name="hint_psw">密码</string>
+
+    <string name="register_tip">注册</string>
+    <string name="register_submit">提交注册</string>
+
+    <string name="hint_name">用户名</string>
+    <string name="hint_email">邮箱</string>
+    <string name="hint_pswagain">再次输入密码</string>
+
+
+    <string name="resetpsw_submit">发送邮件</string>
+    <string name="hint_registeremail">注册邮箱</string>
 
 </resources>

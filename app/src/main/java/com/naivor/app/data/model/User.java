@@ -1,99 +1,91 @@
+/*
+ * Copyright (c) 2016. Naivor.All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.naivor.app.data.model;
 
+import com.google.auto.value.AutoValue;
 import com.naivor.app.data.model.enums.UserType;
 
 /**
- * 用户类
- * <p>
+ * 用户的Bean类
+ * <p/>
  * Created by tianlai on 16-3-4.
  */
-public class User {
-    private int id; //用户id
+@AutoValue
+public abstract class User {
+    public abstract int id(); //用户id
 
-    private String name; //用户名
+    public abstract int age(); //用户年龄
 
-    private String headIcon; //用户头像
+    public abstract String name(); //用户名
 
-    private long phone; //用户电话
+    public abstract String headIcon(); //用户头像
 
-    private UserType userType; //用户类型
+    public abstract long phone(); //用户电话
 
-    public User() {
+    public abstract String email();//邮箱
+
+    public abstract float score();  //用户评分
+
+    public abstract UserType userType(); //用户类型
+
+    public abstract String city(); //城市
+
+    public abstract String position(); //职位
+
+    public static User.Builder Builder() {
+        return new AutoValue_User.Builder()
+                .id(0)
+                .age(0)
+                .name("")
+                .email("")
+                .headIcon("")
+                .phone(0)
+                .score(0.0f)
+                .city("")
+                .position("");
     }
 
-    public int getId() {
-        return id;
-    }
+    public abstract Builder newBuilder();
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder id(int id);
 
-    public String getName() {
-        return name;
-    }
+        public abstract Builder age(int age); //用户年龄
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        public abstract Builder name(String name);
 
-    public String getHeadIcon() {
-        return headIcon;
-    }
+        public abstract Builder headIcon(String headIcon);
 
-    public void setHeadIcon(String headIcon) {
-        this.headIcon = headIcon;
-    }
+        public abstract Builder email(String email);//邮箱
 
-    public long getPhone() {
-        return phone;
-    }
+        public abstract Builder phone(long phone);
 
-    public void setPhone(long phone) {
-        this.phone = phone;
-    }
+        public abstract Builder score(float score);  //用户评分
 
-    public UserType getUserType() {
-        return userType;
-    }
+        public abstract Builder userType(UserType userType);
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
+        public abstract Builder city(String city);
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", headIcon='" + headIcon + '\'' +
-                ", phone=" + phone +
-                ", userType=" + userType +
-                '}';
-    }
+        public abstract Builder position(String position); //职位
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        public abstract User build();
 
-        User user = (User) o;
-
-        if (id != user.id) return false;
-        if (phone != user.phone) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (headIcon != null ? !headIcon.equals(user.headIcon) : user.headIcon != null) return false;
-        return userType == user.userType;
 
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (headIcon != null ? headIcon.hashCode() : 0);
-        result = 31 * result + (int) (phone ^ (phone >>> 32));
-        result = 31 * result + (userType != null ? userType.hashCode() : 0);
-        return result;
-    }
 }

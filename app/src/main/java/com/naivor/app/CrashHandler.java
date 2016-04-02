@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016. Naivor.All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.naivor.app;
 
 import android.content.Context;
@@ -17,6 +33,8 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -41,25 +59,18 @@ public class CrashHandler implements UncaughtExceptionHandler {
     private String path;
 
     // 程序的Context对象
-    @Inject
-    Context context;
+    private Context context;
 
     //App的Activity管理类
-    @Inject
-    ActivityManager activityManager;
+    private PageManager activityManager;
 
     @Inject
-    public CrashHandler() {
+    public CrashHandler(Context app, PageManager activityManager) {
 
+        this.context = app;
+
+        this.activityManager = activityManager;
     }
-
-    //    @Inject
-//    public CrashHandler(Context app,ActivityManager activityManager) {
-//
-//        this.context = app;
-//
-//        this.activityManager=activityManager;
-//    }
 
     /**
      * 初始化CrashHandler
@@ -77,8 +88,6 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 .getString(R.string.crash_path)).toString();
     }
 
-    ;
-
 
     /**
      * 当UncaughtException发生时会转入该函数来处理
@@ -89,11 +98,21 @@ public class CrashHandler implements UncaughtExceptionHandler {
             // 如果用户没有处理则让系统默认的异常处理器来处理
             mDefaultHandler.uncaughtException(thread, ex);
 
-            //关闭所有activity
-            activityManager.ExitApplication();
-            // 异常退出
-            System.exit(1);
         }
+
+        Toast.makeText(context, "很抱歉,我要崩溃了", Toast.LENGTH_LONG).show();
+
+        //两秒后退出
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                //关闭所有activity
+                activityManager.ExitApplication();
+                // 异常退出
+                System.exit(1);
+            }
+        }, 2000);
+
     }
 
     /**
@@ -108,13 +127,12 @@ public class CrashHandler implements UncaughtExceptionHandler {
             return false;
         }
 
-        Toast.makeText(context, "很抱歉,我要崩溃了", Toast.LENGTH_LONG).show();
-
         // 使用Toast来显示异常信息
         new Thread() {
             @Override
             public void run() {
 
+                Looper.prepare();
 
                 // 收集设备参数信息
                 collectDeviceInfo();
@@ -130,7 +148,6 @@ public class CrashHandler implements UncaughtExceptionHandler {
 
     /**
      * 收集设备参数信息
-     *
      */
     public void collectDeviceInfo() {
 
@@ -175,6 +192,11 @@ public class CrashHandler implements UncaughtExceptionHandler {
         printWriter.close();
         String result = writer.toString();
         sb.append(result);
+
+        //打印日志，以便调试
+        LogUtil.e(TAG, sb.toString());
+
+        //保存错误信息到文件
         try {
             long timestamp = System.currentTimeMillis();
             String time = DateUtil.currentTime();

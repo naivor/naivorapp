@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016. Naivor.All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.naivor.app.extras.utils;
 
 import android.content.Context;
@@ -14,33 +30,37 @@ public class ToastUtil {
     private static long time;
     private static String mMessage;
 
-    public static void initialize(Context context) {
-        toast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
-    }
-
     /**
      * 显示消息
      *
      * @param message 消息
      */
-    public static void showToast(String message) {
-        long now = System.currentTimeMillis();
-
-        if (isNeedShow(now) || !message.equals(mMessage)) {
-            cancleToast();
-
-            toast.setText(message);
-
+    public static void showToast(Context context, String message) {
+        if (toast == null) {
+            toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+            time = System.currentTimeMillis();
+            mMessage = message;
+            toast.show();
         } else {
+            long now = System.currentTimeMillis();
 
-            return;
+            if (message.equals(mMessage)) {
+                if (isNeedShow(now)) {
+
+                    toast.show();
+
+                    time = now;
+                }
+
+            } else {
+                toast.setText(message);
+
+                toast.show();
+
+                time = now;
+                mMessage = message;
+            }
         }
-
-        time = now;
-        mMessage = message;
-
-        toast.show();
-
     }
 
     /**
@@ -56,7 +76,10 @@ public class ToastUtil {
      * 取消显示的toast
      */
     public static void cancleToast() {
-        toast.cancel();
+
+        if (toast!=null){
+            toast.cancel();
+        }
     }
 
 }

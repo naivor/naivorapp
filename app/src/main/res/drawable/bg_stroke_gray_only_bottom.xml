@@ -6,8 +6,8 @@
 
     </item>
 
-    <item android:bottom="1dp">
-        <color android:color="@color/white"></color>
+    <item android:bottom="0.2dp">
+        <color android:color="@color/purple"></color>
 
     </item>
 

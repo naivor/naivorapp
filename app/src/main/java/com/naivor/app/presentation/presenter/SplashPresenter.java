@@ -1,12 +1,27 @@
+/*
+ * Copyright (c) 2016. Naivor.All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.naivor.app.presentation.presenter;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.naivor.app.data.cache.spf.SpfManager;
 import com.naivor.app.data.model.User;
-import com.naivor.app.data.model.enums.UserType;
-import com.naivor.app.domain.repository.Repository;
-import com.naivor.app.presentation.usecase.SplashUseCase;
+import com.naivor.app.domain.repository.SplashRepository;
 import com.naivor.app.presentation.view.SplashView;
 
 import java.util.Timer;
@@ -17,36 +32,23 @@ import javax.inject.Inject;
 /**
  * Created by tianlai on 16-3-9.
  */
-public class SplashPresenter extends BasePresenter<SplashUseCase, SplashView> {
+public class SplashPresenter extends BasePresenter<SplashView,SplashRepository> {
 
 
     private SpfManager mSpfManager;
 
     private User mUser;
 
-    private Repository mRepository;
-
-
     @Inject
-    public SplashPresenter(SpfManager spfManager,User user,Repository repository) {
-        this.mSpfManager = spfManager;
-        this.mUser=user;
-        this.mRepository=repository;
+    public SplashPresenter(SplashRepository mRepository) {
+        super(mRepository);
     }
 
+
     @Override
-    public void oncreate(Bundle savedInstanceState) {
-        super.oncreate(savedInstanceState);
+    public void oncreate(Bundle savedInstanceState,Context context) {
+        super.oncreate(savedInstanceState,context);
 
-
-        if (mSpfManager == null) throw new NullPointerException("SharedPrefrences 不能为空");
-
-        if (mUser == null) throw new NullPointerException("User 不能为空");
-
-        mUser.setId(mSpfManager.getInt("uid"));
-        mUser.setName(mSpfManager.getString("name"));
-        mUser.setPhone(mSpfManager.getLong("phone"));
-        mUser.setUserType(UserType.getType(mSpfManager.getString("userType")));
 
         mRepository.setUser(mUser);
     }
@@ -60,7 +62,7 @@ public class SplashPresenter extends BasePresenter<SplashUseCase, SplashView> {
 
             @Override
             public void run() {
-                if (mUser == null || mUser.getId() == 0) {
+                if (mUser == null || mUser.id() == 0) {
                     mUiView.toLoginPage();
                 } else {
                     mUiView.toMainPage();

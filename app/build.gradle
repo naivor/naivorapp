@@ -1,49 +1,81 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
+buildscript {
+    repositories {
+        jcenter()
+
+    }
+
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+
+    }
+}
+
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.naivor.app"
+        applicationId "com.mdd.manager"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 20
+        versionName "1.0.0"
     }
+
+
     buildTypes {
-        release {
+        debug {
+
             minifyEnabled false
+            zipAlignEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
     }
 
     lintOptions {
         quiet true
         abortOnError false
         ignoreWarnings true
+        disable 'InvalidPackage'
     }
 
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+
     dexOptions {
         incremental true
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
 }
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.0'
 
+dependencies {
+
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':widget')
+
+    testCompile 'junit:junit:4+'
+
+    compile 'com.android.support:appcompat-v7:23+'
+    compile 'com.android.support:recyclerview-v7:23+'
+    compile 'com.bartoszlipinski.recyclerviewheader:library:1.2.0'
 
     compile 'com.jakewharton:butterknife:7+'
 
@@ -62,5 +94,10 @@ dependencies {
     compile "frankiesardo:icepick:3+"
     provided "frankiesardo:icepick-processor:3+"
 
-    provided "com.google.auto.value:auto-value:1+"
+    compile 'com.facebook.fresco:fresco:0.9.0+'
+    compile 'com.facebook.fresco:imagepipeline-okhttp:0.9.0+'
+
+    compile "com.google.auto.value:auto-value:1.1"
+
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
 }

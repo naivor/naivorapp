@@ -1,16 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="这是app首页"
-        android:textColor="#00FF00"
-        android:textSize="20sp" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_vp_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </android.support.v4.view.ViewPager>
+
+    <RadioGroup
+        android:id="@+id/main_rg_container"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_stroke_gray_only_top"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/main_rb_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:layout_weight="1"
+            android:checked="true"
+            android:drawableTop="@drawable/bg_radio_main_home"
+            android:paddingTop="10dp" />
+
+        <RadioButton
+            android:id="@+id/main_rb_orderform"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/bg_radio_main_order"
+            android:paddingTop="10dp" />
+
+        <RadioButton
+            android:id="@+id/main_rb_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/bg_radio_main_date"
+            android:paddingTop="10dp"
+            android:checked="false" />
+
+        <RadioButton
+            android:id="@+id/main_rb_mine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/bg_radio_main_mine"
+            android:paddingTop="10dp" />
+    </RadioGroup>
 
 </LinearLayout>
