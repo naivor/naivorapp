@@ -19,6 +19,7 @@ package com.naivor.app.presentation.presenter;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.bugtags.library.Bugtags;
 import com.naivor.app.data.model.User;
 import com.naivor.app.data.model.enums.UserType;
 import com.naivor.app.domain.repository.BaseRepository;
@@ -142,5 +143,21 @@ public abstract class BasePresenter<V extends BaseUiView,R extends BaseRepositor
      */
     public User getUser(){
         return mRepository.getUser();
+    }
+
+    /**
+     * 加载完成
+     */
+    private void loadComplete(){
+        mUiView.loadingComplete();
+    }
+
+    /**
+     * 加载发生错误
+     */
+    private void loadErrorOccured(Throwable e){
+        mUiView.loadingComplete();
+        e.printStackTrace();
+        Bugtags.sendException(e);
     }
 }

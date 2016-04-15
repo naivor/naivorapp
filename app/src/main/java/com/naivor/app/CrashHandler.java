@@ -21,6 +21,7 @@ import android.os.Build;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.bugtags.library.Bugtags;
 import com.naivor.app.extras.utils.AppUtil;
 import com.naivor.app.extras.utils.DateUtil;
 import com.naivor.app.extras.utils.LogUtil;
@@ -138,6 +139,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 collectDeviceInfo();
                 // 保存日志文件
                 saveCrashInfo2File(ex);
+                //错误传到网络
+                Bugtags.sendException(ex);
 
                 Looper.loop();
             }
