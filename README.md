@@ -13,6 +13,8 @@ naivorapp
 ### 2.结合clean架构思想和MVP开发模式，进行app结构分层和代码解耦，方便扩展和维护
     
 ### 3.采用流行的Activity+Fragment+ViewPager搭建应用的主框架，常用工具类集成
+
+### 4.集成bugtags bug管理，方便测试，记录bug产生的原因和位置
     
 ### 4.会一直维护和完善，因为自己项目会用
 
