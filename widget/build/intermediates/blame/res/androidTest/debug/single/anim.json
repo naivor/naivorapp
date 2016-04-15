@@ -24,10 +24,6 @@
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/anim/abc_slide_in_top.xml"
     },
     {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/androidTest/debug/anim/request_loading.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/bundles/debug/res/anim/request_loading.xml"
-    },
-    {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/androidTest/debug/anim/abc_grow_fade_in_from_bottom.xml",
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/anim/abc_grow_fade_in_from_bottom.xml"
     },

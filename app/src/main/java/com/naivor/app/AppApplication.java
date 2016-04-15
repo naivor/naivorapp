@@ -2,6 +2,7 @@ package com.naivor.app;
 
 import android.app.Application;
 
+import com.bugtags.library.Bugtags;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.naivor.app.extras.utils.LogUtil;
 import com.naivor.app.presentation.di.component.ApplicationComponent;
@@ -21,6 +22,7 @@ import okhttp3.OkHttpClient;
  * Created by tianlai on 16-3-3.
  */
 public class AppApplication extends Application {
+    private static final String BUGTAGS_KEY="50da38c2a9e9a6771461a37b465566e7";
 
     private ApplicationComponent mAppComponent;
 
@@ -46,6 +48,7 @@ public class AppApplication extends Application {
 
         crashHandler.init();
 
+        Bugtags.start(BUGTAGS_KEY,this,Bugtags.BTGInvocationEventBubble);
     }
 
     /**

@@ -120,12 +120,12 @@
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-mdpi/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/abc_popup_background_mtrl_mult.9.png",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-mdpi/abc_popup_background_mtrl_mult.9.png"
-    },
-    {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png",
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-mdpi/abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/abc_popup_background_mtrl_mult.9.png",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-mdpi/abc_popup_background_mtrl_mult.9.png"
     },
     {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/abc_cab_background_top_mtrl_alpha.9.png",

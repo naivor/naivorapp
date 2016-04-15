@@ -12,9 +12,11 @@
 
     <ProgressBar
         android:id="@+id/spinnerImageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:indeterminateDrawable="@anim/request_loading"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminate="false"
+        android:padding="5dp"
+        android:indeterminateDrawable="@drawable/request_loading"
          />
 
 </LinearLayout>

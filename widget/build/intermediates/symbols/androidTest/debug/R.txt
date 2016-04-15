@@ -8,7 +8,6 @@ int anim abc_slide_in_bottom 0x7f040006
 int anim abc_slide_in_top 0x7f040007
 int anim abc_slide_out_bottom 0x7f040008
 int anim abc_slide_out_top 0x7f040009
-int anim request_loading 0x7f04000a
 int attr ScaleValue 0x7f010044
 int attr actionBarDivider 0x7f01006e
 int attr actionBarItemBackground 0x7f01006f
@@ -482,9 +481,10 @@ int drawable loading_05 0x7f020057
 int drawable loading_06 0x7f020058
 int drawable loading_07 0x7f020059
 int drawable loading_08 0x7f02005a
-int drawable notification_template_icon_bg 0x7f02005d
-int drawable update_download 0x7f02005b
-int drawable update_icon 0x7f02005c
+int drawable notification_template_icon_bg 0x7f02005e
+int drawable request_loading 0x7f02005b
+int drawable update_download 0x7f02005c
+int drawable update_icon 0x7f02005d
 int id action0 0x7f0b0064
 int id action_bar 0x7f0b0049
 int id action_bar_activity_content 0x7f0b0000

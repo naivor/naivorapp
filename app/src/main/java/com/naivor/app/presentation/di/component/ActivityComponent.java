@@ -50,7 +50,6 @@ public interface ActivityComponent {
 
     //要暴露给其他依赖本组件的组件的依赖方法
 
-
     //子Component
     FragmentComponent plus(FragmentModule fragmentModule);
 }

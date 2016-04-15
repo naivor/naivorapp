@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.bugtags.library.plugin'
 
 buildscript {
     repositories {
@@ -9,6 +10,7 @@ buildscript {
 
     dependencies {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath 'com.bugtags.library:bugtags-gradle:1.2.2'
 
     }
 }
@@ -18,10 +20,10 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.mdd.manager"
+        applicationId "com.naivor.app"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 20
+        versionCode 1
         versionName "1.0.0"
     }
 
@@ -65,6 +67,13 @@ android {
     }
 }
 
+bugtags {
+    appKey "50da38c2a9e9a6771461a37b465566e7"
+    appSecret  "d275fcabda957c0d05d406c913205e5b"
+
+    trackingNetworkEnabled true
+}
+
 
 dependencies {
 
@@ -73,8 +82,8 @@ dependencies {
 
     testCompile 'junit:junit:4+'
 
-    compile 'com.android.support:appcompat-v7:23+'
-    compile 'com.android.support:recyclerview-v7:23+'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.bartoszlipinski.recyclerviewheader:library:1.2.0'
 
     compile 'com.jakewharton:butterknife:7+'
@@ -82,8 +91,8 @@ dependencies {
     compile 'io.reactivex:rxjava:1+'
     compile 'io.reactivex:rxandroid:1+'
 
-    apt 'com.google.dagger:dagger-compiler:2+'
-    compile 'com.google.dagger:dagger:2+'
+    apt 'com.google.dagger:dagger-compiler:2.2'
+    compile 'com.google.dagger:dagger:2.2'
     provided 'org.glassfish:javax.annotation:10+'
 
     compile 'com.squareup.retrofit2:retrofit:2+'
@@ -100,4 +109,6 @@ dependencies {
     compile "com.google.auto.value:auto-value:1.1"
 
     compile 'in.srain.cube:ultra-ptr:1.0.11'
+
+    compile 'com.bugtags.library:bugtags-lib:1.2.2'
 }

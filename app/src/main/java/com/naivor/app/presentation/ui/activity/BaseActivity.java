@@ -28,11 +28,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bugtags.library.Bugtags;
 import com.naivor.app.AppApplication;
 import com.naivor.app.PageManager;
 import com.naivor.app.R;
@@ -210,7 +212,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
 
         toolbar.setVisibility(View.GONE);
 
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
@@ -260,7 +262,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
      */
     @Override
     public void showLoading() {
-        if (!loadingDialog.isShowing()){
+        if (!loadingDialog.isShowing()) {
             loadingDialog.show();
         }
     }
@@ -271,7 +273,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     @Override
     public void loadingComplete() {
 
-        if (loadingDialog.isShowing()){
+        if (loadingDialog.isShowing()) {
             loadingDialog.dismiss();
         }
     }
@@ -281,6 +283,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
         super.onResume();
 
         presenter.onResume(this);
+        Bugtags.onResume(this);
     }
 
     @Override
@@ -288,6 +291,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
         super.onPause();
 
         presenter.onPause();
+        Bugtags.onPause(this);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Bugtags.onDispatchTouchEvent(this, ev);
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
@@ -322,9 +332,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     public TextView addRightActionView(CharSequence name, int viewId) {
         TextView tv_right = new TextView(context);
 
-        if (viewId==0){
+        if (viewId == 0) {
             tv_right.setId(R.id.tv_right_action);
-        }else {
+        } else {
             tv_right.setId(viewId);
         }
 
@@ -336,7 +346,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
 
         Toolbar.LayoutParams layoutParams = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT,
                 Toolbar.LayoutParams.WRAP_CONTENT);
-        layoutParams.rightMargin=DpUtil.dp2px(context, 10);
+        layoutParams.rightMargin = DpUtil.dp2px(context, 10);
         layoutParams.gravity = Gravity.CENTER_VERTICAL | Gravity.RIGHT;
         tv_right.setLayoutParams(layoutParams);
 
@@ -345,7 +355,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     }
 
     public TextView addRightActionView() {
-        return addRightActionView("",0);
+        return addRightActionView("", 0);
     }
 
     /**
@@ -357,9 +367,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     public TextView addCenterTitleView(CharSequence title, int viewId) {
         TextView tv_title = new TextView(context);
 
-        if (viewId==0){
+        if (viewId == 0) {
             tv_title.setId(R.id.tv_center_title);
-        }else {
+        } else {
             tv_title.setId(viewId);
         }
 
@@ -373,7 +383,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
         layoutParams.gravity = Gravity.CENTER;
         tv_title.setLayoutParams(layoutParams);
 
-        if (title!=null){
+        if (title != null) {
             tv_title.setText(title);
         }
 
@@ -381,7 +391,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     }
 
     public TextView addCenterTitleView() {
-        return addCenterTitleView("",0);
+        return addCenterTitleView("", 0);
     }
 
     /**
@@ -412,7 +422,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
      * @param viewId
      * @return
      */
-    public View find(View parent,int viewId) {
+    public View find(View parent, int viewId) {
         return parent.findViewById(viewId);
     }
 
