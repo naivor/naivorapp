@@ -3,7 +3,9 @@ package com.naivor.app;
 import android.app.Application;
 
 import com.bugtags.library.Bugtags;
+import com.bugtags.library.BugtagsOptions;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.naivor.app.extras.utils.AppUtil;
 import com.naivor.app.extras.utils.LogUtil;
 import com.naivor.app.presentation.di.component.ApplicationComponent;
 import com.naivor.app.presentation.di.component.DaggerApplicationComponent;
@@ -18,11 +20,11 @@ import okhttp3.OkHttpClient;
 
 /**
  * AppApplication 程序的Application类，统领全局
- * <p/>
+ * <p>
  * Created by tianlai on 16-3-3.
  */
 public class AppApplication extends Application {
-    private static final String BUGTAGS_KEY="50da38c2a9e9a6771461a37b465566e7";
+    private static final String BUGTAGS_KEY = "50da38c2a9e9a6771461a37b465566e7";
 
     private ApplicationComponent mAppComponent;
 
@@ -48,7 +50,33 @@ public class AppApplication extends Application {
 
         crashHandler.init();
 
-        Bugtags.start(BUGTAGS_KEY,this,Bugtags.BTGInvocationEventBubble);
+        initBugtags();
+    }
+
+    /**
+     * 初始化bug管理工具
+     */
+    private void initBugtags() {
+        BugtagsOptions options = new BugtagsOptions.Builder().
+                trackingLocation(true).       //是否获取位置
+                trackingCrashLog(true).       //是否收集闪退
+                trackingConsoleLog(true).     //是否收集控制台日志
+                trackingUserSteps(true).      //是否跟踪用户操作步骤
+                crashWithScreenshot(true).    //收集闪退是否附带截图
+                versionName(AppUtil.getAppVersionName(this)).         //自定义版本名称
+                versionCode(AppUtil.getAppVersionCode(this)).              //自定义版本号
+                trackingNetworkURLFilter("(.*)").//自定义网络请求跟踪的 url 规则
+                build();
+
+        //debug包显示悬浮小球，release包不显示
+        int level;
+        if (BuildConfig.DEBUG) {
+            level = Bugtags.BTGInvocationEventBubble;
+        } else {
+            level = Bugtags.BTGInvocationEventNone;
+        }
+
+        Bugtags.start(BUGTAGS_KEY, this, level, options);
     }
 
     /**

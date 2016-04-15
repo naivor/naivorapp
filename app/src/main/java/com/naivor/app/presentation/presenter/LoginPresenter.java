@@ -93,8 +93,10 @@ public class LoginPresenter extends BasePresenter<LoginView,LoginRepository>{
                                @Override
                                public void onError(Throwable e) {
                                    e.printStackTrace();
-                                   ToastUtil.showToast(context, "登录失败？试试你的github账号");
+//                                   ToastUtil.showToast(context, "登录失败？试试你的github账号");
                                    mUiView.loadingComplete();
+                                   //好吧，不知为啥查询github会失败，默认去首页吧
+                                   mUiView.toMainPage();
                                }
 
                                @Override
