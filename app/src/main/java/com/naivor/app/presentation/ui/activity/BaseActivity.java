@@ -38,6 +38,7 @@ import com.bugtags.library.Bugtags;
 import com.naivor.app.AppApplication;
 import com.naivor.app.PageManager;
 import com.naivor.app.R;
+import com.naivor.app.domain.presenter.BasePresenter;
 import com.naivor.app.extras.utils.DpUtil;
 import com.naivor.app.extras.utils.FontUtil;
 import com.naivor.app.extras.utils.ToastUtil;
@@ -45,7 +46,6 @@ import com.naivor.app.presentation.di.component.ActivityComponent;
 import com.naivor.app.presentation.di.component.ApplicationComponent;
 import com.naivor.app.presentation.di.component.DaggerActivityComponent;
 import com.naivor.app.presentation.di.module.ActivityModule;
-import com.naivor.app.presentation.presenter.BasePresenter;
 import com.naivor.app.presentation.view.BaseUiView;
 import com.naivor.widget.requestdialog.LoadingDialog;
 

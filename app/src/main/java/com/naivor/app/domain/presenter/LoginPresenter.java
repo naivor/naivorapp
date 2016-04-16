@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.presentation.presenter;
+package com.naivor.app.domain.presenter;
 
 import android.text.TextUtils;
 
@@ -36,7 +36,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by tianlai on 16-3-3.
  */
-public class LoginPresenter extends BasePresenter<LoginView,LoginRepository>{
+public class LoginPresenter extends BasePresenter<LoginView,LoginRepository> {
 
     private SpfManager spfManager;
 

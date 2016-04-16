@@ -29,11 +29,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.naivor.app.R;
+import com.naivor.app.domain.presenter.BasePresenter;
+import com.naivor.app.domain.presenter.MainPresenter;
 import com.naivor.app.extras.utils.ToastUtil;
+import com.naivor.app.presentation.adapter.ViewPagerAdapter;
 import com.naivor.app.presentation.di.component.ActivityComponent;
-import com.naivor.app.presentation.presenter.BasePresenter;
-import com.naivor.app.presentation.presenter.MainPresenter;
-import com.naivor.app.presentation.presenter.adapter.ViewPagerAdapter;
 import com.naivor.app.presentation.ui.fragment.BaseFragment;
 import com.naivor.app.presentation.ui.fragment.DateFragment;
 import com.naivor.app.presentation.ui.fragment.HomeFragment;

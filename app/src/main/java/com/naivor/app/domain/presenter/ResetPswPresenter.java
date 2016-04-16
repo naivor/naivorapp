@@ -14,30 +14,20 @@
  * limitations under the License.
  */
 
-package com.naivor.app.presentation.presenter;
+package com.naivor.app.domain.presenter;
 
-import com.naivor.app.domain.repository.MineRepository;
-import com.naivor.app.presentation.view.MineFragmentView;
+import com.naivor.app.domain.repository.ResetPswRepository;
+import com.naivor.app.presentation.view.ResetPswView;
 
 import javax.inject.Inject;
 
 /**
- * Created by tianlai on 16-3-18.
+ * Created by naivor on 16-4-2.
  */
-public class MineFragmentPresenter extends BasePresenter<MineFragmentView,MineRepository> {
+public class ResetPswPresenter extends BasePresenter<ResetPswView,ResetPswRepository> {
 
     @Inject
-    public MineFragmentPresenter(MineRepository mRepository) {
+    public ResetPswPresenter(ResetPswRepository mRepository) {
         super(mRepository);
-    }
-
-    @Override
-    public void cancleLoading() {
-
-    }
-
-    @Override
-    public void retryLoading() {
-
     }
 }

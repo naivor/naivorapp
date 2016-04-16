@@ -14,20 +14,30 @@
  * limitations under the License.
  */
 
-package com.naivor.app.presentation.presenter;
+package com.naivor.app.domain.presenter;
 
-import com.naivor.app.domain.repository.MainRepository;
-import com.naivor.app.presentation.view.MainView;
+import com.naivor.app.domain.repository.DateRepository;
+import com.naivor.app.presentation.view.DateFragmentView;
 
 import javax.inject.Inject;
 
 /**
- * Created by tianlai on 16-3-9.
+ * Created by tianlai on 16-3-18.
  */
-public class MainPresenter extends BasePresenter<MainView,MainRepository>{
+public class DateFragmentPresenter extends BasePresenter<DateFragmentView,DateRepository> {
 
     @Inject
-    public MainPresenter(MainRepository mRepository) {
+    public DateFragmentPresenter(DateRepository mRepository) {
         super(mRepository);
+    }
+
+    @Override
+    public void cancleLoading() {
+
+    }
+
+    @Override
+    public void retryLoading() {
+
     }
 }

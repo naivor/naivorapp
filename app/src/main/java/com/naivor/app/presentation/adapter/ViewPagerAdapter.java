@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.presentation.presenter.adapter;
+package com.naivor.app.presentation.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

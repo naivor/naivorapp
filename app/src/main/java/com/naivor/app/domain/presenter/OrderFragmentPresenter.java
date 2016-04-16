@@ -14,20 +14,30 @@
  * limitations under the License.
  */
 
-package com.naivor.app.presentation.presenter;
+package com.naivor.app.domain.presenter;
 
-import com.naivor.app.domain.repository.ResetPswRepository;
-import com.naivor.app.presentation.view.ResetPswView;
+import com.naivor.app.domain.repository.OrderRepository;
+import com.naivor.app.presentation.view.OrderFragmentView;
 
 import javax.inject.Inject;
 
 /**
- * Created by naivor on 16-4-2.
+ * Created by tianlai on 16-3-18.
  */
-public class ResetPswPresenter extends BasePresenter<ResetPswView,ResetPswRepository> {
+public class OrderFragmentPresenter extends BasePresenter<OrderFragmentView,OrderRepository> {
 
     @Inject
-    public ResetPswPresenter(ResetPswRepository mRepository) {
+    public OrderFragmentPresenter(OrderRepository mRepository) {
         super(mRepository);
+    }
+
+    @Override
+    public void cancleLoading() {
+
+    }
+
+    @Override
+    public void retryLoading() {
+
     }
 }

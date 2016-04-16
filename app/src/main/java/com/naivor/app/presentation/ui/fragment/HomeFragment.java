@@ -23,10 +23,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.naivor.app.R;
+import com.naivor.app.domain.presenter.BasePresenter;
+import com.naivor.app.domain.presenter.HomeFragmentPresenter;
 import com.naivor.app.extras.utils.FontUtil;
 import com.naivor.app.presentation.di.component.FragmentComponent;
-import com.naivor.app.presentation.presenter.BasePresenter;
-import com.naivor.app.presentation.presenter.HomeFragmentPresenter;
 import com.naivor.app.presentation.ui.activity.MainActivity;
 import com.naivor.app.presentation.view.HomeFragmentView;
 

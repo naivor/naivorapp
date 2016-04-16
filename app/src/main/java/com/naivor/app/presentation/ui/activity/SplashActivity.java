@@ -21,9 +21,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.naivor.app.R;
+import com.naivor.app.domain.presenter.BasePresenter;
+import com.naivor.app.domain.presenter.SplashPresenter;
 import com.naivor.app.presentation.di.component.ActivityComponent;
-import com.naivor.app.presentation.presenter.BasePresenter;
-import com.naivor.app.presentation.presenter.SplashPresenter;
 import com.naivor.app.presentation.view.SplashView;
 import com.naivor.widget.requestdialog.LoadingDialog;
 

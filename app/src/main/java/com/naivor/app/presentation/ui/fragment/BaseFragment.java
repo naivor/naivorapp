@@ -22,9 +22,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.naivor.app.domain.presenter.BasePresenter;
 import com.naivor.app.presentation.di.component.FragmentComponent;
 import com.naivor.app.presentation.di.module.FragmentModule;
-import com.naivor.app.presentation.presenter.BasePresenter;
 import com.naivor.app.presentation.ui.activity.BaseActivity;
 import com.naivor.app.presentation.ui.helper.ToolbarHelper;
 import com.naivor.app.presentation.view.BaseUiView;

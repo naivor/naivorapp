@@ -23,10 +23,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.naivor.app.R;
+import com.naivor.app.domain.presenter.BasePresenter;
+import com.naivor.app.domain.presenter.ResetPswPresenter;
 import com.naivor.app.extras.utils.ToastUtil;
 import com.naivor.app.presentation.di.component.ActivityComponent;
-import com.naivor.app.presentation.presenter.BasePresenter;
-import com.naivor.app.presentation.presenter.ResetPswPresenter;
 import com.naivor.app.presentation.view.ResetPswView;
 import com.naivor.widget.requestdialog.LoadingDialog;
 

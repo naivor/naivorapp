@@ -14,20 +14,30 @@
  * limitations under the License.
  */
 
-package com.naivor.app.presentation.presenter;
+package com.naivor.app.domain.presenter;
 
-import com.naivor.app.domain.repository.RegisterRepository;
-import com.naivor.app.presentation.view.RegisterView;
+import com.naivor.app.domain.repository.MineRepository;
+import com.naivor.app.presentation.view.MineFragmentView;
 
 import javax.inject.Inject;
 
 /**
- * Created by naivor on 16-4-2.
+ * Created by tianlai on 16-3-18.
  */
-public class RegisterPresenter extends BasePresenter<RegisterView,RegisterRepository> {
+public class MineFragmentPresenter extends BasePresenter<MineFragmentView,MineRepository> {
 
     @Inject
-    public RegisterPresenter(RegisterRepository mRepository) {
+    public MineFragmentPresenter(MineRepository mRepository) {
         super(mRepository);
+    }
+
+    @Override
+    public void cancleLoading() {
+
+    }
+
+    @Override
+    public void retryLoading() {
+
     }
 }

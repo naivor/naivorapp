@@ -14,30 +14,20 @@
  * limitations under the License.
  */
 
-package com.naivor.app.presentation.presenter;
+package com.naivor.app.domain.presenter;
 
-import com.naivor.app.domain.repository.OrderRepository;
-import com.naivor.app.presentation.view.OrderFragmentView;
+import com.naivor.app.domain.repository.RegisterRepository;
+import com.naivor.app.presentation.view.RegisterView;
 
 import javax.inject.Inject;
 
 /**
- * Created by tianlai on 16-3-18.
+ * Created by naivor on 16-4-2.
  */
-public class OrderFragmentPresenter extends BasePresenter<OrderFragmentView,OrderRepository> {
+public class RegisterPresenter extends BasePresenter<RegisterView,RegisterRepository> {
 
     @Inject
-    public OrderFragmentPresenter(OrderRepository mRepository) {
+    public RegisterPresenter(RegisterRepository mRepository) {
         super(mRepository);
-    }
-
-    @Override
-    public void cancleLoading() {
-
-    }
-
-    @Override
-    public void retryLoading() {
-
     }
 }

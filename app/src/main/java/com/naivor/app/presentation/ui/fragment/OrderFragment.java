@@ -23,10 +23,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.naivor.app.R;
+import com.naivor.app.domain.presenter.BasePresenter;
+import com.naivor.app.domain.presenter.OrderFragmentPresenter;
 import com.naivor.app.extras.utils.FontUtil;
 import com.naivor.app.presentation.di.component.FragmentComponent;
-import com.naivor.app.presentation.presenter.BasePresenter;
-import com.naivor.app.presentation.presenter.OrderFragmentPresenter;
 import com.naivor.app.presentation.view.OrderFragmentView;
 
 import javax.inject.Inject;

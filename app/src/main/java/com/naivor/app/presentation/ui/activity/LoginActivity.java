@@ -23,9 +23,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.naivor.app.R;
+import com.naivor.app.domain.presenter.BasePresenter;
+import com.naivor.app.domain.presenter.LoginPresenter;
 import com.naivor.app.presentation.di.component.ActivityComponent;
-import com.naivor.app.presentation.presenter.BasePresenter;
-import com.naivor.app.presentation.presenter.LoginPresenter;
 import com.naivor.app.presentation.view.LoginView;
 import com.naivor.widget.requestdialog.LoadingDialog;
 

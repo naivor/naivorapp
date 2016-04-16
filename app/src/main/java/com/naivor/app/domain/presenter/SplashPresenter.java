@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.presentation.presenter;
+package com.naivor.app.domain.presenter;
 
 import android.content.Context;
 import android.os.Bundle;
