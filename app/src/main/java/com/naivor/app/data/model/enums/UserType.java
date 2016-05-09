@@ -22,7 +22,7 @@ package com.naivor.app.data.model.enums;
  * Created by tianlai on 16-3-10.
  */
 public enum UserType {
-    NORMAL("normal"), VIP("vip");
+    BEAUTICIAN("beautician"), BEAUTYSHOP("beauty_parlor"), SHOPSMANAGER("brand"), CLIENT("client");
 
     private final String value;
 
@@ -34,16 +34,19 @@ public enum UserType {
         return value;
     }
 
-    public static UserType getType(String type) {
+    public static UserType valueof(String type) {
         if (type != null) {
 
             switch (type) {
-                case "normal":
+                case "beautician":
 
-                    return UserType.NORMAL;
-                case "vip":
+                    return UserType.BEAUTICIAN;
+                case "beauty_parlor":
 
-                    return UserType.VIP;
+                    return UserType.BEAUTYSHOP;
+                case "brand":
+
+                    return UserType.SHOPSMANAGER;
 
                 default:
                     break;

@@ -25,18 +25,18 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * PageManager app的activity的管理类
+ * AppPageManager app的activity的管理类
  * <p/>
  * Created by tianlai on 16-3-7.
  */
 @Singleton
-public class PageManager {
+public class AppPageManager {
 
     //Activity 容器
     private List<BaseActivity> activities;
 
     @Inject
-    public PageManager() {
+    public AppPageManager() {
         this.activities = new ArrayList<>();
     }
 

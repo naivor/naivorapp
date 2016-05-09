@@ -57,16 +57,16 @@ public class AppApplication extends Application {
      * 初始化bug管理工具
      */
     private void initBugtags() {
-        BugtagsOptions options = new BugtagsOptions.Builder().
-                trackingLocation(true).       //是否获取位置
-                trackingCrashLog(true).       //是否收集闪退
-                trackingConsoleLog(true).     //是否收集控制台日志
-                trackingUserSteps(true).      //是否跟踪用户操作步骤
-                crashWithScreenshot(true).    //收集闪退是否附带截图
-                versionName(AppUtil.getAppVersionName(this)).         //自定义版本名称
-                versionCode(AppUtil.getAppVersionCode(this)).              //自定义版本号
-                trackingNetworkURLFilter("(.*)").//自定义网络请求跟踪的 url 规则
-                build();
+        BugtagsOptions options = new BugtagsOptions.Builder()
+                .trackingLocation(true)       //是否获取位置
+                .trackingCrashLog(true)       //是否收集闪退
+                .trackingConsoleLog(true)     //是否收集控制台日志
+                .trackingUserSteps(true)      //是否跟踪用户操作步骤
+                .crashWithScreenshot(true)    //收集闪退是否附带截图
+                .versionName(AppUtil.getAppVersionName(this))            //自定义版本名称
+                .versionCode(AppUtil.getAppVersionCode(this))             //自定义版本号
+//                .trackingNetworkURLFilter("(.*)")                      //自定义网络请求跟踪的 url 规则(收费版方可使用)
+                .build();
 
         //debug包显示悬浮小球，release包不显示
         int level;

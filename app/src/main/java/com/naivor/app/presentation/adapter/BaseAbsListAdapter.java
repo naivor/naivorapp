@@ -19,6 +19,7 @@ public abstract class BaseAbsListAdapter<T,VH extends BaseViewHolder<T>> extends
     protected LayoutInflater inflater;
 
     protected List<T> itemDatas;
+
     private VH viewHolder;
 
     public BaseAbsListAdapter(Context context, LayoutInflater inflater) {
@@ -35,7 +36,11 @@ public abstract class BaseAbsListAdapter<T,VH extends BaseViewHolder<T>> extends
 
     @Override
     public T getItem(int position) {
-        return itemDatas.get(position);
+        if (position<getCount()){
+            return itemDatas.get(position);
+        }
+
+        return null;
     }
 
     @Override
@@ -45,6 +50,7 @@ public abstract class BaseAbsListAdapter<T,VH extends BaseViewHolder<T>> extends
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         if (convertView==null){
             viewHolder=onCreateViewHolder(parent,getItemViewType(position),inflater);
             convertView=viewHolder.getConvertView();

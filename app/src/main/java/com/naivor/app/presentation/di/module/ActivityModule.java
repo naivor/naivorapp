@@ -25,7 +25,7 @@ import com.naivor.app.presentation.ui.fragment.DateFragment;
 import com.naivor.app.presentation.ui.fragment.HomeFragment;
 import com.naivor.app.presentation.ui.fragment.MineFragment;
 import com.naivor.app.presentation.ui.fragment.OrderFragment;
-import com.naivor.widget.requestdialog.LoadingDialog;
+import com.naivor.app.presentation.widget.LoadingDialog;
 
 import java.util.ArrayList;
 import java.util.List;

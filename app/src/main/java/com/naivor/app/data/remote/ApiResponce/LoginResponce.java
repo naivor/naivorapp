@@ -43,7 +43,7 @@ public class LoginResponce extends BaseResponce {
 
         return User.Builder()
                 .id(id)
-                .userType(UserType.NORMAL)
+                .userType(UserType.BEAUTICIAN)
                 .email("")
                 .city("")
                 .build();

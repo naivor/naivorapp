@@ -20,7 +20,7 @@ package com.naivor.app.presentation.di.component;
 import android.content.Context;
 import android.view.LayoutInflater;
 
-import com.naivor.app.PageManager;
+import com.naivor.app.AppPageManager;
 import com.naivor.app.AppApplication;
 import com.naivor.app.data.cache.spf.SpfManager;
 import com.naivor.app.presentation.di.module.ApplicationModule;
@@ -52,7 +52,7 @@ public interface ApplicationComponent {
 
     LayoutInflater layoutInflater();
 
-    PageManager pageManager();
+    AppPageManager pageManager();
 
     SpfManager spfManager();
 

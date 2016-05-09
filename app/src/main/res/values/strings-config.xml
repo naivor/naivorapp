@@ -1,7 +1,7 @@
 <resources>
 
-    <string name="sd_path">/mdd</string>
-    <string name="crash_path">/crash</string>
+    <string name="crash_path">/mdd/crash</string>
+    <string name="cache_path">/mdd/cache</string>
 
     <string name="api_url_test">https://api.github.com</string>
     <string name="api_url_release">https://api.github.com</string>

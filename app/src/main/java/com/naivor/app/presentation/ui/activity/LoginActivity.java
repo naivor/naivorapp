@@ -27,7 +27,6 @@ import com.naivor.app.domain.presenter.BasePresenter;
 import com.naivor.app.domain.presenter.LoginPresenter;
 import com.naivor.app.presentation.di.component.ActivityComponent;
 import com.naivor.app.presentation.view.LoginView;
-import com.naivor.widget.requestdialog.LoadingDialog;
 
 import javax.inject.Inject;
 
@@ -41,9 +40,6 @@ import butterknife.OnClick;
  * Created by tianlai on 16-3-3.
  */
 public class LoginActivity extends BaseActivity implements LoginView {
-
-    @Inject
-    LoadingDialog dialog;
 
     @Inject
     LoginPresenter loginPresenter;
@@ -92,11 +88,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
                 toResetPasswdPage();
                 break;
         }
-    }
-
-    @Override
-    protected LoadingDialog initLoadingDialog() {
-        return dialog;
     }
 
     @Override

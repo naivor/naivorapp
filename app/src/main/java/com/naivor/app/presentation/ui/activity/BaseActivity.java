@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2016. Naivor.All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.naivor.app.presentation.ui.activity;
 
 import android.annotation.SuppressLint;
@@ -21,22 +5,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bugtags.library.Bugtags;
 import com.naivor.app.AppApplication;
-import com.naivor.app.PageManager;
+import com.naivor.app.AppPageManager;
 import com.naivor.app.R;
 import com.naivor.app.domain.presenter.BasePresenter;
 import com.naivor.app.extras.utils.DpUtil;
@@ -47,13 +29,13 @@ import com.naivor.app.presentation.di.component.ApplicationComponent;
 import com.naivor.app.presentation.di.component.DaggerActivityComponent;
 import com.naivor.app.presentation.di.module.ActivityModule;
 import com.naivor.app.presentation.view.BaseUiView;
-import com.naivor.widget.requestdialog.LoadingDialog;
+import com.naivor.app.presentation.widget.LoadingDialog;
 
 import javax.inject.Inject;
 
 /**
  * BaseActivity 是所有activity的基类，把一些公共的方法放到里面
- * <p/>
+ * <p>
  * Created by tianlai on 16-3-3.
  */
 public abstract class BaseActivity extends AppCompatActivity implements BaseUiView {
@@ -67,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     protected Context context;
 
     @Inject
-    protected PageManager pageManager;
+    protected AppPageManager appPageManager;
 
     protected Toolbar toolbar;
 
@@ -80,39 +62,35 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        rootView = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
-
-        setContentView(rootView);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         // 使用依赖注入
         initInjector();
         injectActivity(activityComponent);
 
-        // 将当前activity加入ActivityManager中
-        pageManager.addActivity(this);
+        //设置根布局
+        rootView = (LinearLayout) inflateView(R.layout.activity_base);
+        setContentView(rootView);
 
-        // 设置ActionBar
+        // 将当前activity加入ActivityManager中
+        appPageManager.addActivity(this);
+
+        // 设置导航栏
+        toolbar = (Toolbar) find(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         initToolbar(toolbar);
 
         //初始化加载数据对话框
-        loadingDialog = initLoadingDialog();
-        if (loadingDialog != null) {
-            loadingDialog.setCanceledOnTouchOutside(false);
-            loadingDialog.setCancelable(true);
+        loadingDialog=new LoadingDialog(this);
+        loadingDialog.setCanceledOnTouchOutside(false);
+        loadingDialog.setCancelable(true);
 
-            loadingDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface loadingDialog) {
-                    presenter.cancleLoading();
-                }
-            });
-        }
+        loadingDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface loadingDialog) {
+                presenter.cancleLoading();
+            }
+        });
 
         //初始化Presenter
         presenter = getPresenter();
@@ -159,6 +137,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     }
 
     /**
+     * @param resId
+     */
+    protected void setNavigationIcon(int resId) {
+        toolbar.setNavigationIcon(resId);
+    }
+
+    /**
      * // 加载ContentView的内容
      *
      * @param view
@@ -174,12 +159,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
         setContentViewToRoot(inflateView(layoutId));
     }
 
-    /**
-     * 获取展示加载状态的对话框
-     *
-     * @return
-     */
-    protected abstract LoadingDialog initLoadingDialog();
 
     /**
      * 进行注入
@@ -211,10 +190,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     protected void hideToolbar() {
 
         toolbar.setVisibility(View.GONE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
     }
 
     /**
@@ -231,8 +206,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
      * 设置注入器
      */
     private void initInjector() {
+        ApplicationComponent appComponent = getAppComponent();
+        appComponent.inject(this);
+
         activityComponent = DaggerActivityComponent.builder()
-                .applicationComponent(getAppComponent())
+                .applicationComponent(appComponent)
                 .activityModule(new ActivityModule(this))
                 .build();
     }
@@ -262,7 +240,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
      */
     @Override
     public void showLoading() {
-        if (!loadingDialog.isShowing()) {
+        if (loadingDialog != null && !loadingDialog.isShowing()) {
             loadingDialog.show();
         }
     }
@@ -273,7 +251,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     @Override
     public void loadingComplete() {
 
-        if (loadingDialog.isShowing()) {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
         }
     }
@@ -295,12 +273,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        Bugtags.onDispatchTouchEvent(this, ev);
-        return super.dispatchTouchEvent(ev);
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
@@ -311,7 +283,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     protected void onDestroy() {
         super.onDestroy();
 
-        pageManager.removeActivity(this);
+        appPageManager.removeActivity(this);
 
         presenter.onDestroy();
 
@@ -354,17 +326,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
 
     }
 
-    public TextView addRightActionView() {
-        return addRightActionView("", 0);
-    }
-
     /**
      * 生成Toolbar中心显示titile的View
      *
      * @return
      */
     @SuppressLint("NewApi")
-    public TextView addCenterTitleView(CharSequence title, int viewId) {
+    public TextView addCenterTitleView(String title, int viewId) {
         TextView tv_title = new TextView(context);
 
         if (viewId == 0) {
@@ -390,10 +358,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
         return tv_title;
     }
 
-    public TextView addCenterTitleView() {
-        return addCenterTitleView("", 0);
-    }
-
     /**
      * 设置应用的字体不随系统设置的更改而更改
      */
@@ -404,6 +368,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
         config.setToDefaults();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
         return resources;
+    }
+
+    public AppPageManager getAppPageManager() {
+        return appPageManager;
+    }
+
+    public void setAppPageManager(AppPageManager appPageManager) {
+        this.appPageManager = appPageManager;
     }
 
     /**
@@ -424,6 +396,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
      */
     public View find(View parent, int viewId) {
         return parent.findViewById(viewId);
+    }
+
+    /**
+     * 隐藏软键盘
+     */
+    protected void hideIME() {
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
 }

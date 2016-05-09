@@ -92,12 +92,12 @@
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_item_background_holo_dark.xml"
     },
     {
-        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/androidTest/debug/drawable/abc_btn_radio_material.xml",
-        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_radio_material.xml"
-    },
-    {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/androidTest/debug/drawable/abc_btn_colored_material.xml",
         "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/androidTest/debug/drawable/abc_btn_radio_material.xml",
+        "source": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_btn_radio_material.xml"
     },
     {
         "merged": "/home/naivor/workspace/studio/naivorapp/widget/build/intermediates/res/merged/androidTest/debug/drawable/abc_textfield_search_material.xml",

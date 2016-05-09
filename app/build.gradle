@@ -2,6 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.bugtags.library.plugin'
 
+
+bugtags {
+    appKey '79b099f46c4bd714fb389cafa4fe4018'
+    appSecret 'dd9d82aceadbd3fe466c7cd5ed658cca'
+
+}
+
 buildscript {
     repositories {
         jcenter()
@@ -10,17 +17,16 @@ buildscript {
 
     dependencies {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-        classpath 'com.bugtags.library:bugtags-gradle:1.2.2'
 
     }
 }
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.naivor.app"
+        applicationId "com.mdd.manager"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
@@ -30,7 +36,6 @@ android {
 
     buildTypes {
         debug {
-
             minifyEnabled false
             zipAlignEnabled false
             shrinkResources false
@@ -67,48 +72,43 @@ android {
     }
 }
 
-bugtags {
-    appKey "50da38c2a9e9a6771461a37b465566e7"
-    appSecret  "d275fcabda957c0d05d406c913205e5b"
-
-    trackingNetworkEnabled true
-}
-
 
 dependencies {
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':widget')
 
     testCompile 'junit:junit:4+'
 
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.bartoszlipinski.recyclerviewheader:library:1.2.0'
 
-    compile 'com.jakewharton:butterknife:7+'
+    compile 'com.jakewharton:butterknife:7.0.1'
 
-    compile 'io.reactivex:rxjava:1+'
-    compile 'io.reactivex:rxandroid:1+'
+    compile 'io.reactivex:rxjava:1.1.4'
+    compile 'io.reactivex:rxandroid:1.2.0'
 
     apt 'com.google.dagger:dagger-compiler:2.2'
     compile 'com.google.dagger:dagger:2.2'
-    provided 'org.glassfish:javax.annotation:10+'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 
-    compile 'com.squareup.retrofit2:retrofit:2+'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2+'
-    compile 'com.squareup.retrofit2:converter-gson:2+'
-    compile 'com.squareup.okhttp:logging-interceptor:2+'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
 
-    compile "frankiesardo:icepick:3+"
-    provided "frankiesardo:icepick-processor:3+"
+    compile "frankiesardo:icepick:3.2.0"
+    provided "frankiesardo:icepick-processor:3.2.0"
 
-    compile 'com.facebook.fresco:fresco:0.9.0+'
-    compile 'com.facebook.fresco:imagepipeline-okhttp:0.9.0+'
+    compile 'com.facebook.fresco:fresco:0.9.0'
+    compile 'com.facebook.fresco:imagepipeline-okhttp:0.9.0'
 
     compile "com.google.auto.value:auto-value:1.1"
 
     compile 'in.srain.cube:ultra-ptr:1.0.11'
 
     compile 'com.bugtags.library:bugtags-lib:1.2.2'
+
+    compile 'com.infstory:proguard-snippets:1.0.0'
+
+    compile 'com.isseiaoki:simplecropview:1.1.0'
 }

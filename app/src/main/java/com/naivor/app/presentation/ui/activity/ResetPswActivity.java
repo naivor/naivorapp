@@ -28,7 +28,6 @@ import com.naivor.app.domain.presenter.ResetPswPresenter;
 import com.naivor.app.extras.utils.ToastUtil;
 import com.naivor.app.presentation.di.component.ActivityComponent;
 import com.naivor.app.presentation.view.ResetPswView;
-import com.naivor.widget.requestdialog.LoadingDialog;
 
 import javax.inject.Inject;
 
@@ -43,9 +42,6 @@ public class ResetPswActivity extends BaseActivity implements ResetPswView {
 
     @Inject
     ResetPswPresenter resetPswPresenter;
-
-    @Inject
-    LoadingDialog loadingDialog;
 
     @Bind(R.id.edt_email)
     EditText edtEmail;
@@ -73,11 +69,6 @@ public class ResetPswActivity extends BaseActivity implements ResetPswView {
         }else {
             ToastUtil.showToast(context,"发送邮件成功");
         }
-    }
-
-    @Override
-    protected LoadingDialog initLoadingDialog() {
-        return loadingDialog;
     }
 
     @Override

@@ -28,7 +28,7 @@ import com.naivor.app.domain.presenter.RegisterPresenter;
 import com.naivor.app.extras.utils.ToastUtil;
 import com.naivor.app.presentation.di.component.ActivityComponent;
 import com.naivor.app.presentation.view.RegisterView;
-import com.naivor.widget.requestdialog.LoadingDialog;
+import com.naivor.app.presentation.widget.LoadingDialog;
 
 import javax.inject.Inject;
 
@@ -43,9 +43,6 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
 
     @Inject
     RegisterPresenter registerPresenter;
-
-    @Inject
-    LoadingDialog loadingDialog;
 
     @Bind(R.id.edt_name)
     EditText edtName;
@@ -106,11 +103,6 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
         }
 
 
-    }
-
-    @Override
-    protected LoadingDialog initLoadingDialog() {
-        return loadingDialog;
     }
 
     @Override

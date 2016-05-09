@@ -53,7 +53,7 @@ public class MineFragment extends BaseFragment implements MineFragmentView{
         //初始化Toolbar显示
         toolbarHelper.setTitle(FontUtil.addColor(baseActivity.getResources().getColor(R.color.deepskyblue), "蓝色页"));
         toolbarHelper.setIsCenterTitleStyle(true);
-        toolbarHelper.setTopView(baseActivity.addCenterTitleView());
+        toolbarHelper.setTopView(baseActivity.addCenterTitleView("",0));
     }
 
     @Override

@@ -21,7 +21,6 @@ import android.os.Build;
 import android.os.Looper;
 import android.widget.Toast;
 
-import com.bugtags.library.Bugtags;
 import com.naivor.app.extras.utils.AppUtil;
 import com.naivor.app.extras.utils.DateUtil;
 import com.naivor.app.extras.utils.LogUtil;
@@ -63,10 +62,10 @@ public class CrashHandler implements UncaughtExceptionHandler {
     private Context context;
 
     //App的Activity管理类
-    private PageManager activityManager;
+    private AppPageManager activityManager;
 
     @Inject
-    public CrashHandler(Context app, PageManager activityManager) {
+    public CrashHandler(Context app, AppPageManager activityManager) {
 
         this.context = app;
 
@@ -85,8 +84,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 
         infos = new HashMap<String, String>();
 
-        path = new StringBuffer().append(SDCardUtil.getRootPath()).append(context.getString(R.string.sd_path)).append(context
-                .getString(R.string.crash_path)).toString();
+        path = context.getString(R.string.crash_path);
     }
 
 
@@ -139,8 +137,6 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 collectDeviceInfo();
                 // 保存日志文件
                 saveCrashInfo2File(ex);
-                //错误传到网络
-                Bugtags.sendException(ex);
 
                 Looper.loop();
             }

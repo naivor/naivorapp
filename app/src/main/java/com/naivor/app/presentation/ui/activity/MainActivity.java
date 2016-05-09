@@ -41,7 +41,7 @@ import com.naivor.app.presentation.ui.fragment.MineFragment;
 import com.naivor.app.presentation.ui.fragment.OrderFragment;
 import com.naivor.app.presentation.ui.helper.ToolbarHelper;
 import com.naivor.app.presentation.view.MainView;
-import com.naivor.widget.requestdialog.LoadingDialog;
+import com.naivor.app.presentation.widget.LoadingDialog;
 
 import java.util.List;
 import java.util.Timer;
@@ -60,9 +60,6 @@ import butterknife.OnPageChange;
  * Created by tianlai on 16-3-11.
  */
 public class MainActivity extends BaseActivity implements MainView {
-
-    @Inject
-    LoadingDialog dialog;
 
     @Inject
     MainPresenter mainPresenter;
@@ -199,11 +196,6 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    protected LoadingDialog initLoadingDialog() {
-        return dialog;
-    }
-
-    @Override
     protected void injectActivity(ActivityComponent activityComponent) {
         activityComponent.inject(this);
     }
@@ -281,7 +273,7 @@ public class MainActivity extends BaseActivity implements MainView {
                     }
                 }, 2000);
             } else {
-                pageManager.ExitApplication();
+                appPageManager.ExitApplication();
                 System.exit(0);
             }
         }

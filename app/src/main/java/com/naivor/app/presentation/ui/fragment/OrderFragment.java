@@ -55,7 +55,7 @@ public class OrderFragment extends BaseFragment implements OrderFragmentView {
         //初始化Toolbar显示
         toolbarHelper.setTitle(FontUtil.addColor(baseActivity.getResources().getColor(R.color.orange), "橙色页"));
         toolbarHelper.setIsCenterTitleStyle(true);
-        toolbarHelper.setTopView(baseActivity.addCenterTitleView());
+        toolbarHelper.setTopView(baseActivity.addCenterTitleView("",0));
     }
 
     @Override

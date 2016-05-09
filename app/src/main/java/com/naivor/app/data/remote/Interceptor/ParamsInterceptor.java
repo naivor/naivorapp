@@ -1,25 +1,10 @@
-/*
- * Copyright (c) 2016. Naivor.All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.naivor.app.data.remote.Interceptor;
 
 import android.content.Context;
 
 import com.naivor.app.R;
 import com.naivor.app.data.model.User;
+import com.naivor.app.data.model.enums.UserType;
 import com.naivor.app.domain.repository.BaseRepository;
 import com.naivor.app.extras.utils.LogUtil;
 
@@ -30,6 +15,7 @@ import javax.inject.Singleton;
 
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -41,7 +27,7 @@ import okhttp3.Response;
  */
 @Singleton
 public class ParamsInterceptor implements Interceptor {
-    private static final String TAG="request params";
+    private static final String TAG = "request params";
     private Context context;
 
     @Inject
@@ -54,68 +40,148 @@ public class ParamsInterceptor implements Interceptor {
 
         Request orgRequest = chain.request();
 
-        RequestBody body=orgRequest.body();
 
+        RequestBody body = orgRequest.body();
         //收集请求参数，方便调试
-        StringBuilder paramsLogBuilder = new StringBuilder();
+        StringBuilder paramsBuilder = new StringBuilder();
 
-        if (body instanceof FormBody){
-            FormBody.Builder builder=new FormBody.Builder();
+        if (body != null) {
 
-            //添加appcode
-            String appcode = context.getString(R
-                    .string.appkey);
-            builder.add("appcode", appcode);
+            RequestBody newBody = null;
 
-            paramsLogBuilder.append("appcode=" + appcode);
-
-            //添加id，city，用户类型参数
-            User user = BaseRepository.getUser();
-            if (user != null) {
-                // id
-                String id = user.id() + "";
-                builder.add("uid", id);
-                paramsLogBuilder.append("&");
-                paramsLogBuilder.append("uid=" + id);
-
-                // type
-                String userType = user.userType().getValue();
-                builder.add("type", userType);
-                paramsLogBuilder.append("&");
-                paramsLogBuilder.append("type=" + userType);
-
-                //城市
-                String city = user.city();
-                builder.add("city", city);
-                paramsLogBuilder.append("&");
-                paramsLogBuilder.append("city=" + city);
+            if (body instanceof FormBody) {
+                newBody = addParamsToFormBody((FormBody) body, paramsBuilder);
+            } else if (body instanceof MultipartBody) {
+                newBody = addParamsToMultipartBody((MultipartBody) body, paramsBuilder);
             }
 
-            //添加原请求体
-            FormBody oldBody= (FormBody) body;
 
-            for (int i=0;i<oldBody.size();i++){
-                builder.addEncoded(oldBody.encodedName(i),oldBody.encodedValue(i));
+            if (null != newBody) {
+                //打印参数
+                LogUtil.i(TAG, paramsBuilder.toString());
 
-                paramsLogBuilder.append("&");
-                paramsLogBuilder.append(oldBody.name(i));
-                paramsLogBuilder.append("=");
-                paramsLogBuilder.append(oldBody.value(i));
+                Request newRequest = orgRequest.newBuilder()
+                        .url(orgRequest.url())
+                        .method(orgRequest.method(), newBody)
+                        .build();
+
+                return chain.proceed(newRequest);
             }
 
-            //打印参数
-            LogUtil.i(TAG, paramsLogBuilder.toString());
 
-
-            Request newRequest = orgRequest.newBuilder()
-                    .url(orgRequest.url())
-                    .method(orgRequest.method(), builder.build())
-                    .build();
-
-            return chain.proceed(newRequest);
         }
 
         return chain.proceed(orgRequest);
 
+    }
+
+    /**
+     * 为MultipartBody类型请求体添加参数
+     *
+     * @param body
+     * @param paramsBuilder
+     * @return
+     */
+    private MultipartBody addParamsToMultipartBody(MultipartBody body, StringBuilder paramsBuilder) {
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        //添加appcode
+        String appcode = context.getString(R
+                .string.appkey);
+        builder.addFormDataPart("appcode", appcode);
+
+
+        paramsBuilder.append("appcode=" + appcode);
+
+        //添加id，city参数
+        User user = BaseRepository.getUser();
+        if (user != null) {
+            String id = user.id() + "";
+            UserType userType = user.userType();
+
+            if (userType == UserType.BEAUTICIAN) {
+                builder.addFormDataPart("beautician_id", id);
+
+                paramsBuilder.append("&");
+                paramsBuilder.append("beautician_id=" + id);
+            } else  if (userType == UserType.BEAUTYSHOP){
+                builder.addFormDataPart("bp_id", id);
+
+                paramsBuilder.append("&");
+                paramsBuilder.append("bp_id=" + id);
+            }
+
+            //城市
+            String city = user.city();
+
+            builder.addFormDataPart("city", city);
+
+            paramsBuilder.append("&");
+            paramsBuilder.append("city=" + city);
+        }
+
+        //添加原请求体
+        for (int i = 0; i < body.size(); i++) {
+            builder.addPart(body.part(i));
+        }
+
+        return builder.build();
+    }
+
+    /**
+     * 为FormBody类型请求体添加参数
+     *
+     * @param body
+     * @param paramsBuilder
+     * @return
+     */
+    private FormBody addParamsToFormBody(FormBody body, StringBuilder paramsBuilder) {
+        FormBody.Builder builder = new FormBody.Builder();
+
+        //添加appcode
+        String appcode = context.getString(R
+                .string.appkey);
+        builder.add("appcode", appcode);
+
+        paramsBuilder.append("appcode=" + appcode);
+
+        //添加id，city参数
+        User user = BaseRepository.getUser();
+        if (user != null) {
+            String id = user.id() + "";
+            UserType userType = user.userType();
+
+            if (userType == UserType.BEAUTICIAN) {
+                builder.add("beautician_id", id);
+
+                paramsBuilder.append("&");
+                paramsBuilder.append("beautician_id=" + id);
+            } else  if (userType == UserType.BEAUTYSHOP){
+                builder.add("bp_id", id);
+
+                paramsBuilder.append("&");
+                paramsBuilder.append("bp_id=" + id);
+            }
+
+            //城市
+            String city = user.city();
+
+            builder.add("city", city);
+
+            paramsBuilder.append("&");
+            paramsBuilder.append("city=" + city);
+        }
+
+        //添加原请求体
+        for (int i = 0; i < body.size(); i++) {
+            builder.addEncoded(body.encodedName(i), body.encodedValue(i));
+            paramsBuilder.append("&");
+            paramsBuilder.append(body.name(i));
+            paramsBuilder.append("=");
+            paramsBuilder.append(body.value(i));
+        }
+
+        return builder.build();
     }
 }

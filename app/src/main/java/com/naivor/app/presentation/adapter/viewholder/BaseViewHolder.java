@@ -13,12 +13,12 @@ public abstract class BaseViewHolder<T> {
     protected Context context;
     protected BaseAbsListAdapter absListAdapter;
 
-    private View convertView;
+    protected View convertView;
 
     protected int position;
     protected T data;
 
-    public BaseViewHolder(View convertView, BaseAbsListAdapter absListAdapter) {
+    public BaseViewHolder(View convertView,BaseAbsListAdapter absListAdapter) {
         this.convertView = convertView;
         context=convertView.getContext();
         this.absListAdapter=absListAdapter;

@@ -58,7 +58,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentView {
         //初始化Toolbar显示
         toolbarHelper.setTitle(FontUtil.addColor(baseActivity.getResources().getColor(R.color.green), "绿色页"));
         toolbarHelper.setIsCenterTitleStyle(true);
-        toolbarHelper.setTopView(baseActivity.addCenterTitleView());
+        toolbarHelper.setTopView(baseActivity.addCenterTitleView("",0));
     }
 
     @Override

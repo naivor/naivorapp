@@ -25,7 +25,6 @@ import com.naivor.app.domain.presenter.BasePresenter;
 import com.naivor.app.domain.presenter.SplashPresenter;
 import com.naivor.app.presentation.di.component.ActivityComponent;
 import com.naivor.app.presentation.view.SplashView;
-import com.naivor.widget.requestdialog.LoadingDialog;
 
 import javax.inject.Inject;
 
@@ -47,11 +46,6 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
         hideToolbar();
 
-    }
-
-    @Override
-    protected LoadingDialog initLoadingDialog() {
-        return null;
     }
 
     @Override
