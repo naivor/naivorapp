@@ -23,6 +23,7 @@ package com.naivor.app.data.remote.ApiResponce;
  */
 public  class BaseResponce {
     protected int respCode;
+    protected int pageSize;
 
     public int getRespCode() {
         return respCode;
@@ -30,5 +31,13 @@ public  class BaseResponce {
 
     public void setRespCode(int respCode) {
         this.respCode = respCode;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }

@@ -16,11 +16,14 @@
 
 package com.naivor.app.presentation.view;
 
+import com.naivor.app.presentation.ui.helper.LoadMoreViewImpl;
+
 /**
  * Created by tianlai on 16-3-18.
  */
-public interface HomeFragmentView extends BaseUiView {
+public interface HomeFragmentView extends BaseUiView,LoadMoreViewImpl {
 
     public void setPageTitle();
+
 
 }

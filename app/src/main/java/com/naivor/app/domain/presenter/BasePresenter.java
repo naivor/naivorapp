@@ -27,6 +27,7 @@ import com.naivor.app.presentation.view.BaseUiView;
 
 import icepick.Icepick;
 import icepick.State;
+import rx.Subscriber;
 import rx.subjects.BehaviorSubject;
 import rx.subjects.Subject;
 
@@ -50,16 +51,54 @@ public abstract class BasePresenter<V extends BaseUiView,R extends BaseRepositor
 
     protected rx.Observable observable;
 
+    protected rx.Subscriber subscriber;
+
     //定义一个总线
     protected static Subject<Object,Object> subject;
 
-    public BasePresenter(R mRepository) {
+    public BasePresenter(final R mRepository) {
         this.mRepository=mRepository;
 
+        //初始化总线
         if (subject==null){
             subject= BehaviorSubject.create(new Object());
         }
+
+        //初始化订阅者
+        if (subscriber==null){
+            subscriber=new Subscriber() {
+                @Override
+                public void onCompleted() {
+                    if (mUiView!=null) {
+                        mUiView.loadingComplete();
+                    }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    e.printStackTrace();
+                    if (mUiView!=null) {
+                        mUiView.loadingComplete();
+                        mUiView.showError();
+                    }
+                }
+
+                @Override
+                public void onNext(Object o) {
+                    if (!mRepository.isCancled()){
+                        onResponce(o);
+                    }
+                }
+            };
+        }
     }
+
+    /**
+     * 返回数据的处理
+     *
+     * @param o
+     */
+    protected abstract void onResponce(Object o);
 
     /**
      * Presenter 的 oncreate（）生命周期，在Activity中的 oncreate（）中调用

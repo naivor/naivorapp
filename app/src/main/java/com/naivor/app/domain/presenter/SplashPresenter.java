@@ -44,6 +44,11 @@ public class SplashPresenter extends BasePresenter<SplashView,SplashRepository> 
         super(mRepository);
     }
 
+    @Override
+    protected void onResponce(Object o) {
+
+    }
+
 
     @Override
     public void oncreate(Bundle savedInstanceState,Context context) {
@@ -82,13 +87,4 @@ public class SplashPresenter extends BasePresenter<SplashView,SplashRepository> 
         super.onDestroy();
     }
 
-    @Override
-    public void cancleLoading() {
-
-    }
-
-    @Override
-    public void retryLoading() {
-
-    }
 }

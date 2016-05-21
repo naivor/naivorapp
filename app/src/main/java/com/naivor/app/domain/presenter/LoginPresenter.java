@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import com.naivor.app.data.cache.spf.SpfManager;
 import com.naivor.app.data.model.User;
 import com.naivor.app.data.remote.ApiResponce.LoginResponce;
+import com.naivor.app.data.remote.CheckResponce;
 import com.naivor.app.domain.repository.LoginRepository;
 import com.naivor.app.extras.utils.EncryptUtil;
 import com.naivor.app.extras.utils.ToastUtil;
@@ -44,24 +45,81 @@ public class LoginPresenter extends BasePresenter<LoginView,LoginRepository> {
         super(mRepository);
     }
 
+    private String phone;
+    private String securityPsw;
+
     @Inject
-    public LoginPresenter(SpfManager spfManager,LoginRepository mRepository) {
-        super(mRepository);
+    public LoginPresenter(SpfManager spfManager,LoginRepository repository) {
+        super(repository);
+
+        subscriber=new Subscriber() {
+            @Override
+            public void onCompleted() {
+                if (mUiView!=null) {
+                    mUiView.loadingComplete();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                if (mUiView!=null) {
+                    mUiView.loadingComplete();
+                    mUiView.showError();
+
+                    mUiView.toMainPage();
+                }
+            }
+
+            @Override
+            public void onNext(Object o) {
+                if (!mRepository.isCancled()){
+                    onResponce(o);
+                }
+            }
+        };
 
         this.spfManager=spfManager;
     }
 
+    @Override
+    protected void onResponce(Object o) {
+        if (o instanceof LoginResponce){
+            LoginResponce loginResponce= (LoginResponce) o;
+
+            if (CheckResponce.check(context, loginResponce)) {
+                //保存登录信息，下次自动登录
+                saveLoginInfo(phone, securityPsw);
+
+                User user = loginResponce.userMapper();
+
+                if (user.userType() != null) {
+
+                    //保存用户信息到Repository，全局可使用
+                    mRepository.setUser(user);
+
+                    //登录结果处理
+                    dealResponce(loginResponce);
+                }
+            }
+        }
+
+    }
 
     /**
      * 登录应用
      */
-    public void login(final String phone, final String passwd) {
+    public void login() {
+
+        phone=mUiView.getPhoneNum();
 
         //检查账号是否合法
         if (TextUtils.isEmpty(phone)){
             ToastUtil.showToast(context,"请输入用户名或邮箱");
             return;
         }
+
+        String passwd=mUiView.getPasswd();
 
         //检查密码是否合法
         if (TextUtils.isEmpty(passwd)){
@@ -70,7 +128,7 @@ public class LoginPresenter extends BasePresenter<LoginView,LoginRepository> {
         }
 
         //密码MD5加密
-        final String securityPsw = EncryptUtil.md5Encode(passwd);
+         securityPsw = EncryptUtil.md5Encode(passwd);
 
         //进行登录
         mRepository.login(phone, securityPsw)
@@ -84,46 +142,7 @@ public class LoginPresenter extends BasePresenter<LoginView,LoginRepository> {
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<LoginResponce>() {
-                               @Override
-                               public void onCompleted() {
-                                   mUiView.loadingComplete();
-                               }
-
-                               @Override
-                               public void onError(Throwable e) {
-                                   e.printStackTrace();
-//                                   ToastUtil.showToast(context, "登录失败？试试你的github账号");
-                                   mUiView.loadingComplete();
-                                   //好吧，不知为啥查询github会失败，默认去首页吧
-                                   mUiView.toMainPage();
-                               }
-
-                               @Override
-                               public void onNext(LoginResponce loginResponce) {
-                                   if (!mRepository.isCancled()) {
-
-//                                       if (CheckResponce.check(context, loginResponce)) {
-                                           //保存登录信息，下次自动登录
-                                           saveLoginInfo(phone, securityPsw);
-
-                                           User user = loginResponce.userMapper();
-
-                                           if (user.userType() != null) {
-
-                                               //保存用户信息到Repository，全局可使用
-                                               mRepository.setUser(user);
-
-                                               //登录结果处理
-                                               dealResponce(loginResponce);
-                                           }
-                                       }
-                                   }
-//                               }
-
-                           }
-
-                );
+                .subscribe(subscriber);
 
     }
 

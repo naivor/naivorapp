@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         switch (v.getId()){
             case R.id.tv_login:
                     //进行登录请求
-                loginPresenter.login(getPhoneNum(),getPasswd());
+                loginPresenter.login();
                 break;
             case R.id.tv_register:
                 toRegisterPage();

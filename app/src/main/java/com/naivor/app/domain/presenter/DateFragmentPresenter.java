@@ -32,12 +32,8 @@ public class DateFragmentPresenter extends BasePresenter<DateFragmentView,DateRe
     }
 
     @Override
-    public void cancleLoading() {
+    protected void onResponce(Object o) {
 
     }
 
-    @Override
-    public void retryLoading() {
-
-    }
 }

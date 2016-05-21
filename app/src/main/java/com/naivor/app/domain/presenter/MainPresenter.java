@@ -30,4 +30,9 @@ public class MainPresenter extends BasePresenter<MainView,MainRepository> {
     public MainPresenter(MainRepository mRepository) {
         super(mRepository);
     }
+
+    @Override
+    protected void onResponce(Object o) {
+
+    }
 }

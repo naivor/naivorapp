@@ -32,12 +32,8 @@ public class MineFragmentPresenter extends BasePresenter<MineFragmentView,MineRe
     }
 
     @Override
-    public void cancleLoading() {
+    protected void onResponce(Object o) {
 
     }
 
-    @Override
-    public void retryLoading() {
-
-    }
 }
