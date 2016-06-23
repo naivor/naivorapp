@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_stroke_gray_only_bottom"
-        android:fitsSystemWindows="true"
+        android:minHeight="68dp"
+        android:paddingTop="20dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></android.support.v7.widget.Toolbar>
 
 </LinearLayout>

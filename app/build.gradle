@@ -22,15 +22,15 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.mdd.manager"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0.0"
+        applicationId rootProject.ext.android.buildToolsVersion
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
     }
 
 
@@ -79,36 +79,37 @@ dependencies {
 
     testCompile 'junit:junit:4+'
 
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:recyclerview-v7:23.3.0'
-    compile 'com.bartoszlipinski.recyclerviewheader:library:1.2.0'
+    compile rootProject.ext.dependencies["appcompat-v7"]
+    compile rootProject.ext.dependencies["recyclerview"]
+    compile rootProject.ext.dependencies["recyclerviewheader"]
 
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile rootProject.ext.dependencies["butterknife"]
 
-    compile 'io.reactivex:rxjava:1.1.4'
-    compile 'io.reactivex:rxandroid:1.2.0'
+    compile rootProject.ext.dependencies["rxjava"]
+    compile rootProject.ext.dependencies["rxandroid"]
 
-    apt 'com.google.dagger:dagger-compiler:2.2'
-    compile 'com.google.dagger:dagger:2.2'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile rootProject.ext.dependencies["dagger-compiler"]
+    compile rootProject.ext.dependencies["dagger"]
+    compile rootProject.ext.dependencies["javax.annotation"]
 
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile rootProject.ext.dependencies["retrofit"]
+    compile rootProject.ext.dependencies["adapter-rxjava"]
+    compile rootProject.ext.dependencies["converter-gson"]
 
-    compile "frankiesardo:icepick:3.2.0"
-    provided "frankiesardo:icepick-processor:3.2.0"
+    compile rootProject.ext.dependencies["icepick"]
+    compile rootProject.ext.dependencies["icepick-processor"]
 
-    compile 'com.facebook.fresco:fresco:0.9.0'
-    compile 'com.facebook.fresco:imagepipeline-okhttp:0.9.0'
+    compile rootProject.ext.dependencies["fresco"]
+    compile rootProject.ext.dependencies["imagepipeline-okhttp"]
 
-    compile "com.google.auto.value:auto-value:1.1"
+    compile rootProject.ext.dependencies["auto-value"]
 
-    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile rootProject.ext.dependencies["ultra-ptr"]
 
-    compile 'com.bugtags.library:bugtags-lib:1.2.2'
+    compile rootProject.ext.dependencies["bugtags-lib"]
 
-    compile 'com.infstory:proguard-snippets:1.0.0'
+    compile rootProject.ext.dependencies["proguard-snippets"]
 
-    compile 'com.isseiaoki:simplecropview:1.1.0'
+    compile rootProject.ext.dependencies["simplecropview"]
+
 }
