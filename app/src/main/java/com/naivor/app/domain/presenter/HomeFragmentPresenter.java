@@ -20,9 +20,9 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.naivor.app.R;
-import com.naivor.app.data.remote.ApiResponce.HomeResponce;
-import com.naivor.app.data.remote.CheckResponce;
+import com.naivor.app.data.remote.ApiResponce.HomeData;
 import com.naivor.app.domain.repository.HomeRepository;
+import com.naivor.app.domain.rxjava.MineSubscriber;
 import com.naivor.app.extras.utils.LogUtil;
 import com.naivor.app.presentation.di.PerFragment;
 import com.naivor.app.presentation.ui.helper.LoadMorePresenterImpl;
@@ -48,11 +48,6 @@ import rx.schedulers.Schedulers;
 @PerFragment
 public class HomeFragmentPresenter extends BasePresenter<HomeFragmentView, HomeRepository> implements LoadMorePresenterImpl {
 
-    @Inject
-    public HomeFragmentPresenter(HomeRepository mRepository) {
-        super(mRepository);
-    }
-
     private int maxPageSize;
 
     private int index;
@@ -61,96 +56,40 @@ public class HomeFragmentPresenter extends BasePresenter<HomeFragmentView, HomeR
 
     private boolean isShowLoading;
 
-    @Override
-    protected void onResponce(Object o) {
-        LogUtil.i("提示", "数据返回");
-
-        if (o instanceof HomeResponce) {
-            HomeResponce homeResponce = (HomeResponce) o;
-            if (CheckResponce.check(context, homeResponce)) {
-                List<String> datas = homeResponce.getList();
-
-                if (datas.size() < maxPageSize || homeResponce.getPageSize()<maxPageSize) {
-                    isCanLoadMore = false;
-                }
-
-                if (index == 0) {
-                    mUiView.getListAdapter().setItems(datas);
-                } else {
-                    mUiView.getListAdapter().addItems(datas);
-                }
-            }
-        }
-
-    }
-
-    @Override
-    public void oncreate(Bundle savedInstanceState, Context context) {
-        super.oncreate(savedInstanceState, context);
+    @Inject
+    public HomeFragmentPresenter(HomeRepository mRepository) {
+        super(mRepository);
 
         maxPageSize = 18;
         index = 0;
         isCanLoadMore = true;
         isShowLoading = true;
-
-        requestData(R.array.list_data, maxPageSize);
     }
 
-    private void requestData(final int dataId, final int maxPageSize) {
-        observable = Observable.create(new Observable.OnSubscribe<Object>() {
-            @Override
-            public void call(Subscriber<? super Object> subscriber) {
-                LogUtil.i("提示", "数据装载");
+    /**
+     */
+    public void requestData() {
+        mRepository.optHomeData()
+                .subscribe(new MineSubscriber<List<String>>(this) {
+                    @Override
+                    public void onNext(List<String> s) {
+                        if (s != null) {
+                            isCanLoadMore = s.size() < maxPageSize;
 
-                HomeResponce responce = new HomeResponce();
-                responce.setList(Arrays.asList(context.getResources().getStringArray(dataId)));
-                responce.setRespCode(1000);
-                responce.setPageSize(maxPageSize);
+                            if (index == 0) {
+                                mUiView.getListAdapter().setItems(s);
+                            } else {
+                                mUiView.getListAdapter().addItems(s);
+                            }
+                        }
+                    }
+                });
 
-                mRepository.startRequest();
-
-                subscriber.onNext(responce);
-                subscriber.onCompleted();
-            }
-
-        }).subscribeOn(Schedulers.io());
-
-
-    }
-
-    @Override
-    public void onResume(HomeFragmentView uiView) {
-        super.onResume(uiView);
-
-        dealResponce();
-    }
-
-    private void dealResponce() {
-
-        observable.doOnSubscribe(new Action0() {
-            @Override
-            public void call() {
-                if (isShowLoading)
-                    mUiView.showLoading();
-
-            }
-        })
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .delay(2000, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
-
-        LogUtil.i("提示", "数据处理");
     }
 
     @Override
     public void refreshPageDate() {
-       new Timer().schedule(new TimerTask() {
-           @Override
-           public void run() {
-              mUiView.loadingComplete();
-           }
-       },1500);
+        requestData();
     }
 
     @Override
@@ -158,9 +97,7 @@ public class HomeFragmentPresenter extends BasePresenter<HomeFragmentView, HomeR
         index = 0;
         isCanLoadMore = true;
 
-        requestData(R.array.list_data, maxPageSize);
-        LogUtil.i("提示", "刷新页面");
-        dealResponce();
+        requestData();
     }
 
     @Override
@@ -168,24 +105,13 @@ public class HomeFragmentPresenter extends BasePresenter<HomeFragmentView, HomeR
         if (isCanLoadMore) {
             index++;
 
-            if (index == 1) {
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        mUiView.loadingComplete();
-
-                        HomeResponce responce = new HomeResponce();
-                        responce.setList(Arrays.asList(context.getResources().getStringArray(R.array.list_more)));
-                        responce.setRespCode(1000);
-                        responce.setPageSize(maxPageSize);
-
-                        onResponce(responce);
-                    }
-                },1500);
-            }
-
-            LogUtil.i("提示", "加载下一页数据");
+           requestData();
         }
+    }
+
+    @Override
+    public void loadComplete() {
+        super.loadComplete();
     }
 
     @Override

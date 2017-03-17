@@ -31,9 +31,5 @@ public class MineFragmentPresenter extends BasePresenter<MineFragmentView,MineRe
         super(mRepository);
     }
 
-    @Override
-    protected void onResponce(Object o) {
-
-    }
 
 }

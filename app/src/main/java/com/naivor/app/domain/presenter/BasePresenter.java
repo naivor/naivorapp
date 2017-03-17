@@ -49,10 +49,6 @@ public abstract class BasePresenter<V extends BaseUiView,R extends BaseRepositor
 
     protected R mRepository;
 
-    protected rx.Observable observable;
-
-    protected rx.Subscriber subscriber;
-
     //定义一个总线
     protected static Subject<Object,Object> subject;
 
@@ -64,41 +60,7 @@ public abstract class BasePresenter<V extends BaseUiView,R extends BaseRepositor
             subject= BehaviorSubject.create(new Object());
         }
 
-        //初始化订阅者
-        if (subscriber==null){
-            subscriber=new Subscriber() {
-                @Override
-                public void onCompleted() {
-                    if (mUiView!=null) {
-                        mUiView.loadingComplete();
-                    }
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    e.printStackTrace();
-                    if (mUiView!=null) {
-                        mUiView.loadingComplete();
-                        mUiView.showError();
-                    }
-                }
-
-                @Override
-                public void onNext(Object o) {
-                    if (!mRepository.isCancled()){
-                        onResponce(o);
-                    }
-                }
-            };
-        }
     }
-
-    /**
-     * 返回数据的处理
-     *
-     * @param o
-     */
-    protected abstract void onResponce(Object o);
 
     /**
      * Presenter 的 oncreate（）生命周期，在Activity中的 oncreate（）中调用
@@ -161,9 +123,7 @@ public abstract class BasePresenter<V extends BaseUiView,R extends BaseRepositor
      * 重新加载页面的方法
      */
     public  void retryLoading(){
-        if (observable!=null){
-            observable.retry();
-        }
+
     }
 
     /**
@@ -187,16 +147,22 @@ public abstract class BasePresenter<V extends BaseUiView,R extends BaseRepositor
     /**
      * 加载完成
      */
-    private void loadComplete(){
-        mUiView.loadingComplete();
+    public void loadComplete(){
+        if (mUiView!=null) {
+            mUiView.loadingComplete();
+        }
     }
 
     /**
      * 加载发生错误
      */
-    private void loadErrorOccured(Throwable e){
-        mUiView.loadingComplete();
+    public void loadErrorOccured(Throwable e){
         e.printStackTrace();
-        Bugtags.sendException(e);
+
+        if (mUiView!=null) {
+            mUiView.loadingComplete();
+            mUiView.showError();
+        }
     }
+
 }

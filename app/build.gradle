@@ -9,24 +9,13 @@ bugtags {
 
 }
 
-buildscript {
-    repositories {
-        jcenter()
-
-    }
-
-    dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-
-    }
-}
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        applicationId rootProject.ext.android.buildToolsVersion
+        applicationId rootProject.ext.android.applicationId
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
@@ -70,6 +59,24 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null) {
+                def fileName = outputFile.name;
+
+                if (fileName.startsWith('app') && fileName.endsWith('.apk')) {
+                    fileName = fileName.replace("app", "${defaultConfig.applicationId}")
+                            .replace(".apk", "-${defaultConfig.versionName}.apk")
+                }
+
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+
+        }
+    }
+
 }
 
 
@@ -95,6 +102,7 @@ dependencies {
     compile rootProject.ext.dependencies["retrofit"]
     compile rootProject.ext.dependencies["adapter-rxjava"]
     compile rootProject.ext.dependencies["converter-gson"]
+    compile rootProject.ext.dependencies["logging-interceptor"]
 
     compile rootProject.ext.dependencies["icepick"]
     provided rootProject.ext.dependencies["icepick-processor"]
@@ -111,5 +119,7 @@ dependencies {
     compile rootProject.ext.dependencies["proguard-snippets"]
 
     compile rootProject.ext.dependencies["simplecropview"]
+
+    compile rootProject.ext.dependencies["statusbaruitl"]
 
 }

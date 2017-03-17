@@ -18,15 +18,24 @@ package com.naivor.app.domain.repository;
 
 import android.content.Context;
 
+import com.naivor.app.R;
+import com.naivor.app.data.remote.ApiResponce.HomeData;
 import com.naivor.app.data.remote.ApiService.HomeApiService;
+import com.naivor.app.domain.rxjava.RxUtils;
+import com.naivor.app.extras.utils.LogUtil;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import retrofit2.Retrofit;
+import rx.Observable;
+import rx.Subscriber;
+import rx.functions.Func1;
 
 /**
- *
- *
  * Created by naivor on 16-4-2.
  */
 public class HomeRepository extends BaseRepository<HomeApiService> {
@@ -38,5 +47,37 @@ public class HomeRepository extends BaseRepository<HomeApiService> {
     @Override
     protected Class<HomeApiService> getServiceClass() {
         return HomeApiService.class;
+    }
+
+
+    /**
+     * 获取首页数据
+     *
+     * @return
+     */
+    public Observable<List<String>> optHomeData() {
+        return Observable.timer(3, TimeUnit.SECONDS)
+                .flatMap(new Func1<Long, Observable<String>>() {
+                    @Override
+                    public Observable<String> call(Long aLong) {
+                        return Observable.create(new Observable.OnSubscribe<String>() {
+                            @Override
+                            public void call(Subscriber<? super String> subscriber) {
+
+                                List<String> list = Arrays.asList(mContext.getResources().getStringArray(R.array.list_more));
+
+                                for (String str : list
+                                        ) {
+                                    subscriber.onNext(str);
+                                }
+
+                                subscriber.onCompleted();
+                            }
+
+                        });
+                    }
+                })
+                .compose(RxUtils.<String>transSchedule())
+                .toList();
     }
 }

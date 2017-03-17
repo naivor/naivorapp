@@ -5,18 +5,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bugtags.library.Bugtags;
+import com.jaeger.library.StatusBarUtil;
 import com.naivor.app.AppApplication;
 import com.naivor.app.AppPageManager;
 import com.naivor.app.R;
@@ -53,12 +58,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
 
     protected Toolbar toolbar;
 
-    protected LinearLayout rootView;
+    protected RelativeLayout rootView;
 
     protected BasePresenter presenter;
 
     protected LoadingDialog loadingDialog;
 
+    @SuppressLint("NewApi")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +73,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
         injectActivity(activityComponent);
 
         //设置根布局
-        rootView = (LinearLayout) inflateView(R.layout.activity_base);
-        setContentView(rootView);
+        setContentView(R.layout.activity_base);
+        rootView = (RelativeLayout) find(R.id.rootView);
 
         // 将当前activity加入ActivityManager中
         appPageManager.addActivity(this);
@@ -78,10 +84,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        initToolbar(toolbar);
+        initToolbar(toolbar,0x800080);
+
 
         //初始化加载数据对话框
-        loadingDialog=new LoadingDialog(this);
+        loadingDialog = new LoadingDialog(this);
         loadingDialog.setCanceledOnTouchOutside(false);
         loadingDialog.setCancelable(true);
 
@@ -121,6 +128,22 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
     }
 
     /**
+     * 初始化Toolbar,statusbar颜色
+     *
+     * @param toolbar
+     */
+    protected void initToolbar(Toolbar toolbar, @ColorInt int mColor) {
+
+        setStatusColor(mColor);
+
+        initToolbar(toolbar);
+    }
+
+    protected void setStatusColor(@ColorInt int mColor) {
+        StatusBarUtil.setColor(this, mColor);
+    }
+
+    /**
      * 设置页面的标题
      *
      * @param title
@@ -150,8 +173,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiVi
      */
     protected void setContentViewToRoot(View view) {
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout
                 .LayoutParams.MATCH_PARENT);
+        params.addRule(RelativeLayout.BELOW, R.id.toolbar);
         rootView.addView(view, params);
     }
 

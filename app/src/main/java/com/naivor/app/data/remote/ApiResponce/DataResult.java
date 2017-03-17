@@ -17,27 +17,38 @@
 package com.naivor.app.data.remote.ApiResponce;
 
 /**
- * BaseResponce 请求返回的基类，包含公共部分，比如返回码，返回消息等等
+ * DataResult 请求返回的基类，包含公共部分，比如返回码，返回消息等等
  *
  * Created by tianlai on 16-3-8.
  */
-public  class BaseResponce {
-    protected int respCode;
-    protected int pageSize;
+public  class DataResult<T> {
 
-    public int getRespCode() {
-        return respCode;
+    private int code;
+    private String message;
+    private T data;
+
+
+    public int getCode() {
+        return code;
     }
 
-    public void setRespCode(int respCode) {
-        this.respCode = respCode;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public int getPageSize() {
-        return pageSize;
+    public String getMessage() {
+        return message;
     }
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }

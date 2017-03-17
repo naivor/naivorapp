@@ -19,8 +19,9 @@ package com.naivor.app.domain.repository;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.naivor.app.data.remote.ApiResponce.LoginResponce;
+import com.naivor.app.data.remote.ApiResponce.LoginData;
 import com.naivor.app.data.remote.ApiService.LoginApiService;
+import com.naivor.app.domain.rxjava.RxUtils;
 
 import javax.inject.Inject;
 
@@ -50,10 +51,10 @@ public class MainRepository extends BaseRepository<LoginApiService> {
      * @param psw
      * @return
      */
-    public rx.Observable<LoginResponce> login(@NonNull String mobile, @NonNull String psw) {
+    public rx.Observable<LoginData> login(@NonNull String mobile, @NonNull String psw) {
 
-        startRequest();
-
-        return service.login(mobile, psw);
+        return service.login(mobile, psw)
+                .compose(RxUtils.<LoginData>transData())
+                .compose(RxUtils.<LoginData>transSchedule());
     }
 }

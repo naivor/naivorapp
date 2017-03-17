@@ -71,6 +71,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
         hideToolbar();
 
+        setStatusColor(0xe7298729);
     }
 
     @OnClick({R.id.tv_login,R.id.tv_register,R.id.tv_forgetpsw})

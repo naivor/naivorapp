@@ -31,9 +31,6 @@ public class DateFragmentPresenter extends BasePresenter<DateFragmentView,DateRe
         super(mRepository);
     }
 
-    @Override
-    protected void onResponce(Object o) {
 
-    }
 
 }

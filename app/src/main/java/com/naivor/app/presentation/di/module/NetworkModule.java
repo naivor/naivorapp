@@ -20,7 +20,6 @@ import android.content.Context;
 
 import com.naivor.app.BuildConfig;
 import com.naivor.app.R;
-import com.naivor.app.data.remote.Interceptor.LoggingInterceptor;
 import com.naivor.app.data.remote.Interceptor.ParamsInterceptor;
 
 import java.util.concurrent.TimeUnit;
@@ -30,6 +29,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -41,24 +41,31 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class NetworkModule {
-    private static final int TIMEOUT=10 * 1000;
+    private static final int TIMEOUT = 10 * 1000;
 
     @Singleton
     @Provides
-    OkHttpClient privodeOkHttpClient(ParamsInterceptor paramsInterceptor,LoggingInterceptor loggingInterceptor) {
+    OkHttpClient privodeOkHttpClient(ParamsInterceptor paramsInterceptor) {
 
-        return new OkHttpClient.Builder()
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(paramsInterceptor)   //添加 paramsInterceptor
-                .addInterceptor(loggingInterceptor)  //添加 loggingInterceptor
-                .build();
+                .addInterceptor(paramsInterceptor);
+
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+            builder.addInterceptor(logging);  //添加 loggingInterceptor
+        }
+
+        return builder.build();
 
     }
 
     @Singleton
     @Provides
-    Retrofit privodeRetrofit(Context context,OkHttpClient okHttpClient) {
+    Retrofit privodeRetrofit(Context context, OkHttpClient okHttpClient) {
 
         return new Retrofit.Builder()
                 .baseUrl(getBaseUrl(context))

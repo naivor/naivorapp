@@ -75,15 +75,25 @@ public class HomeFragment extends BaseFragment implements HomeFragmentView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View contentView = inflater.inflate(R.layout.fragment_home, container, false);
+        if (savedInstanceState==null){
+
+            return inflater.inflate(R.layout.fragment_home, container, false);
+        }
+
+        return super.onCreateView(inflater,container,savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ButterKnife.bind(this, view);
 
         setPageTitle();
 
-        ButterKnife.bind(this, contentView);
-
         initListView();
 
-        return contentView;
+        homeFragmentPresenter.requestData();
     }
 
     /**

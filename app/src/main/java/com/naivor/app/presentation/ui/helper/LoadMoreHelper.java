@@ -158,12 +158,9 @@ public class LoadMoreHelper implements AbsListView.OnScrollListener {
      * 加载更多数据完成
      */
     public void loadMoreComplete() {
-        if (state == State.LOADING) {
             LogUtil.i(TAG, " --加载完成--");
 
             changeState(State.COMPLETE);
-        }
-
     }
 
     public boolean isHasMoreDate() {

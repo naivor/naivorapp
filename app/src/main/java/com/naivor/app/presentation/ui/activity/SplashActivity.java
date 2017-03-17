@@ -20,6 +20,7 @@ package com.naivor.app.presentation.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.jaeger.library.StatusBarUtil;
 import com.naivor.app.R;
 import com.naivor.app.domain.presenter.BasePresenter;
 import com.naivor.app.domain.presenter.SplashPresenter;
@@ -45,6 +46,8 @@ public class SplashActivity extends BaseActivity implements SplashView {
         setContentViewToRoot(R.layout.activity_splash);
 
         hideToolbar();
+
+        StatusBarUtil.setTransparent(this);
 
     }
 

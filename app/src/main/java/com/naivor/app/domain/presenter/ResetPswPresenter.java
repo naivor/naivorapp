@@ -31,8 +31,5 @@ public class ResetPswPresenter extends BasePresenter<ResetPswView,ResetPswReposi
         super(mRepository);
     }
 
-    @Override
-    protected void onResponce(Object o) {
 
-    }
 }

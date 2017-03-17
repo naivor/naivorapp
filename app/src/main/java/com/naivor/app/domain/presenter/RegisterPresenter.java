@@ -31,8 +31,5 @@ public class RegisterPresenter extends BasePresenter<RegisterView,RegisterReposi
         super(mRepository);
     }
 
-    @Override
-    protected void onResponce(Object o) {
 
-    }
 }

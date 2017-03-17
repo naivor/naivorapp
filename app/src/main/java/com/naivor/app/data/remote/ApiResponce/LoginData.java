@@ -24,7 +24,7 @@ import com.naivor.app.data.model.enums.UserType;
  * <p>
  * Created by tianlai on 16-3-8.
  */
-public class LoginResponce extends BaseResponce {
+public class LoginData {
     private int id;  //用户的id
 
     private String type; //用户的类型
@@ -100,7 +100,7 @@ public class LoginResponce extends BaseResponce {
 
     @Override
     public String toString() {
-        return "LoginResponce{" +
+        return "LoginData{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", name='" + name + '\'' +

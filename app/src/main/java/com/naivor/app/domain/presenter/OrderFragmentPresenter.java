@@ -31,9 +31,5 @@ public class OrderFragmentPresenter extends BasePresenter<OrderFragmentView,Orde
         super(mRepository);
     }
 
-    @Override
-    protected void onResponce(Object o) {
-
-    }
 
 }

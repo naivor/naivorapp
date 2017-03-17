@@ -16,7 +16,8 @@
 
 package com.naivor.app.data.remote.ApiService;
 
-import com.naivor.app.data.remote.ApiResponce.LoginResponce;
+import com.naivor.app.data.remote.ApiResponce.DataResult;
+import com.naivor.app.data.remote.ApiResponce.LoginData;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -29,8 +30,10 @@ import rx.Observable;
  * Created by tianlai on 16-3-8.
  */
 public interface LoginApiService {
+
+
     @GET("/users/{username}")
-    Observable<LoginResponce> login(
+    Observable<DataResult<LoginData>> login(
             @Path("username") String username,
             @Query("password") String psw
     );

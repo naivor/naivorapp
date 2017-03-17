@@ -6,7 +6,7 @@ import java.util.List;
  * Home 页面的返回结果
  * Created by naivor on 16-5-21.
  */
-public class HomeResponce extends BaseResponce{
+public class HomeData {
     private List<String> list;
 
     public List<String> getList() {
@@ -19,7 +19,7 @@ public class HomeResponce extends BaseResponce{
 
     @Override
     public String toString() {
-        return "HomeResponce{" +
+        return "HomeData{" +
                 "list=" + list +
                 '}';
     }
