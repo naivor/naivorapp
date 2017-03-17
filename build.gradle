@@ -1,5 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 apply from: "config.gradle"
+apply plugin: 'checkstyle'
 
 buildscript {
     repositories {
@@ -29,6 +30,24 @@ allprojects {
     }
 }
 
+checkstyle {
+    toolVersion '6.19'
+    showViolations true
+}
+
+task check(type: Checkstyle) {
+    source 'src'
+    configFile file("checkstyle.xml")
+    include '**/*.java'
+    exclude '**/gen/**'
+    ignoreFailures true
+
+    classpath = files()
+}
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
