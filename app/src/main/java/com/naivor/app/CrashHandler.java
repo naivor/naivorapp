@@ -21,10 +21,10 @@ import android.os.Build;
 import android.os.Looper;
 import android.widget.Toast;
 
-import com.naivor.app.extras.utils.AppUtil;
-import com.naivor.app.extras.utils.DateUtil;
-import com.naivor.app.extras.utils.LogUtil;
-import com.naivor.app.extras.utils.SDCardUtil;
+import com.naivor.app.common.utils.AppUtil;
+import com.naivor.app.common.utils.DateUtil;
+import com.naivor.app.common.utils.LogUtil;
+import com.naivor.app.common.utils.SDCardUtil;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -62,10 +62,10 @@ public class CrashHandler implements UncaughtExceptionHandler {
     private Context context;
 
     //App的Activity管理类
-    private AppPageManager activityManager;
+    private PageManager activityManager;
 
     @Inject
-    public CrashHandler(Context app, AppPageManager activityManager) {
+    public CrashHandler(Context app, PageManager activityManager) {
 
         this.context = app;
 
