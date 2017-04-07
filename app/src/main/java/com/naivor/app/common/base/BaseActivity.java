@@ -17,7 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.bugtags.library.Bugtags;
 import com.naivor.app.NaivorApp;
 import com.naivor.app.PageManager;
-import com.naivor.app.common.model.User;
+import com.naivor.app.features.model.User;
 import com.naivor.app.common.rxJava.RxBus;
 import com.naivor.app.common.utils.AppUtil;
 import com.naivor.app.common.utils.LogUtil;

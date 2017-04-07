@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.modules.login.resetPsw;
+package com.naivor.app.modules.login.ui.register;
 
 
 import com.naivor.app.common.base.BaseUiView;
@@ -22,6 +22,6 @@ import com.naivor.app.common.base.BaseUiView;
 /**
  * Created by naivor on 16-4-2.
  */
-public interface ResetPswView extends BaseUiView {
+public interface RegisterView extends BaseUiView {
 
 }

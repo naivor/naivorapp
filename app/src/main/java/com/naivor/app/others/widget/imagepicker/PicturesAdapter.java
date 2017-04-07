@@ -21,7 +21,6 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -32,10 +31,10 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.naivor.adapter.AdapterOperator;
+import com.naivor.adapter.ListAdapter;
+import com.naivor.adapter.ListHolder;
 import com.naivor.app.R;
-import com.naivor.app.common.base.AdapterOperator;
-import com.naivor.app.common.base.ListAdapter;
-import com.naivor.app.common.base.ListHolder;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -59,8 +58,8 @@ public class PicturesAdapter extends ListAdapter<String> {
     }
 
     @Override
-    public PicturesViewHolder onCreateViewHolder(ViewGroup parent, int viewType, LayoutInflater inflater) {
-        return new PicturesViewHolder(inflater.inflate(R.layout.grid_item_select_image, null));
+    public ListHolder<String> onCreateViewHolder(View view, int i) {
+        return new PicturesViewHolder(view);
     }
 
 
@@ -152,6 +151,17 @@ public class PicturesAdapter extends ListAdapter<String> {
      */
     public void clearSelectedPictures() {
         selectedPictures.clear();
+    }
+
+    /**
+     * 获取布局资源
+     *
+     * @param viewType
+     * @return
+     */
+    @Override
+    public int getLayoutRes(int viewType) {
+        return R.layout.grid_item_select_image;
     }
 
     public static interface OnPictrueSelectListener {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.modules.login.register;
+package com.naivor.app.modules.login.ui.register;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;

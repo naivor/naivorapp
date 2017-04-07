@@ -19,10 +19,10 @@ package com.naivor.app.features.di.component;
 import com.naivor.app.common.base.BaseFragment;
 import com.naivor.app.features.di.PerActivity;
 import com.naivor.app.features.di.module.ActivityModule;
-import com.naivor.app.modules.login.LoginActivity;
-import com.naivor.app.modules.login.register.RegisterActivity;
-import com.naivor.app.modules.login.resetPsw.ResetPswActivity;
-import com.naivor.app.modules.main.MainActivity;
+import com.naivor.app.modules.login.ui.LoginActivity;
+import com.naivor.app.modules.login.ui.register.RegisterActivity;
+import com.naivor.app.modules.login.ui.resetPsw.ResetPswActivity;
+import com.naivor.app.modules.main.ui.MainActivity;
 import com.naivor.app.modules.others.SplashActivity;
 
 import dagger.Component;

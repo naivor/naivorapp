@@ -18,7 +18,7 @@ package com.naivor.app.features.di.module;
 
 
 import com.naivor.app.common.base.BaseFragment;
-import com.naivor.app.common.model.SimpleItem;
+import com.naivor.app.features.model.SimpleItem;
 
 import java.util.ArrayList;
 import java.util.List;

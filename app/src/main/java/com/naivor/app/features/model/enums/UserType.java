@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.common.model.enums;
+package com.naivor.app.features.model.enums;
 
 /**
  * 用户的类型，普通，VIP

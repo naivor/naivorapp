@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.common.model;
+package com.naivor.app.features.model;
 
 import com.google.auto.value.AutoValue;
 

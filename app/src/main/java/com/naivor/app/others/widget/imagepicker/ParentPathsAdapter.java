@@ -20,14 +20,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.naivor.adapter.AdapterOperator;
+import com.naivor.adapter.ListAdapter;
+import com.naivor.adapter.ListHolder;
 import com.naivor.app.R;
-import com.naivor.app.common.base.AdapterOperator;
-import com.naivor.app.common.base.ListAdapter;
-import com.naivor.app.common.base.ListHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +42,19 @@ public class ParentPathsAdapter extends ListAdapter<ImageCollection> {
     }
 
     @Override
-    public ParentPathsViewHolder onCreateViewHolder(ViewGroup parent, int viewType, LayoutInflater inflater) {
-        return new ParentPathsViewHolder(inflater.inflate(R.layout.list_item_parent_paths, null));
+    public ListHolder<ImageCollection> onCreateViewHolder(View view, int i) {
+        return new ParentPathsViewHolder(view);
+    }
+
+    /**
+     * 获取布局资源
+     *
+     * @param viewType
+     * @return
+     */
+    @Override
+    public int getLayoutRes(int viewType) {
+        return R.layout.list_item_parent_paths;
     }
 
     /**

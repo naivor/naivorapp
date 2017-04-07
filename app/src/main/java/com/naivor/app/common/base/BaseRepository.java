@@ -19,7 +19,7 @@ package com.naivor.app.common.base;
 
 import android.content.Context;
 
-import com.naivor.app.common.model.User;
+import com.naivor.app.features.model.User;
 import com.naivor.app.others.UserManager;
 
 import retrofit2.Retrofit;

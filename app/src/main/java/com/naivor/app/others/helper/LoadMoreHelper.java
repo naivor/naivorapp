@@ -24,8 +24,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.naivor.adapter.AdapterOperator;
 import com.naivor.app.R;
-import com.naivor.app.common.base.AdapterOperator;
 import com.naivor.app.common.utils.LogUtil;
 
 import javax.inject.Inject;

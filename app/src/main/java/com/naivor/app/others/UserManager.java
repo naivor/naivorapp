@@ -1,7 +1,7 @@
 package com.naivor.app.others;
 
 
-import com.naivor.app.common.model.User;
+import com.naivor.app.features.model.User;
 
 /**
  * 用户管理器,保存用户的信息

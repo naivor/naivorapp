@@ -31,19 +31,19 @@
         </activity>
 
         <activity
-            android:name=".modules.login.LoginActivity"
+            android:name=".modules.login.ui.LoginActivity"
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".modules.login.register.RegisterActivity"
+            android:name=".modules.login.ui.register.RegisterActivity"
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".modules.login.resetPsw.ResetPswActivity"
+            android:name=".modules.login.ui.resetPsw.ResetPswActivity"
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".modules.main.MainActivity"
+            android:name=".modules.main.ui.MainActivity"
             android:screenOrientation="portrait"></activity>
 
     </application>

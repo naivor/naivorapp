@@ -26,14 +26,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.naivor.adapter.AdapterOperator;
 import com.naivor.app.R;
-import com.naivor.app.common.base.AdapterOperator;
 import com.naivor.app.common.base.BaseFragment;
 import com.naivor.app.common.base.BasePresenter;
 import com.naivor.app.common.utils.ToastUtil;
 import com.naivor.app.features.adapter.HomeListAdapter;
 import com.naivor.app.features.di.component.FragmentComponent;
-import com.naivor.app.modules.main.MainActivity;
+import com.naivor.app.modules.main.ui.MainActivity;
 import com.naivor.app.others.helper.LoadMoreHelper;
 
 import javax.inject.Inject;
@@ -76,7 +76,6 @@ public class PartOneFragment extends BaseFragment implements PartOneView {
 
     @Inject
     LoadMoreHelper loadMoreHelper;
-
 
     private boolean isRefreshing;
 

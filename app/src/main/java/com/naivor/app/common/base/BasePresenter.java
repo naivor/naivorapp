@@ -18,12 +18,16 @@ package com.naivor.app.common.base;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import com.naivor.app.common.rxJava.RxBus;
-import com.naivor.app.common.model.User;
+import com.naivor.app.common.utils.LogUtil;
+import com.naivor.app.features.exception.ApiException;
+import com.naivor.app.features.model.User;
 import com.naivor.app.others.UserManager;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 
 import icepick.Icepick;
 import rx.Subscription;
@@ -153,19 +157,33 @@ public abstract class BasePresenter<V extends BaseUiView> {
      */
     public void loadError(Throwable e) {
 
-        e.printStackTrace();
+        if (e instanceof ApiException) {
+            ApiException exception = (ApiException) e;
 
-        if (e instanceof SocketTimeoutException) {
-            mUiView.showError("超时，请稍后重试");
-        } else if (e instanceof ConnectException) {
-            mUiView.showError("连接失败，请稍检查您的网络");
+            LogUtil.e("ApiException", exception.toString());
+        } else {
+
+            if (e instanceof SocketTimeoutException) {
+                mUiView.showError("超时，请稍后重试");
+            } else if (e instanceof ConnectException) {
+                mUiView.showError("连接失败，请稍检查您的网络");
+            } else if (e instanceof UnknownHostException) {
+                mUiView.showError("请检查您的网络");
+            } else {
+                e.printStackTrace();
+
+                mUiView.showError("未知错误");
+            }
         }
 
         dismissLoading();
     }
 
+    /**
+     * 加载完成
+     */
     public void loadComplete() {
-        //TODO
+        dismissLoading();
     }
 
     /**

@@ -24,7 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.naivor.app.common.model.User;
+import com.naivor.app.features.model.User;
 import com.naivor.app.common.rxJava.RxBus;
 import com.naivor.app.features.di.component.DaggerFragmentComponent;
 import com.naivor.app.features.di.component.FragmentComponent;

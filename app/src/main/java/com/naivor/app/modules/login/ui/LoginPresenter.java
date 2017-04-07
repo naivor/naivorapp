@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.modules.login;
+package com.naivor.app.modules.login.ui;
 
 import android.content.Context;
 import android.text.TextUtils;

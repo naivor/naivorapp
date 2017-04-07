@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.naivor.app.R;
 import com.naivor.app.common.base.BaseRepository;
-import com.naivor.app.common.model.User;
-import com.naivor.app.common.model.enums.UserType;
+import com.naivor.app.features.model.User;
+import com.naivor.app.features.model.enums.UserType;
 import com.naivor.app.common.utils.LogUtil;
 
 import java.io.IOException;

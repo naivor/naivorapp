@@ -14,14 +14,22 @@
  * limitations under the License.
  */
 
-package com.naivor.app.modules.login.register;
+package com.naivor.app.modules.main.ui;
 
 
-import com.naivor.app.common.base.BaseUiView;
+import android.content.Context;
+
+import com.naivor.app.common.base.BasePresenter;
+
+import javax.inject.Inject;
 
 /**
- * Created by naivor on 16-4-2.
+ * Created by tianlai on 16-3-9.
  */
-public interface RegisterView extends BaseUiView {
+public class MainPresenter extends BasePresenter<MainView> {
 
+    @Inject
+    public MainPresenter(Context context) {
+        super(context);
+    }
 }

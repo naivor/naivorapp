@@ -25,8 +25,8 @@ import com.naivor.app.R;
 import com.naivor.app.common.base.BaseActivity;
 import com.naivor.app.common.base.BasePresenter;
 import com.naivor.app.features.di.component.ActivityComponent;
-import com.naivor.app.modules.login.LoginActivity;
-import com.naivor.app.modules.main.MainActivity;
+import com.naivor.app.modules.login.ui.LoginActivity;
+import com.naivor.app.modules.main.ui.MainActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;

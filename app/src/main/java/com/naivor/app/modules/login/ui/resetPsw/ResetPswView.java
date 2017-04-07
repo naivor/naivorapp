@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-package com.naivor.app.modules.main;
+package com.naivor.app.modules.login.ui.resetPsw;
 
 
-import android.content.Context;
-
-import com.naivor.app.common.base.BasePresenter;
-
-import javax.inject.Inject;
+import com.naivor.app.common.base.BaseUiView;
 
 /**
- * Created by tianlai on 16-3-9.
+ * Created by naivor on 16-4-2.
  */
-public class MainPresenter extends BasePresenter<MainView> {
+public interface ResetPswView extends BaseUiView {
 
-    @Inject
-    public MainPresenter(Context context) {
-        super(context);
-    }
 }

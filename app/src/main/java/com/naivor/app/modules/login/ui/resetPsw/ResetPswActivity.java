@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.modules.login.resetPsw;
+package com.naivor.app.modules.login.ui.resetPsw;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;

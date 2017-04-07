@@ -3,13 +3,12 @@ package com.naivor.app.features.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.naivor.adapter.AdapterOperator;
+import com.naivor.adapter.ListAdapter;
+import com.naivor.adapter.ListHolder;
 import com.naivor.app.R;
-import com.naivor.app.common.base.AdapterOperator;
-import com.naivor.app.common.base.ListAdapter;
-import com.naivor.app.common.base.ListHolder;
 
 import javax.inject.Inject;
 
@@ -27,8 +26,19 @@ public class HomeListAdapter extends ListAdapter<String> {
     }
 
     @Override
-    public HomeViewHolder onCreateViewHolder(ViewGroup parent, int viewType, LayoutInflater inflater) {
-        return new HomeViewHolder(inflater.inflate(R.layout.list_item_home,null));
+    public ListHolder<String> onCreateViewHolder(View view, int i) {
+        return new HomeViewHolder(view);
+    }
+
+    /**
+     * 获取布局资源
+     *
+     * @param viewType
+     * @return
+     */
+    @Override
+    public int getLayoutRes(int viewType) {
+        return R.layout.list_item_home;
     }
 
     /**

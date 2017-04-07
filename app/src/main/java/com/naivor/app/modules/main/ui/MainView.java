@@ -14,42 +14,38 @@
  * limitations under the License.
  */
 
-package com.naivor.app.modules.login;
+package com.naivor.app.modules.main.ui;
 
 
 import com.naivor.app.common.base.BaseUiView;
 
 /**
- *
- * Created by tianlai on 16-3-3.
+ * Created by tianlai on 16-3-9.
  */
-public interface LoginView extends BaseUiView {
+public interface MainView extends BaseUiView {
     /**
-     * 去到注册页面
+     * 双击退出应用
      */
-    public void toRegisterPage();
+    public void exitOnClickTwice(int keyCode);
 
     /**
-     * 获取登录手机号
-     *
-     * @return
+     * 切换到HomeFragment
      */
-    public String getPhoneNum();
+    public void toHomePage();
 
     /**
-     * 获取登录密码
-     *
-     * @return
+     * 切换到OrderFragment
      */
-    public String getPasswd();
+    public void toOrderPage();
 
     /**
-     * 去主页面
+     *切换到DateFragment
      */
-    public void toMainPage();
+    public void toDatePage();
 
     /**
-     * 去重置密码页面
+     *切换到MineFragment
      */
-    public void toResetPasswdPage();
+    public void toMinePage();
+
 }

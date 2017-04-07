@@ -16,8 +16,8 @@
 
 package com.naivor.app.features.repo.responce;
 
-import com.naivor.app.common.model.User;
-import com.naivor.app.common.model.enums.UserType;
+import com.naivor.app.features.model.User;
+import com.naivor.app.features.model.enums.UserType;
 
 /**
  * 登录请求返回的结果

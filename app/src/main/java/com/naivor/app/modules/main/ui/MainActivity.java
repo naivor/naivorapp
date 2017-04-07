@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.modules.main;
+package com.naivor.app.modules.main.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

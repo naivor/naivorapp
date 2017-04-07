@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.naivor.app.modules.login;
+package com.naivor.app.modules.login.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,9 +26,9 @@ import com.naivor.app.R;
 import com.naivor.app.common.base.BaseActivity;
 import com.naivor.app.common.base.BasePresenter;
 import com.naivor.app.features.di.component.ActivityComponent;
-import com.naivor.app.modules.login.register.RegisterActivity;
-import com.naivor.app.modules.login.resetPsw.ResetPswActivity;
-import com.naivor.app.modules.main.MainActivity;
+import com.naivor.app.modules.login.ui.register.RegisterActivity;
+import com.naivor.app.modules.login.ui.resetPsw.ResetPswActivity;
+import com.naivor.app.modules.main.ui.MainActivity;
 
 import javax.inject.Inject;
 
