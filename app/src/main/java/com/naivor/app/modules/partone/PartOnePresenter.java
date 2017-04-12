@@ -22,7 +22,6 @@ import com.naivor.app.common.base.BasePresenter;
 import com.naivor.app.common.rxJava.MineSubscriber;
 import com.naivor.app.features.di.PerFragment;
 import com.naivor.app.features.repo.OtherRepo;
-import com.naivor.app.others.helper.LoadMoreHelper;
 
 import java.util.List;
 
@@ -32,18 +31,12 @@ import javax.inject.Inject;
  * Created by tianlai on 16-3-18.
  */
 @PerFragment
-public class PartOnePresenter extends BasePresenter<PartOneView> implements LoadMoreHelper.LoadMorePresenter {
-
-    private int maxPageSize;
-
-    private int index;
-
-    private boolean isCanLoadMore;
-
-    private boolean isShowLoading;
+public class PartOnePresenter extends BasePresenter<PartOneView> {
 
     @Inject
     OtherRepo mRepository;
+
+    private int maxPageSize = 10;
 
     @Inject
     public PartOnePresenter(Context context) {
@@ -52,55 +45,25 @@ public class PartOnePresenter extends BasePresenter<PartOneView> implements Load
 
 
     /**
+     * 请求数据
      */
-    public void requestData() {
+    public void requestData(int index) {
         mRepository.optHomeData(index)
                 .subscribe(new MineSubscriber<List<String>>(this) {
                     @Override
                     public void onNext(List<String> s) {
                         if (s != null) {
-                            isCanLoadMore = s.size() < maxPageSize;
+                            mUiView.setHasMore(s.size() < maxPageSize);
 
-                            if (isLoadMore()) {
-                                mUiView.getListAdapter().addItems(s);
+                            if (mUiView.isLoadMore()) {
+                                mUiView.getAdapter().addItems(s);
                             } else {
-                                mUiView.getListAdapter().setItems(s);
+                                mUiView.getAdapter().setItems(s);
                             }
                         }
                     }
                 });
 
-    }
-
-    @Override
-    public void refreshPage() {
-        requestData();
-    }
-
-    @Override
-    public void resetAndLoad() {
-        index = 0;
-        isCanLoadMore = true;
-
-        requestData();
-    }
-
-    @Override
-    public void loadNextPage() {
-        if (isCanLoadMore) {
-            index++;
-
-            requestData();
-        }
-    }
-
-    @Override
-    public void loadComplete() {
-        dismissLoading();
-    }
-
-    public boolean isLoadMore() {
-        return index > 0 ;
     }
 
 }

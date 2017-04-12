@@ -14,17 +14,40 @@
  * limitations under the License.
  */
 
-package com.naivor.app.modules.partone;
+package com.naivor.app.others.helper;
 
-import com.naivor.app.common.base.BaseUiView;
-import com.naivor.app.others.helper.LoadMoreView;
+
+import com.naivor.adapter.AdapterOperator;
 
 /**
- * Created by tianlai on 16-3-18.
+ * 加载更多的view操作接口
+ * <p>
+ * Created by tianlai on 16-4-18.
  */
-public interface PartOneView extends BaseUiView,LoadMoreView {
+public interface LoadMoreView {
 
-    public void setPageTitle();
+    /**
+     * 获取客户列表的适配器
+     *
+     * @return
+     */
+    AdapterOperator getAdapter();
 
+    /**
+     * 是否加载更多
+     */
+    boolean isLoadMore();
+
+    /**
+     * 设置是否有更多数据
+     *
+     * @param hasMore
+     */
+    void setHasMore(boolean hasMore);
+
+    /**
+     * 隐藏空白页
+     */
+    void hideEmpty();
 
 }

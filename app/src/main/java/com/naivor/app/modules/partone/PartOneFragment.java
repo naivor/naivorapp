@@ -34,7 +34,8 @@ import com.naivor.app.common.utils.ToastUtil;
 import com.naivor.app.features.adapter.HomeListAdapter;
 import com.naivor.app.features.di.component.FragmentComponent;
 import com.naivor.app.modules.main.ui.MainActivity;
-import com.naivor.app.others.helper.LoadMoreHelper;
+import com.naivor.loadmore.LoadMoreHelper;
+import com.naivor.loadmore.OnLoadMoreListener;
 
 import javax.inject.Inject;
 
@@ -77,8 +78,6 @@ public class PartOneFragment extends BaseFragment implements PartOneView {
     @Inject
     LoadMoreHelper loadMoreHelper;
 
-    private boolean isRefreshing;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,23 +102,13 @@ public class PartOneFragment extends BaseFragment implements PartOneView {
 
         initListView();
 
-        partOnePresenter.requestData();
+        partOnePresenter.requestData(loadMoreHelper.getIndex());
     }
 
     /**
      * 初始化下拉刷新部分
      */
     private void initListView() {
-
-        //底部加载更多
-        loadMoreHelper.setListView(lvList, inflater);
-        loadMoreHelper.setOnLoadMoreListener(new LoadMoreHelper.OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                partOnePresenter.loadNextPage();
-            }
-        });
-
 
         //下拉刷新
         ptrRefresh.setLastUpdateTimeRelateObject(this);
@@ -132,15 +121,23 @@ public class PartOneFragment extends BaseFragment implements PartOneView {
 
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                if (!isRefreshing) {
-                    isRefreshing = true;
-                    partOnePresenter.refreshPage();
-                }
+                loadMoreHelper.reset();
+                partOnePresenter.requestData(loadMoreHelper.getIndex());
             }
         });
 
 
         lvList.setAdapter(adapter);
+
+        //底部加载更多
+        loadMoreHelper.target(lvList);
+        loadMoreHelper.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(int i) {
+                partOnePresenter.requestData(i);
+            }
+
+        });
 
     }
 
@@ -184,31 +181,47 @@ public class PartOneFragment extends BaseFragment implements PartOneView {
     }
 
     @Override
-    public AdapterOperator getListAdapter() {
-        return adapter;
-    }
-
-
-    @Override
     public void dismissLoading() {
         super.dismissLoading();
 
-        if (partOnePresenter.isLoadMore()) {
-            loadMoreHelper.loadMoreComplete();
+        if (isLoadMore()) {
+            loadMoreHelper.loadComplete();
         } else {
             ptrRefresh.refreshComplete();
         }
+    }
+
+    /**
+     * 获取客户列表的适配器
+     *
+     * @return
+     */
+    @Override
+    public AdapterOperator getAdapter() {
+        return adapter;
+    }
+
+    /**
+     * 是否加载更多
+     */
+    @Override
+    public boolean isLoadMore() {
+        return loadMoreHelper.isLoadMore();
+    }
+
+    /**
+     * 设置是否有更多数据
+     *
+     * @param hasMore
+     */
+    @Override
+    public void setHasMore(boolean hasMore) {
+        loadMoreHelper.setHasMore(hasMore);
     }
 
     @Override
     public void hideEmpty() {
 
     }
-
-    @Override
-    public void resetBottom() {
-
-    }
-
 
 }

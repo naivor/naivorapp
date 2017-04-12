@@ -17,7 +17,7 @@ ext {
             "recyclerviewheader"  : 'com.bartoszlipinski.recyclerviewheader:library:1.2.0',
 
             "adapter"             : "com.naivor:adapter:1.0.8",
-            "loadmore"             : "com.naivor:loadmore:1.0.1",
+            "loadmore"             : "com.naivor:loadmore:1.0.2",
 
             "butterknife"         : 'com.jakewharton:butterknife:7.0.1',
 

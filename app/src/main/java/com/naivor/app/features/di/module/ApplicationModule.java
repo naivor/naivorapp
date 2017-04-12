@@ -20,6 +20,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 
 import com.naivor.app.NaivorApp;
+import com.naivor.loadmore.LoadMoreHelper;
 
 import javax.inject.Singleton;
 
@@ -51,6 +52,11 @@ public class ApplicationModule {
     @Provides
     LayoutInflater provideLayoutInflater() {
         return LayoutInflater.from(mApplication);
+    }
+
+    @Provides
+    LoadMoreHelper provideLoadMoreHelper() {
+        return new LoadMoreHelper(mApplication);
     }
 
 

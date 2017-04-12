@@ -26,6 +26,7 @@ import com.naivor.app.common.base.BaseActivity;
 import com.naivor.app.features.di.module.ApplicationModule;
 import com.naivor.app.features.di.module.NetworkModule;
 import com.naivor.app.features.repo.cache.SpfManager;
+import com.naivor.loadmore.LoadMoreHelper;
 
 import javax.inject.Singleton;
 
@@ -60,5 +61,6 @@ public interface ApplicationComponent {
 
     OkHttpClient okHttpClient();
 
+    LoadMoreHelper loadMoreHelper();
     //子Component
 }

@@ -119,7 +119,7 @@ dependencies {
     compile rootProject.ext.dependencies["proguard-snippets"]
 
     compile rootProject.ext.dependencies["adapter"]
-//    compile rootProject.ext.dependencies["loadmore"]
+    compile rootProject.ext.dependencies["loadmore"]
 
     compile rootProject.ext.dependencies["simplecropview"]
 
