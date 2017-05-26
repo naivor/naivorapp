@@ -12,7 +12,7 @@ import com.naivor.app.R;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -46,7 +46,7 @@ public class HomeListAdapter extends ListAdapter<String> {
      */
     static class HomeViewHolder extends ListHolder<String> {
 
-        @Bind(R.id.tv_text)
+        @BindView(R.id.tv_text)
         TextView tvText;
 
         public HomeViewHolder(View convertView) {

@@ -19,10 +19,10 @@ package com.naivor.app.features.di.component;
 
 import com.naivor.app.features.di.PerFragment;
 import com.naivor.app.features.di.module.FragmentModule;
-import com.naivor.app.modules.partfour.PartFourFragment;
-import com.naivor.app.modules.partone.PartOneFragment;
-import com.naivor.app.modules.partthree.PartThreeFragment;
-import com.naivor.app.modules.parttwo.PartTwoFragment;
+import com.naivor.app.modules.partfour.FourFragment;
+import com.naivor.app.modules.partone.OneFragment;
+import com.naivor.app.modules.partthree.ThreeFragment;
+import com.naivor.app.modules.parttwo.TwoFragment;
 
 import dagger.Component;
 
@@ -34,13 +34,13 @@ import dagger.Component;
 public interface FragmentComponent {
 
     ////要注入的类型
-    void inject(PartOneFragment partOneFragment);
+    void inject(OneFragment __);
 
-    void inject(PartTwoFragment partTwoFragment);
+    void inject(TwoFragment __);
 
-    void inject(PartThreeFragment partThreeFragment);
+    void inject(ThreeFragment __);
 
-    void inject(PartFourFragment partFourFragment);
+    void inject(FourFragment __);
 
 
     //要暴露给其他依赖本组件的组件的依赖方法

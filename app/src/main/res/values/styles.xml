@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/purple</item>
-        <item name="colorPrimaryDark">@color/purple</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
@@ -18,13 +18,6 @@
         <item name="android:windowBackground">@mipmap/bg_splash</item>
     </style>
 
-    <style name="AppTheme.Button.Borderless" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
-        <item name="android:textColor">@color/textColorPrimary</item>
-        <item name="android:minHeight">48dp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:gravity">center_vertical|center_horizontal</item>
-    </style>
 
     <style name="AppTheme.Dialog" >
         <item name="android:windowFrame">@null</item>

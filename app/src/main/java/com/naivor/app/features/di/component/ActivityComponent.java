@@ -19,10 +19,10 @@ package com.naivor.app.features.di.component;
 import com.naivor.app.common.base.BaseFragment;
 import com.naivor.app.features.di.PerActivity;
 import com.naivor.app.features.di.module.ActivityModule;
-import com.naivor.app.modules.login.ui.LoginActivity;
-import com.naivor.app.modules.login.ui.register.RegisterActivity;
-import com.naivor.app.modules.login.ui.resetPsw.ResetPswActivity;
-import com.naivor.app.modules.main.ui.MainActivity;
+import com.naivor.app.modules.login.LoginActivity;
+import com.naivor.app.modules.login.register.RegisterActivity;
+import com.naivor.app.modules.login.resetPsw.ResetPswActivity;
+import com.naivor.app.modules.main.MainActivity;
 import com.naivor.app.modules.others.SplashActivity;
 
 import dagger.Component;
@@ -35,17 +35,17 @@ import dagger.Component;
 public interface ActivityComponent {
 
     ////要注入的类型
-    void inject(BaseFragment baseFragment);
+    void inject(BaseFragment __);
 
-    void inject(SplashActivity splashActivity);
+    void inject(SplashActivity __);
 
-    void inject(LoginActivity loginActivity);
+    void inject(LoginActivity __);
 
-    void inject(RegisterActivity registerActivity);
+    void inject(RegisterActivity __);
 
-    void inject(ResetPswActivity resetPswActivity);
+    void inject(ResetPswActivity __);
 
-    void inject(MainActivity mainActivity);
+    void inject(MainActivity __);
 
     //要暴露给其他依赖本组件的组件的依赖方法
 

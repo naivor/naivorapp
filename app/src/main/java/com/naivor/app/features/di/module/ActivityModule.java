@@ -16,16 +16,14 @@
 
 package com.naivor.app.features.di.module;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 
-import com.naivor.app.common.base.BaseActivity;
 import com.naivor.app.features.di.PerActivity;
-import com.naivor.app.modules.partfour.PartFourFragment;
-import com.naivor.app.modules.partone.PartOneFragment;
-import com.naivor.app.modules.partthree.PartThreeFragment;
-import com.naivor.app.modules.parttwo.PartTwoFragment;
-import com.naivor.app.others.widget.LoadingDialog;
+import com.naivor.app.modules.partfour.FourFragment;
+import com.naivor.app.modules.partone.OneFragment;
+import com.naivor.app.modules.partthree.ThreeFragment;
+import com.naivor.app.modules.parttwo.TwoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,30 +38,13 @@ import dagger.Provides;
  */
 @Module
 public class ActivityModule {
-    private BaseActivity baseActivity;
+    private Context context;
 
-    public ActivityModule(BaseActivity baseActivity) {
-        this.baseActivity = baseActivity;
-    }
-
-    @Provides
-    BaseActivity provideBaseActivity(){
-        return this.baseActivity;
+    public ActivityModule( Context context) {
+        this.context = context;
     }
 
     //需要提供的公共对象
-
-    @PerActivity
-    @Provides
-    FragmentManager provideFragmentManager() {
-        return baseActivity.getSupportFragmentManager();
-    }
-
-    @PerActivity
-    @Provides
-    LoadingDialog provideRequestDialog() {
-        return new LoadingDialog(baseActivity);
-    }
 
     @PerActivity
     @Provides
@@ -74,26 +55,26 @@ public class ActivityModule {
     //需要提供的fragment
     @PerActivity
     @Provides
-    PartOneFragment provideHomeFragment() {
-        return new PartOneFragment();
+    OneFragment provideHomeFragment() {
+        return new OneFragment();
     }
 
     @PerActivity
     @Provides
-    PartTwoFragment provideOrderFragment() {
-        return new PartTwoFragment();
+    TwoFragment provideOrderFragment() {
+        return new TwoFragment();
     }
 
     @PerActivity
     @Provides
-    PartThreeFragment provideDateFragment() {
-        return new PartThreeFragment();
+    ThreeFragment provideDateFragment() {
+        return new ThreeFragment();
     }
 
     @PerActivity
     @Provides
-    PartFourFragment provideMineFragment() {
-        return new PartFourFragment();
+    FourFragment provideMineFragment() {
+        return new FourFragment();
     }
 
 }

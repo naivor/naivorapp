@@ -24,20 +24,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.naivor.app.features.model.User;
-import com.naivor.app.common.rxJava.RxBus;
-import com.naivor.app.features.di.component.DaggerFragmentComponent;
+import com.naivor.app.common.bus.RxBus;
+import com.naivor.app.features.di.InjectionManager;
 import com.naivor.app.features.di.component.FragmentComponent;
-import com.naivor.app.features.di.module.FragmentModule;
-import com.naivor.app.others.UserManager;
 
-import rx.Subscription;
-import rx.functions.Action1;
+import io.reactivex.disposables.SerialDisposable;
+import io.reactivex.functions.Consumer;
 
-public abstract class BaseFragment extends Fragment implements BaseUiView {
-    protected  final String TAG = this.getClass().getSimpleName();
-
-    protected FragmentComponent fragmentComponent;
+/**
+ * BaseFragment 是所有activity的基类，把一些公共的方法放到里面
+ * <p/>
+ * Created by tianlai on 16-3-3.
+ */
+public abstract class BaseFragment extends Fragment implements UiView {
 
     protected Context context;
 
@@ -45,9 +44,9 @@ public abstract class BaseFragment extends Fragment implements BaseUiView {
 
     protected BaseActivity baseActivity;
 
-    protected BasePresenter presenter;
+    private SerialDisposable sub;
 
-    private Subscription sub;
+    private Presenter presenter;
 
     @Override
     public void onAttach(Context context) {
@@ -57,15 +56,14 @@ public abstract class BaseFragment extends Fragment implements BaseUiView {
         inflater = LayoutInflater.from(context);
         baseActivity = (BaseActivity) getActivity();
 
+        sub = new SerialDisposable();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initInjector();
-
-        injectFragment(fragmentComponent);
+        injectFragment(InjectionManager.get().getFragmentComponent());
     }
 
     @Override
@@ -74,44 +72,48 @@ public abstract class BaseFragment extends Fragment implements BaseUiView {
 
         //初始化Presenter
         presenter = getPresenter();
-        if (presenter == null) {
-            throw new NullPointerException("presenter 不能为 Null");
-        } else {
-            presenter.oncreate(savedInstanceState, this);
+
+        if (presenter != null) {
+            presenter.bindView(this);
+            presenter.oncreate(savedInstanceState);
         }
 
     }
 
-    private void initInjector() {
-        fragmentComponent = DaggerFragmentComponent.builder()
-                .applicationComponent(baseActivity.getAppComponent())
-                .fragmentModule(getFragmentModule())
-                .build();
-    }
+    /**
+     * 进行注入
+     *
+     * @param component
+     */
+    protected abstract void injectFragment(FragmentComponent component);
 
-    private FragmentModule getFragmentModule() {
-        return new FragmentModule(this);
-    }
-
-    protected abstract void injectFragment(FragmentComponent fragmentComponent);
-
-    public abstract BasePresenter getPresenter();
+    /**
+     * 获取注入Fragment的Presenter对象
+     *
+     * @return
+     */
+    @Override
+    public abstract Presenter getPresenter();
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        presenter.onSave(outState);
+        if (presenter != null) {
+            presenter.onSave(outState);
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
 
-        presenter.onStop();
+        if (presenter != null) {
+            presenter.onStop();
+        }
 
-        if (sub.isUnsubscribed()) {
-            sub.unsubscribe();
+        if (sub != null && !sub.isDisposed()) {
+            sub.dispose();
         }
 
     }
@@ -119,27 +121,12 @@ public abstract class BaseFragment extends Fragment implements BaseUiView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        presenter.onDestroy();
+
+        if (presenter != null) {
+            presenter.onDestroy();
+        }
 
         presenter = null;
-    }
-
-    /**
-     * 获取当前用户
-     *
-     * @return
-     */
-    public User getUser() {
-        return UserManager.get().getUser();
-    }
-
-    /**
-     * 更新当前用户
-     *
-     * @return
-     */
-    public void updateUser(User newUser) {
-        UserManager.get().update(newUser);
     }
 
 
@@ -157,14 +144,9 @@ public abstract class BaseFragment extends Fragment implements BaseUiView {
      *
      * @param c
      */
-    public <T> void busEvent(Class<T> c, Action1<T> a) {
-        sub = RxBus.getDefault().toObservable(c)
-                .subscribe(a, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        throwable.printStackTrace();
-                    }
-                });
+    public <T> void busEvent(Class<T> c, Consumer<T> a) {
+        sub.replace(RxBus.getDefault().toObservable(c)
+                .subscribe(a, throwable -> throwable.printStackTrace()));
 
     }
 
@@ -173,7 +155,10 @@ public abstract class BaseFragment extends Fragment implements BaseUiView {
      */
     @Override
     public void showLoading() {
-        baseActivity.showLoading();
+
+        if (baseActivity != null) {
+            baseActivity.showLoading();
+        }
     }
 
     /**
@@ -181,23 +166,25 @@ public abstract class BaseFragment extends Fragment implements BaseUiView {
      */
     @Override
     public void dismissLoading() {
-        baseActivity.dismissLoading();
+        if (baseActivity != null) {
+            baseActivity.dismissLoading();
+        }
     }
 
-    @Override
-    public void showLoadingDialogNow(boolean timeout) {
-        baseActivity.showLoadingDialogNow(timeout);
-    }
 
     @Override
     public void showEmpty() {
-        baseActivity.showEmpty();
+        if (baseActivity != null) {
+            baseActivity.showEmpty();
+        }
     }
 
 
     @Override
     public void showError(String msg) {
-        baseActivity.showError(msg);
+        if (baseActivity != null) {
+            baseActivity.showError(msg);
+        }
     }
 
     /**
@@ -207,9 +194,11 @@ public abstract class BaseFragment extends Fragment implements BaseUiView {
      * @return
      */
     public View find(View parent, int viewId) {
-        return parent.findViewById(viewId);
+        if (parent != null) {
+            return parent.findViewById(viewId);
+        }
+        return null;
     }
-
 
     /**
      * 获取页面的toolbar

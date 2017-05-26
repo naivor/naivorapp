@@ -20,17 +20,15 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.naivor.app.common.base.BaseRepository;
-import com.naivor.app.common.rxJava.RxUtils;
 import com.naivor.app.features.repo.apiService.LoginApiService;
-import com.naivor.app.features.repo.responce.DataResult;
+import com.naivor.app.features.repo.deal.FlowableUtils;
 import com.naivor.app.features.repo.responce.LoginData;
 
 import javax.inject.Inject;
 
+import io.reactivex.Flowable;
 import retrofit2.Retrofit;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
+
 
 /**
  * LoginRepo 登录的数据仓库类
@@ -56,27 +54,9 @@ public class LoginRepo extends BaseRepository<LoginApiService> {
      * @param psw
      * @return
      */
-    public rx.Observable<LoginData> login(@NonNull String mobile, @NonNull String psw) {
+    public Flowable<LoginData> login(@NonNull String mobile, @NonNull String psw) {
 
         return getService().login(mobile, psw)
-                .compose(new Observable.Transformer<DataResult<LoginData>, LoginData>() {
-                    @Override
-                    public Observable<LoginData> call(Observable<DataResult<LoginData>> result) {
-                        return result.flatMap(new Func1<DataResult<LoginData>, Observable<LoginData>>() {
-                            @Override
-                            public Observable<LoginData> call(DataResult<LoginData> loginDataDataResult) {
-                                return Observable.create(new Observable.OnSubscribe<LoginData>() {
-                                    @Override
-                                    public void call(Subscriber<? super LoginData> subscriber) {
-                                        LoginData loginData = new LoginData();
-                                        subscriber.onNext(loginData);
-                                        subscriber.onCompleted();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                })
-                .compose(RxUtils.<LoginData>transSchedule());
+                .compose(FlowableUtils.transDataAndSchedule());
     }
 }

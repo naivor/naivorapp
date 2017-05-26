@@ -28,38 +28,37 @@ import android.widget.Toast;
 public class ToastUtil {
     private static Toast toast;
     private static long time;
-    private static String mMessage;
+    private static String mMessage="";
+
+    public static void init(Context context){
+        toast =Toast.makeText(context,mMessage,Toast.LENGTH_SHORT);
+        time = System.currentTimeMillis();
+    }
 
     /**
      * 显示消息
      *
      * @param message 消息
      */
-    public static void showToast(Context context, String message) {
+    public static void show(String message) {
         if (toast == null) {
-            toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
-            time = System.currentTimeMillis();
-            mMessage = message;
-            toast.show();
+            throw new IllegalStateException("ToastUtil is not inited");
         } else {
             long now = System.currentTimeMillis();
 
             if (message.equals(mMessage)) {
                 if (isNeedShow(now)) {
-
-                    toast.show();
-
                     time = now;
                 }
 
             } else {
                 toast.setText(message);
-
                 toast.show();
 
-                time = now;
                 mMessage = message;
             }
+
+            time = now;
         }
     }
 

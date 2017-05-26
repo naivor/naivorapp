@@ -21,17 +21,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 
 import com.naivor.app.NaivorApp;
-import com.naivor.app.PageManager;
+import com.naivor.app.UIController;
 import com.naivor.app.common.base.BaseActivity;
 import com.naivor.app.features.di.module.ApplicationModule;
 import com.naivor.app.features.di.module.NetworkModule;
-import com.naivor.app.features.repo.cache.SpfManager;
 import com.naivor.loadmore.LoadMoreHelper;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
@@ -53,13 +51,9 @@ public interface ApplicationComponent {
 
     LayoutInflater layoutInflater();
 
-    PageManager pageManager();
-
-    SpfManager spfManager();
+    UIController uiController();
 
     Retrofit retrofit();
-
-    OkHttpClient okHttpClient();
 
     LoadMoreHelper loadMoreHelper();
     //子Component

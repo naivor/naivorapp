@@ -19,20 +19,19 @@ package com.naivor.app.common.base;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.naivor.app.common.rxJava.RxBus;
-import com.naivor.app.common.utils.LogUtil;
+import com.naivor.app.common.bus.RxBus;
 import com.naivor.app.features.exception.ApiException;
-import com.naivor.app.features.model.User;
-import com.naivor.app.others.UserManager;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
-import icepick.Icepick;
-import rx.Subscription;
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import lombok.NonNull;
+import timber.log.Timber;
+
 
 /**
  * BasePresenter 是应用中所有Presenter的顶级抽象类，规定了Presenter的参数类型
@@ -41,20 +40,33 @@ import rx.subscriptions.CompositeSubscription;
  * <p>
  * Created by tianlai on 16-3-3.
  */
-public abstract class BasePresenter<V extends BaseUiView> {
-    protected static final String TAG = "BasePresenter";
-
-    protected V mUiView;
+public abstract class BasePresenter implements Presenter, Consumer<Throwable> {
 
     protected Context context;
 
-    protected CompositeSubscription subscriptions;
+    protected CompositeDisposable subscriptions;
+
+    protected UiView view;
 
     public BasePresenter(Context context) {
         this.context = context;
 
-        subscriptions = new CompositeSubscription();
+        subscriptions = new CompositeDisposable();
     }
+
+    @Override
+    public void bindView(UiView view) {
+        this.view = view;
+    }
+
+    /**
+     * 获取View
+     *
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    @NonNull
+    public abstract <T extends UiView> T getView();
 
     /**
      * Presenter 的 oncreate（）生命周期，在Activity中的 oncreate（）中调用
@@ -62,12 +74,10 @@ public abstract class BasePresenter<V extends BaseUiView> {
      *
      * @param savedInstanceState
      */
-    public void oncreate(Bundle savedInstanceState, V uiView) {
-        Icepick.restoreInstanceState(this, savedInstanceState);
-        this.mUiView = uiView;
+    @Override
+    public void oncreate(Bundle savedInstanceState) {
 
     }
-
 
     /**
      * Presenter 的 onSave（）生命周期，在Activity中的 onSaveInstance（）中调用
@@ -75,8 +85,9 @@ public abstract class BasePresenter<V extends BaseUiView> {
      *
      * @param state
      */
+    @Override
     public void onSave(Bundle state) {
-        Icepick.saveInstanceState(this, state);
+
     }
 
 
@@ -84,6 +95,7 @@ public abstract class BasePresenter<V extends BaseUiView> {
      * Presenter 的 onPause（）生命周期，在Activity中的 onPause（）中调用
      * 作用：解绑View，销毁View
      */
+    @Override
     public void onStop() {
         cancle();
     }
@@ -92,28 +104,11 @@ public abstract class BasePresenter<V extends BaseUiView> {
      * Presenter 的 onDestroy（）生命周期，在Activity中的 onDestroy（）中调用
      * 作用：销毁持有的对象
      */
+    @Override
     public void onDestroy() {
-        mUiView = null;
+        view = null;
         context = null;
         subscriptions = null;
-    }
-
-    /**
-     * 获取当前用户
-     *
-     * @return
-     */
-    public User getUser() {
-        return UserManager.get().getUser();
-    }
-
-    /**
-     * 更新当前用户
-     *
-     * @return
-     */
-    public void updateUser(User newUser) {
-        UserManager.get().update(newUser);
     }
 
 
@@ -126,19 +121,16 @@ public abstract class BasePresenter<V extends BaseUiView> {
         RxBus.getDefault().post(object);
     }
 
+
     /**
      * 订阅事件
      *
      * @param c
      */
-    public <T> void busEvent(Class<T> c, Action1<T> a) {
-        Subscription sub = RxBus.getDefault().toObservable(c)
-                .subscribe(a, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        loadError(throwable);
-                    }
-                });
+
+    public <E> void busEvent(Class<E> c, Consumer<E> a) {
+        Disposable sub = RxBus.getDefault().toObservable(c)
+                .subscribe(a, this);
 
         subscriptions.add(sub);
     }
@@ -146,42 +138,49 @@ public abstract class BasePresenter<V extends BaseUiView> {
     /**
      * 取消加载的方法
      */
+    @Override
     public void cancle() {
         if (subscriptions != null) {
-            subscriptions.unsubscribe();
+            subscriptions.dispose();
         }
     }
 
-    /**
-     * 加载发生错误
-     */
-    public void loadError(Throwable e) {
+    @Override
+    public void accept(@NonNull Throwable e) throws Exception {
 
-        if (e instanceof ApiException) {
+        String msg = "未知错误";
+
+        if (e instanceof SocketTimeoutException) {
+            msg = "超时，请稍后重试";
+
+        } else if (e instanceof ConnectException) {
+            msg = "连接失败，请稍检查您的网络";
+        } else if (e instanceof UnknownHostException) {
+            msg = "请检查您的网络";
+        } else if (e instanceof ApiException) {
             ApiException exception = (ApiException) e;
 
-            LogUtil.e("ApiException", exception.toString());
+            msg = "暂时没有找到你想要的，请换一个试试";
+
+            Timber.e("ApiException:%s", exception.toString());
         } else {
-
-            if (e instanceof SocketTimeoutException) {
-                mUiView.showError("超时，请稍后重试");
-            } else if (e instanceof ConnectException) {
-                mUiView.showError("连接失败，请稍检查您的网络");
-            } else if (e instanceof UnknownHostException) {
-                mUiView.showError("请检查您的网络");
-            } else {
-                e.printStackTrace();
-
-                mUiView.showError("未知错误");
-            }
+            e.printStackTrace();
         }
+
+        if (view != null) {
+            view.showError(msg);
+            Timber.e(msg);
+        }
+
 
         dismissLoading();
     }
 
+
     /**
      * 加载完成
      */
+    @Override
     public void loadComplete() {
         dismissLoading();
     }
@@ -192,8 +191,8 @@ public abstract class BasePresenter<V extends BaseUiView> {
      * @param isShow
      */
     protected void showLoading(boolean isShow) {
-        if (isShow && mUiView != null) {
-            mUiView.showLoading();
+        if (isShow && view != null) {
+            view.showLoading();
         }
     }
 
@@ -201,8 +200,8 @@ public abstract class BasePresenter<V extends BaseUiView> {
      * 取消加载对话框
      */
     protected void dismissLoading() {
-        if (mUiView != null) {
-            mUiView.dismissLoading();
+        if (view != null) {
+            view.dismissLoading();
         }
     }
 
@@ -212,7 +211,7 @@ public abstract class BasePresenter<V extends BaseUiView> {
      *
      * @param sub
      */
-    public void addNetTask(Subscription sub) {
+    public void addNetTask(Disposable sub) {
         if (subscriptions != null) {
             subscriptions.add(sub);
         }
@@ -223,7 +222,7 @@ public abstract class BasePresenter<V extends BaseUiView> {
      *
      * @param sub
      */
-    public void removeNetTask(Subscription sub) {
+    public void removeNetTask(Disposable sub) {
         if (subscriptions != null) {
             subscriptions.remove(sub);
         }

@@ -19,9 +19,6 @@ package com.naivor.app.common.base;
 
 import android.content.Context;
 
-import com.naivor.app.features.model.User;
-import com.naivor.app.others.UserManager;
-
 import retrofit2.Retrofit;
 
 /**
@@ -31,7 +28,6 @@ import retrofit2.Retrofit;
  */
 
 public abstract class BaseRepository<T> {
-    protected static final String TAG = "BaseRepository";
 
     protected Retrofit retrofit;
 
@@ -73,13 +69,5 @@ public abstract class BaseRepository<T> {
     protected abstract Class<T> defServiceType();
 
 
-    /**
-     * 获取用户的信息
-     *
-     * @return
-     */
-    public static User getUser() {
-        return UserManager.get().getUser();
-    }
 
 }

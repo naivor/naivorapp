@@ -20,19 +20,18 @@ import android.content.Context;
 
 import com.naivor.app.R;
 import com.naivor.app.common.base.BaseRepository;
-import com.naivor.app.common.rxJava.RxUtils;
 import com.naivor.app.features.repo.apiService.LoginApiService;
+import com.naivor.app.features.repo.deal.ObservableUtils;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
 import retrofit2.Retrofit;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
 
 /**
  * Created by naivor on 16-4-2.
@@ -53,30 +52,20 @@ public class OtherRepo extends BaseRepository<LoginApiService> {
      *
      * @return
      */
-    public Observable<List<String>> optHomeData(int index) {
-        return Observable.timer(3, TimeUnit.SECONDS)
-                .flatMap(new Func1<Long, Observable<String>>() {
-                    @Override
-                    public Observable<String> call(Long aLong) {
-                        return Observable.create(new Observable.OnSubscribe<String>() {
-                            @Override
-                            public void call(Subscriber<? super String> subscriber) {
+    public Flowable<List<String>> optHomeData(int index) {
+        return Observable.create((ObservableOnSubscribe<String>) emitter -> {
+            List<String> list1 = Arrays.asList(mContext.getResources().getStringArray(R.array.list_data));
 
-                                List<String> list = Arrays.asList(mContext.getResources().getStringArray(R.array.list_data));
+            for (String str:list1) {
+                emitter.onNext(str);
+            }
 
-                                for (String str : list) {
-                                    subscriber.onNext(str);
-                                }
-
-                                subscriber.onCompleted();
-                            }
-
-                        });
-                    }
-                })
+        })
                 .skip(index * pageSum)
                 .take(pageSum)
-                .compose(RxUtils.<String>transSchedule())
-                .toList();
+                .compose(ObservableUtils.transSchedule())
+                .toList()
+                .toFlowable();
     }
+
 }

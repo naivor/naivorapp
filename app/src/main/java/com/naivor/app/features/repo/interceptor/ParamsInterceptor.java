@@ -2,12 +2,6 @@ package com.naivor.app.features.repo.interceptor;
 
 import android.content.Context;
 
-import com.naivor.app.R;
-import com.naivor.app.common.base.BaseRepository;
-import com.naivor.app.features.model.User;
-import com.naivor.app.features.model.enums.UserType;
-import com.naivor.app.common.utils.LogUtil;
-
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -27,7 +21,6 @@ import okhttp3.Response;
  */
 @Singleton
 public class ParamsInterceptor implements Interceptor {
-    private static final String TAG = "request params";
     private Context context;
 
     @Inject
@@ -42,23 +35,19 @@ public class ParamsInterceptor implements Interceptor {
 
 
         RequestBody body = orgRequest.body();
-        //收集请求参数，方便调试
-        StringBuilder paramsBuilder = new StringBuilder();
 
         if (body != null) {
 
             RequestBody newBody = null;
 
             if (body instanceof FormBody) {
-                newBody = addParamsToFormBody((FormBody) body, paramsBuilder);
+                newBody = addParamsToFormBody((FormBody) body);
             } else if (body instanceof MultipartBody) {
-                newBody = addParamsToMultipartBody((MultipartBody) body, paramsBuilder);
+                newBody = addParamsToMultipartBody((MultipartBody) body);
             }
 
 
             if (null != newBody) {
-                //打印参数
-                LogUtil.i(TAG, paramsBuilder.toString());
 
                 Request newRequest = orgRequest.newBuilder()
                         .url(orgRequest.url())
@@ -79,48 +68,16 @@ public class ParamsInterceptor implements Interceptor {
      * 为MultipartBody类型请求体添加参数
      *
      * @param body
-     * @param paramsBuilder
      * @return
      */
-    private MultipartBody addParamsToMultipartBody(MultipartBody body, StringBuilder paramsBuilder) {
+    private MultipartBody addParamsToMultipartBody(MultipartBody body) {
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
 
-        //添加appcode
-        String appcode = context.getString(R
-                .string.appkey);
-        builder.addFormDataPart("appcode", appcode);
-
-
-        paramsBuilder.append("appcode=" + appcode);
-
-        //添加id，city参数
-        User user = BaseRepository.getUser();
-
-        if (user != null) {
-            String id = user.id() + "";
-            UserType userType = user.userType();
-
-            if (userType == UserType.BEAUTICIAN) {
-                builder.addFormDataPart("beautician_id", id);
-
-                paramsBuilder.append("&");
-                paramsBuilder.append("beautician_id=" + id);
-            } else  if (userType == UserType.BEAUTYSHOP){
-                builder.addFormDataPart("bp_id", id);
-
-                paramsBuilder.append("&");
-                paramsBuilder.append("bp_id=" + id);
-            }
-
-            //城市
-            String city = user.city();
-
-            builder.addFormDataPart("city", city);
-
-            paramsBuilder.append("&");
-            paramsBuilder.append("city=" + city);
-        }
+//        添加通用的参数，如
+//        String appcode = context.getString(R
+//                .string.appkey);
+//        builder.addFormDataPart("appcode", appcode);
 
         //添加原请求体
         for (int i = 0; i < body.size(); i++) {
@@ -134,53 +91,20 @@ public class ParamsInterceptor implements Interceptor {
      * 为FormBody类型请求体添加参数
      *
      * @param body
-     * @param paramsBuilder
      * @return
      */
-    private FormBody addParamsToFormBody(FormBody body, StringBuilder paramsBuilder) {
+    private FormBody addParamsToFormBody(FormBody body) {
         FormBody.Builder builder = new FormBody.Builder();
 
-        //添加appcode
-        String appcode = context.getString(R
-                .string.appkey);
-        builder.add("appcode", appcode);
+//        添加通用的参数，如
+//        String appcode = context.getString(R
+//                .string.appkey);
+//        builder.add("appcode", appcode);
 
-        paramsBuilder.append("appcode=" + appcode);
-
-        //添加id，city参数
-        User user = BaseRepository.getUser();
-        if (user != null) {
-            String id = user.id() + "";
-            UserType userType = user.userType();
-
-            if (userType == UserType.BEAUTICIAN) {
-                builder.add("beautician_id", id);
-
-                paramsBuilder.append("&");
-                paramsBuilder.append("beautician_id=" + id);
-            } else  if (userType == UserType.BEAUTYSHOP){
-                builder.add("bp_id", id);
-
-                paramsBuilder.append("&");
-                paramsBuilder.append("bp_id=" + id);
-            }
-
-            //城市
-            String city = user.city();
-
-            builder.add("city", city);
-
-            paramsBuilder.append("&");
-            paramsBuilder.append("city=" + city);
-        }
 
         //添加原请求体
         for (int i = 0; i < body.size(); i++) {
             builder.addEncoded(body.encodedName(i), body.encodedValue(i));
-            paramsBuilder.append("&");
-            paramsBuilder.append(body.name(i));
-            paramsBuilder.append("=");
-            paramsBuilder.append(body.value(i));
         }
 
         return builder.build();

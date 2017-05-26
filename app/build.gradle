@@ -1,14 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'com.bugtags.library.plugin'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: "net.ltgt.apt"
 
-
-bugtags {
-    appKey '79b099f46c4bd714fb389cafa4fe4018'
-    appSecret 'dd9d82aceadbd3fe466c7cd5ed658cca'
-
-}
-
+def buildTime = new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -49,15 +43,13 @@ android {
 
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/rxjava.properties'
     }
 
-    dexOptions {
-        incremental true
-    }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     applicationVariants.all { variant ->
@@ -68,7 +60,7 @@ android {
 
                 if (fileName.startsWith('app') && fileName.endsWith('.apk')) {
                     fileName = fileName.replace("app", "${defaultConfig.applicationId}")
-                            .replace(".apk", "-${defaultConfig.versionName}.apk")
+                            .replace(".apk", "-${defaultConfig.versionName}_${buildTime}.apk")
                 }
 
                 output.outputFile = new File(outputFile.parent, fileName)
@@ -79,50 +71,52 @@ android {
 
 }
 
+retrolambda {
+    jdk System.getenv("JAVA_HOME")
+    javaVersion JavaVersion.VERSION_1_7
+    jvmArgs '-noverify'
+    defaultMethods false
+    incremental true
+}
 
 dependencies {
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
-    testCompile 'junit:junit:4+'
+    compile rootProject.ext.dependencies.appcompat_v7
+    compile rootProject.ext.dependencies.recyclerview
 
-    compile rootProject.ext.dependencies["appcompat-v7"]
-    compile rootProject.ext.dependencies["recyclerview"]
-    compile rootProject.ext.dependencies["recyclerviewheader"]
+    compile rootProject.ext.dependencies.butterknife
+    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
 
-    compile rootProject.ext.dependencies["butterknife"]
+    compile rootProject.ext.dependencies.rxjava
+    compile rootProject.ext.dependencies.rxandroid
 
-    compile rootProject.ext.dependencies["rxjava"]
-    compile rootProject.ext.dependencies["rxandroid"]
+    compile rootProject.ext.dependencies.dagger
+    annotationProcessor rootProject.ext.dependencies.daggerCompiler
 
-    apt rootProject.ext.dependencies["dagger-compiler"]
-    compile rootProject.ext.dependencies["dagger"]
-    provided rootProject.ext.dependencies["javax.annotation"]
+    compile rootProject.ext.dependencies.retrofit
+    compile rootProject.ext.dependencies.adapterRxjava
+    compile rootProject.ext.dependencies.converterGson
+    compile rootProject.ext.dependencies.loggingInterceptor
 
-    compile rootProject.ext.dependencies["retrofit"]
-    compile rootProject.ext.dependencies["adapter-rxjava"]
-    compile rootProject.ext.dependencies["converter-gson"]
-    compile rootProject.ext.dependencies["logging-interceptor"]
+    compile rootProject.ext.dependencies.timber
 
-    compile rootProject.ext.dependencies["icepick"]
-    provided rootProject.ext.dependencies["icepick-processor"]
+    provided rootProject.ext.dependencies.lombok
 
-    compile rootProject.ext.dependencies["fresco"]
-    compile rootProject.ext.dependencies["imagepipeline-okhttp"]
+    compile rootProject.ext.dependencies.ultraPtr
 
-    compile rootProject.ext.dependencies["auto-value"]
+    compile rootProject.ext.dependencies.loadmore
+    compile rootProject.ext.dependencies.adapter
 
-    compile rootProject.ext.dependencies["ultra-ptr"]
+    debugCompile rootProject.ext.dependencies.leakcanary_debug
+    releaseCompile rootProject.ext.dependencies.leakcanary_release
 
-    compile rootProject.ext.dependencies["bugtags-lib"]
+    testCompile rootProject.ext.dependencies.junit
 
-    compile rootProject.ext.dependencies["proguard-snippets"]
+    testCompile rootProject.ext.dependencies.mockitoCore
+    androidTestCompile rootProject.ext.dependencies.mockitoAndroid
 
-    compile rootProject.ext.dependencies["adapter"]
-    compile rootProject.ext.dependencies["loadmore"]
-
-    compile rootProject.ext.dependencies["simplecropview"]
-
-    compile rootProject.ext.dependencies["statusbaruitl"]
+    testCompile rootProject.ext.dependencies.robolectric
 
 }

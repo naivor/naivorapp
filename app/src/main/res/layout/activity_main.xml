@@ -1,15 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/main_vp_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
-    </android.support.v4.view.ViewPager>
+        android:layout_weight="1"></android.support.v4.view.ViewPager>
 
     <RadioGroup
         android:id="@+id/main_rg_container"
@@ -17,14 +16,14 @@
         android:layout_height="48dp"
         android:background="@drawable/bg_stroke_gray_only_top"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/main_rb_home"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:button="@null"
             android:layout_weight="1"
+            android:button="@null"
             android:checked="true"
             android:drawableTop="@drawable/bg_radio_main_home"
             android:paddingTop="10dp" />
@@ -33,8 +32,8 @@
             android:id="@+id/main_rb_orderform"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:button="@null"
             android:layout_weight="1"
+            android:button="@null"
             android:drawableTop="@drawable/bg_radio_main_order"
             android:paddingTop="10dp" />
 
@@ -42,18 +41,18 @@
             android:id="@+id/main_rb_date"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:button="@null"
             android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
             android:drawableTop="@drawable/bg_radio_main_date"
-            android:paddingTop="10dp"
-            android:checked="false" />
+            android:paddingTop="10dp" />
 
         <RadioButton
             android:id="@+id/main_rb_mine"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:button="@null"
             android:layout_weight="1"
+            android:button="@null"
             android:drawableTop="@drawable/bg_radio_main_mine"
             android:paddingTop="10dp" />
     </RadioGroup>

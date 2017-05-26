@@ -20,22 +20,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.naivor.app.features.di.PerActivity;
-
 import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * ViewPagerAdapter  为容纳Fragment的Viewpager提供的适配器
  *
  * Created by tianlai on 16-3-21.
  */
-@PerActivity
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> mFragments;
 
-    @Inject
+
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }

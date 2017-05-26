@@ -20,36 +20,28 @@ package com.naivor.app.modules.others;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.jaeger.library.StatusBarUtil;
 import com.naivor.app.R;
 import com.naivor.app.common.base.BaseActivity;
 import com.naivor.app.common.base.BasePresenter;
 import com.naivor.app.features.di.component.ActivityComponent;
-import com.naivor.app.modules.login.ui.LoginActivity;
-import com.naivor.app.modules.main.ui.MainActivity;
+import com.naivor.app.modules.login.LoginActivity;
+import com.naivor.app.modules.main.MainActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.inject.Inject;
 
 /**
  * SplashActivity app的欢迎页面
  * <p>
  * Created by tianlai on 16-3-3.
  */
-public class SplashActivity extends BaseActivity implements SplashView {
-
-    @Inject
-    EmptyPresenter splashPresenter;
+public class SplashActivity extends BaseActivity implements SplashVPContact.SplashView {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splash);
-
-        StatusBarUtil.setTransparent(this);
 
         new Timer()
                 .schedule(new TimerTask() {
@@ -67,8 +59,8 @@ public class SplashActivity extends BaseActivity implements SplashView {
     }
 
     @Override
-    protected BasePresenter getPresenter() {
-        return splashPresenter;
+    public BasePresenter getPresenter() {
+        return null;
     }
 
     @Override

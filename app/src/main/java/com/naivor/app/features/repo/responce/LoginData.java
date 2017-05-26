@@ -16,8 +16,8 @@
 
 package com.naivor.app.features.repo.responce;
 
-import com.naivor.app.features.model.User;
-import com.naivor.app.features.model.enums.UserType;
+import com.naivor.app.common.model.User;
+import com.naivor.app.common.model.enums.UserType;
 
 /**
  * 登录请求返回的结果
@@ -41,7 +41,7 @@ public class LoginData {
      */
     public User userMapper() {
 
-        return User.Builder()
+        return User.builder()
                 .id(id)
                 .userType(UserType.BEAUTICIAN)
                 .email("")
@@ -50,63 +50,5 @@ public class LoginData {
 
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBlog() {
-        return blog;
-    }
-
-    public void setBlog(String blog) {
-        this.blog = blog;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "LoginData{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", name='" + name + '\'' +
-                ", blog='" + blog + '\'' +
-                ", location='" + location + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }

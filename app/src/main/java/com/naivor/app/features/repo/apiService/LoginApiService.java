@@ -19,10 +19,10 @@ package com.naivor.app.features.repo.apiService;
 import com.naivor.app.features.repo.responce.DataResult;
 import com.naivor.app.features.repo.responce.LoginData;
 
+import io.reactivex.Flowable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * LoginApiService 登录的请求接口
@@ -33,7 +33,7 @@ public interface LoginApiService {
 
 
     @GET("/users/{username}")
-    Observable<DataResult<LoginData>> login(
+    Flowable<DataResult<LoginData>> login(
             @Path("username") String username,
             @Query("password") String psw
     );

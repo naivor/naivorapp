@@ -19,7 +19,6 @@ package com.naivor.app.features.di.module;
 import android.content.Context;
 import android.view.LayoutInflater;
 
-import com.naivor.app.NaivorApp;
 import com.naivor.loadmore.LoadMoreHelper;
 
 import javax.inject.Singleton;
@@ -35,28 +34,28 @@ import dagger.Provides;
 
 @Module
 public class ApplicationModule {
-    private NaivorApp mApplication;
+    private Context context;
 
-    public ApplicationModule(NaivorApp application) {
-        this.mApplication = application;
+    public ApplicationModule( Context context) {
+        this.context = context;
     }
 
     @Singleton
     @Provides
     Context provideContext() {
-        return mApplication;
+        return context;
     }
 
 
     @Singleton
     @Provides
     LayoutInflater provideLayoutInflater() {
-        return LayoutInflater.from(mApplication);
+        return LayoutInflater.from(context);
     }
 
     @Provides
     LoadMoreHelper provideLoadMoreHelper() {
-        return new LoadMoreHelper(mApplication);
+        return new LoadMoreHelper(context);
     }
 
 

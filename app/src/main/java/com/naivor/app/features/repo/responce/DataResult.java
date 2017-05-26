@@ -16,11 +16,14 @@
 
 package com.naivor.app.features.repo.responce;
 
+import lombok.Data;
+
 /**
  * DataResult 请求返回的基类，包含公共部分，比如返回码，返回消息等等
  *
  * Created by tianlai on 16-3-8.
  */
+@Data
 public  class DataResult<T> {
 
     private int code;
@@ -28,27 +31,4 @@ public  class DataResult<T> {
     private T data;
 
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 }

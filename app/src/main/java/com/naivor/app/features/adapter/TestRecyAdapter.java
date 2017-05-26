@@ -9,11 +9,11 @@ import com.naivor.adapter.AdapterOperator;
 import com.naivor.adapter.RecyAdapter;
 import com.naivor.adapter.RecyHolder;
 import com.naivor.app.R;
-import com.naivor.app.features.model.SimpleItem;
+import com.naivor.app.common.model.SimpleItem;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -48,7 +48,7 @@ public class TestRecyAdapter extends RecyAdapter<SimpleItem> {
 
     static class SHolder extends RecyHolder<SimpleItem> {
 
-        @Bind(R.id.tv_text)
+        @BindView(R.id.tv_text)
         TextView tvText;
 
         public SHolder(View itemView) {
@@ -61,7 +61,7 @@ public class TestRecyAdapter extends RecyAdapter<SimpleItem> {
         public void bindData(AdapterOperator<SimpleItem> operator, int position, SimpleItem itemData) {
             super.bindData(operator, position, itemData);
 
-            tvText.setText(itemData.content()+"编号："+position);
+            tvText.setText(itemData.getContent()+"编号："+position);
         }
     }
 }

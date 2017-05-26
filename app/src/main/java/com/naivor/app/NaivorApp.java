@@ -1,21 +1,18 @@
 package com.naivor.app;
 
 import android.app.Application;
+import android.util.Log;
 
-import com.bugtags.library.Bugtags;
-import com.bugtags.library.BugtagsOptions;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.naivor.app.common.utils.AppUtil;
 import com.naivor.app.common.utils.LogUtil;
+import com.naivor.app.common.utils.ToastUtil;
+import com.naivor.app.features.di.InjectionManager;
 import com.naivor.app.features.di.component.ApplicationComponent;
-import com.naivor.app.features.di.component.DaggerApplicationComponent;
-import com.naivor.app.features.di.module.ApplicationModule;
-import com.naivor.app.features.di.module.NetworkModule;
+import com.squareup.leakcanary.LeakCanary;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
-import okhttp3.OkHttpClient;
+import timber.log.Timber;
 
 
 /**
@@ -31,78 +28,52 @@ public class NaivorApp extends Application {
     @Inject
     CrashHandler crashHandler;
 
-    @Inject
-    OkHttpClient okHttpClient;
-
     @Override
     public void onCreate() {
         super.onCreate();
 
-        initInjector();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
 
-        injectApplication();
+        LeakCanary.install(this);
+
+        InjectionManager.init(this);
+        InjectionManager.get().getAppComponent().inject(this);
 
         ButterKnife.setDebug(BuildConfig.DEBUG);
 
         LogUtil.setDebugMode(BuildConfig.DEBUG);
 
-        Fresco.initialize(this);
-
         crashHandler.init();
 
-        initBugtags();
+        ToastUtil.init(this);
+
+        initLog();
     }
 
-    /**
-     * 初始化bug管理工具
-     */
-    private void initBugtags() {
-        BugtagsOptions options = new BugtagsOptions.Builder()
-                .trackingLocation(true)       //是否获取位置
-                .trackingCrashLog(true)       //是否收集闪退
-                .trackingConsoleLog(true)     //是否收集控制台日志
-                .trackingUserSteps(true)      //是否跟踪用户操作步骤
-                .crashWithScreenshot(true)    //收集闪退是否附带截图
-                .versionName(AppUtil.getAppVersionName(this))            //自定义版本名称
-                .versionCode(AppUtil.getAppVersionCode(this))             //自定义版本号
-//                .trackingNetworkURLFilter("(.*)")                      //自定义网络请求跟踪的 url 规则(收费版方可使用)
-                .build();
 
-        //debug包显示悬浮小球，release包不显示
-        int level;
+    private void initLog() {
         if (BuildConfig.DEBUG) {
-            level = Bugtags.BTGInvocationEventBubble;
+            Timber.plant(new Timber.DebugTree());
         } else {
-            level = Bugtags.BTGInvocationEventNone;
+            Timber.plant(new CrashReportingTree());
         }
-
-        Bugtags.start(BUGTAGS_KEY, this, level, options);
     }
 
     /**
-     * 进行注入
+     * A tree which logs important information for crash reporting.
      */
-    private void injectApplication() {
-        mAppComponent.inject(this);
-    }
+    private static class CrashReportingTree extends Timber.Tree {
+        @Override
+        protected void log(int priority, String tag, String message, Throwable t) {
+            if (priority == Log.VERBOSE || priority == Log.DEBUG) {
+                return;
+            }
 
-    /**
-     * 初始化注入器
-     */
-    private void initInjector() {
-        mAppComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .networkModule(new NetworkModule())
-                .build();
-    }
-
-    /**
-     * mAppComponent 的getter方法
-     *
-     * @return
-     */
-    public ApplicationComponent getAppComponent() {
-        return mAppComponent;
+        }
     }
 
 

@@ -62,10 +62,10 @@ public class CrashHandler implements UncaughtExceptionHandler {
     private Context context;
 
     //App的Activity管理类
-    private PageManager activityManager;
+    private UIController activityManager;
 
     @Inject
-    public CrashHandler(Context app, PageManager activityManager) {
+    public CrashHandler(Context app, UIController activityManager) {
 
         this.context = app;
 

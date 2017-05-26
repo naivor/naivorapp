@@ -17,8 +17,9 @@
 package com.naivor.app.features.di.module;
 
 
-import com.naivor.app.common.base.BaseFragment;
-import com.naivor.app.features.model.SimpleItem;
+import android.content.Context;
+
+import com.naivor.app.common.model.SimpleItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +34,10 @@ import dagger.Provides;
  */
 @Module
 public class FragmentModule {
-    private BaseFragment baseFragment;
+    private Context context;
 
-    public FragmentModule(BaseFragment baseFragment) {
-        this.baseFragment = baseFragment;
+    public FragmentModule( Context context) {
+        this.context = context;
     }
 
     @Provides
