@@ -6,7 +6,7 @@ ext {
             compileSdkVersion: 25,
             buildToolsVersion: "25.0.0",
 
-            applicationId    : "com.yeezhao.lark",
+            applicationId    : "com.naivor.app",
             minSdkVersion    : 15,
             targetSdkVersion : 22,
             versionCode      : 6,

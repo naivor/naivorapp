@@ -36,7 +36,7 @@ public class OnePresenter extends BasePresenter implements OneVPContact.OnePrese
     @Inject
     OtherRepo mRepository;
 
-    private int maxPageSize = 10;
+    private int maxPageSize = 8;
 
     @Inject
     public OnePresenter(Context context) {
@@ -58,7 +58,7 @@ public class OnePresenter extends BasePresenter implements OneVPContact.OnePrese
                     @Override
                     public void onNext(List<String> s) {
                         if (s != null) {
-                            getView().setHasMore(s.size() < maxPageSize);
+                            getView().setHasMore(s.size() >= maxPageSize);
 
                             if (getView().isLoadMore()) {
                                 getView().getAdapter().addItems(s);

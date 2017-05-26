@@ -1,13 +1,14 @@
 package com.naivor.app.features.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.naivor.adapter.AdapterOperator;
-import com.naivor.adapter.ListAdapter;
-import com.naivor.adapter.ListHolder;
+import com.naivor.adapter.RecyAdapter;
+import com.naivor.adapter.RecyHolder;
 import com.naivor.app.R;
 
 import javax.inject.Inject;
@@ -18,7 +19,7 @@ import butterknife.ButterKnife;
 /**
  * Created by naivor on 16-5-21.
  */
-public class HomeListAdapter extends ListAdapter<String> {
+public class HomeListAdapter extends RecyAdapter<String> {
 
     @Inject
     public HomeListAdapter(Context context, LayoutInflater inflater) {
@@ -26,7 +27,7 @@ public class HomeListAdapter extends ListAdapter<String> {
     }
 
     @Override
-    public ListHolder<String> onCreateViewHolder(View view, int i) {
+    public RecyclerView.ViewHolder createHolder(View view, int i) {
         return new HomeViewHolder(view);
     }
 
@@ -44,7 +45,7 @@ public class HomeListAdapter extends ListAdapter<String> {
     /**
      * Created by naivor on 16-5-21.
      */
-    static class HomeViewHolder extends ListHolder<String> {
+    static class HomeViewHolder extends RecyHolder<String> {
 
         @BindView(R.id.tv_text)
         TextView tvText;
@@ -53,6 +54,8 @@ public class HomeListAdapter extends ListAdapter<String> {
             super(convertView);
 
             ButterKnife.bind(this, convertView);
+
+            registerClick(convertView);
 
         }
 

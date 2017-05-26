@@ -60,12 +60,15 @@ public class OtherRepo extends BaseRepository<LoginApiService> {
                 emitter.onNext(str);
             }
 
+            emitter.onComplete();
+
         })
                 .skip(index * pageSum)
                 .take(pageSum)
                 .compose(ObservableUtils.transSchedule())
                 .toList()
-                .toFlowable();
+                .toFlowable()
+                ;
     }
 
 }

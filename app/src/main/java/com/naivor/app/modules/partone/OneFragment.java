@@ -18,12 +18,12 @@ package com.naivor.app.modules.partone;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.naivor.adapter.AdapterOperator;
@@ -35,16 +35,15 @@ import com.naivor.app.features.adapter.HomeListAdapter;
 import com.naivor.app.features.di.component.FragmentComponent;
 import com.naivor.app.modules.main.MainActivity;
 import com.naivor.loadmore.LoadMoreHelper;
-import com.naivor.loadmore.OnLoadMoreListener;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnItemClick;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
+import timber.log.Timber;
 
 /**
  * Created by tianlai on 16-3-18.
@@ -52,7 +51,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 public class OneFragment extends BaseFragment implements OneVPContact.OneView {
 
     @Inject
-    com.naivor.app.modules.partone.OnePresenter onePresenter;
+    OnePresenter onePresenter;
 
     @BindView(R.id.tv_center)
     TextView tvCenter;
@@ -66,8 +65,8 @@ public class OneFragment extends BaseFragment implements OneVPContact.OneView {
     @BindView(R.id.tv_empty)
     TextView tvEmpty;
 
-    @BindView(R.id.lv_list)
-    ListView lvList;
+    @BindView(R.id.rv_content)
+    RecyclerView rvContent;
 
     @BindView(R.id.ptr_refresh)
     PtrClassicFrameLayout ptrRefresh;
@@ -110,13 +109,15 @@ public class OneFragment extends BaseFragment implements OneVPContact.OneView {
      */
     private void initListView() {
 
+        rvContent.setLayoutManager(new LinearLayoutManager(context));
+
         //下拉刷新
         ptrRefresh.setLastUpdateTimeRelateObject(this);
         ptrRefresh.setPtrHandler(new PtrDefaultHandler() {
 
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, lvList, header);
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, rvContent, header);
             }
 
             @Override
@@ -126,26 +127,21 @@ public class OneFragment extends BaseFragment implements OneVPContact.OneView {
             }
         });
 
-
-        lvList.setAdapter(adapter);
-
-        //底部加载更多
-        loadMoreHelper.target(lvList);
-        loadMoreHelper.setOnLoadMoreListener(new OnLoadMoreListener() {
+        adapter.setInnerListener(new AdapterOperator.InnerListener<String>() {
             @Override
-            public void onLoadMore(int i) {
-                onePresenter.requestData(i);
+            public void onClick(View view, String itemData, int postition) {
+                ToastUtil.show(adapter.getItem(postition));
             }
-
         });
 
-    }
 
-    @OnItemClick(R.id.lv_list)
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ToastUtil.show(adapter.getItem(position));
-    }
+        rvContent.setAdapter(adapter);
 
+        //底部加载更多
+        loadMoreHelper.target(rvContent);
+        loadMoreHelper.setOnLoadMoreListener(i -> onePresenter.requestData(i));
+
+    }
 
     @Override
     protected void injectFragment(FragmentComponent fragmentComponent) {
@@ -210,8 +206,10 @@ public class OneFragment extends BaseFragment implements OneVPContact.OneView {
      */
     @Override
     public void setHasMore(boolean hasMore) {
+        Timber.d("是否有下一页：%s",hasMore);
         loadMoreHelper.setHasMore(hasMore);
     }
+
 
     @Override
     public void hideEmpty() {

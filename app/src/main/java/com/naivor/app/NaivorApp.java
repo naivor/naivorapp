@@ -3,7 +3,6 @@ package com.naivor.app;
 import android.app.Application;
 import android.util.Log;
 
-import com.naivor.app.common.utils.LogUtil;
 import com.naivor.app.common.utils.ToastUtil;
 import com.naivor.app.features.di.InjectionManager;
 import com.naivor.app.features.di.component.ApplicationComponent;
@@ -44,8 +43,6 @@ public class NaivorApp extends Application {
         InjectionManager.get().getAppComponent().inject(this);
 
         ButterKnife.setDebug(BuildConfig.DEBUG);
-
-        LogUtil.setDebugMode(BuildConfig.DEBUG);
 
         crashHandler.init();
 

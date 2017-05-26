@@ -17,9 +17,9 @@
 package com.naivor.app.features.repo.interceptor;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.naivor.app.common.utils.BitmapUtil;
-import com.naivor.app.common.utils.LogUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -83,7 +83,7 @@ public class RequestBodyHelper {
             }
         }
 
-        LogUtil.i(TAG, mBuilder.toString());
+        Log.d(TAG, mBuilder.toString());
 
         return builder.build();
     }

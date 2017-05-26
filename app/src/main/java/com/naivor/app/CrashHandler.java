@@ -19,11 +19,11 @@ package com.naivor.app;
 import android.content.Context;
 import android.os.Build;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.naivor.app.common.utils.AppUtil;
 import com.naivor.app.common.utils.DateUtil;
-import com.naivor.app.common.utils.LogUtil;
 import com.naivor.app.common.utils.SDCardUtil;
 
 import java.io.PrintWriter;
@@ -158,9 +158,9 @@ public class CrashHandler implements UncaughtExceptionHandler {
             try {
                 field.setAccessible(true);
                 infos.put(field.getName(), field.get(null).toString());
-                LogUtil.d(TAG, field.getName() + " : " + field.get(null));
+                Log.d(TAG, field.getName() + " : " + field.get(null));
             } catch (Exception e) {
-                LogUtil.e(TAG, "an error occured when collect crash info");
+                Log.e(TAG, "an error occured when collect crash info");
             }
         }
     }
@@ -193,7 +193,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         sb.append(result);
 
         //打印日志，以便调试
-        LogUtil.e(TAG, sb.toString());
+        Log.e(TAG, sb.toString());
 
         //保存错误信息到文件
         try {
@@ -207,7 +207,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             }
             return fileName;
         } catch (Exception e) {
-            LogUtil.e(TAG, "an error occured while writing file...\n" + "path" + path);
+            Log.e(TAG, "an error occured while writing file...\n" + "path" + path);
             e.printStackTrace();
         }
         return null;
