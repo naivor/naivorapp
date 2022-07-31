@@ -1,0 +1,10 @@
+<resources>
+    <!--沉浸式状态栏-->
+
+    <style name="Theme.App.TranslucentStatus" parent="Theme.App.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--设置statusBarColor为透明-->
+        <item name="android:statusBarColor">@color/black_overlay</item>
+    </style>
+
+</resources>

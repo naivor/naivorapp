@@ -1,19 +1,22 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
-apply plugin: "net.ltgt.apt"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
-def buildTime = new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    compileSdkVersion libs.versions.compileSdk.get().toInteger()
+
+    def version = 1
 
     defaultConfig {
-        applicationId rootProject.ext.android.applicationId
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
+        applicationId "com.naivor.sampleapp"
+        minSdkVersion libs.versions.minSdk.get().toInteger()
+        targetSdkVersion libs.versions.targetSdk.get().toInteger()
+        versionCode getVersionWithGitCommit(version)
+        versionName "1.0.0"
+        vectorDrawables.useSupportLibrary true
     }
 
 
@@ -38,10 +41,27 @@ android {
         quiet true
         abortOnError false
         ignoreWarnings true
-        disable 'InvalidPackage'
+        disable 'InvalidPackage', 'MissingTranslation', 'CheckResult'
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+
+        // Enable Coroutines and Flow APIs
+        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     packagingOptions {
+        // Multiple dependency bring these files in. Exclude them to enable
+        // our test APK to build (has no effect on our AARs)
+        excludes += "/META-INF/AL2.0"
+        excludes += "/META-INF/LGPL2.1"
+
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'META-INF/rxjava.properties'
     }
@@ -53,70 +73,104 @@ android {
     }
 
     applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null) {
-                def fileName = outputFile.name;
-
-                if (fileName.startsWith('app') && fileName.endsWith('.apk')) {
-                    fileName = fileName.replace("app", "${defaultConfig.applicationId}")
-                            .replace(".apk", "-${defaultConfig.versionName}_${buildTime}.apk")
-                }
-
-                output.outputFile = new File(outputFile.parent, fileName)
-            }
-
+        variant.outputs.all { output ->
+            def buildTime = new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+            outputFileName = "naivorapp-v${versionName}-${versionCode}-${buildTime}.apk"
         }
     }
 
 }
 
-retrolambda {
-    jdk System.getenv("JAVA_HOME")
-    javaVersion JavaVersion.VERSION_1_7
-    jvmArgs '-noverify'
-    defaultMethods false
-    incremental true
-}
 
 dependencies {
 
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    compile rootProject.ext.dependencies.appcompat_v7
-    compile rootProject.ext.dependencies.recyclerview
+    // JetPack Foundationy
+    implementation(libs.appcompat)
+    implementation(libs.ktxCore)
 
-    compile rootProject.ext.dependencies.butterknife
-    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
+    implementation(libs.coroutinesAndroid)
+    implementation(libs.coroutinesCore)
 
-    compile rootProject.ext.dependencies.rxjava
-    compile rootProject.ext.dependencies.rxandroid
 
-    compile rootProject.ext.dependencies.dagger
-    annotationProcessor rootProject.ext.dependencies.daggerCompiler
+//  JetPack Architecture
+    kapt(libs.hiltCompiler)
+    implementation(libs.hiltAndroid)
 
-    compile rootProject.ext.dependencies.retrofit
-    compile rootProject.ext.dependencies.adapterRxjava
-    compile rootProject.ext.dependencies.converterGson
-    compile rootProject.ext.dependencies.loggingInterceptor
+    kapt(libs.roomCompiler)
+    implementation(libs.roomKtx)
+    implementation(libs.roomRuntime)
 
-    compile rootProject.ext.dependencies.timber
+    implementation(libs.lifecycle)
+    implementation(libs.livedata)
+    implementation(libs.viewmodel)
 
-    provided rootProject.ext.dependencies.lombok
+    implementation(libs.navigationFragment)
+    implementation(libs.navigationUi)
 
-    compile rootProject.ext.dependencies.ultraPtr
+    implementation(libs.workManager)
 
-    compile rootProject.ext.dependencies.loadmore
-    compile rootProject.ext.dependencies.adapter
+//  JetPack UI
+    implementation(libs.fragment)
+    implementation(libs.constraintlayout)
+    implementation(libs.recyclerview)
+    implementation(libs.material)
+    implementation(libs.viewpager)
+    implementation(libs.flexbox)
+    implementation(libs.swiperefreshlayout)
 
-    debugCompile rootProject.ext.dependencies.leakcanary_debug
-    releaseCompile rootProject.ext.dependencies.leakcanary_release
+//  Google Others
+    kapt(libs.glideCompiler)
+    implementation(libs.glide)
 
-    testCompile rootProject.ext.dependencies.junit
+    implementation(libs.gson)
 
-    testCompile rootProject.ext.dependencies.mockitoCore
-    androidTestCompile rootProject.ext.dependencies.mockitoAndroid
+//  ThirdPart Library
+    implementation(libs.timber)
 
-    testCompile rootProject.ext.dependencies.robolectric
+    implementation(libs.retrofit)
+    implementation(libs.converterGson)
+    implementation(libs.loggingInterceptor)
 
+//    implementation(libs.adapter)
+//    implementation(libs.loadmore)
+
+
+
+//  Test
+    kaptAndroidTest(libs.hiltCompiler)
+
+    androidTestImplementation(libs.coreTest)
+
+    androidTestImplementation(libs.espressoContrib)
+    androidTestImplementation(libs.espressoCore)
+    androidTestImplementation(libs.espressoIntents)
+
+    androidTestImplementation(libs.extJunit)
+    testImplementation(libs.junit)
+
+    androidTestImplementation(libs.uiAutomator)
+
+    androidTestImplementation(libs.workTest)
+
+    androidTestImplementation(libs.truth)
+
+    androidTestImplementation(libs.hiltTest)
+
+    androidTestImplementation(libs.coroutinesTest)
+
+    testImplementation(libs.mockitoCore)
+    androidTestImplementation(libs.mockitoAndroid)
+
+    testImplementation(libs.robolectric)
+
+    testImplementation(libs.leakcanary)
+}
+
+static def getVersionWithGitCommit(version) {
+    Process process = "git rev-list --count HEAD".execute()
+    process.waitFor()
+    int commitCount = process.getText().toInteger()
+    version * 100 + commitCount
 }

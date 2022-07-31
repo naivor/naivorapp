@@ -6,5 +6,5 @@
     <string name="api_url_test">https://api.github.com</string>
     <string name="api_url_release">https://api.github.com</string>
 
-    <string name="appkey" ></string>
+    <string name="appkey" >AAA</string>
 </resources>

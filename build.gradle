@@ -1,42 +1,39 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply from: "config.gradle"
-apply plugin: 'checkstyle'
-
 buildscript {
-    repositories {
-        jcenter()
 
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+    repositories {
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        mavenLocal()
+        mavenCentral()
+        google()
     }
+
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
-        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.10"
+        classpath "com.android.tools.build:gradle:${libs.versions.gradle.get()}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.get()}"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${libs.versions.navigation.get()}"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:${libs.versions.hilt.get()}"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
-allprojects {
-    repositories {
-        jcenter()
+plugins {
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.kotlinAndroid) apply false
+    id 'checkstyle'
+}
 
-        mavenCentral()
 
-//        maven {
-//            url "https://clojars.org/repo/"
-//        }
-
+spotless {
+    kotlin {
+        target "**/*.kt"
+        ktlint(libs.versions.ktlintVersion.get()).userData(['max_line_length': '100'])
     }
 }
 
-checkstyle {
-    toolVersion '6.19'
-    showViolations true
-}
 
 task check(type: Checkstyle) {
     source 'src'

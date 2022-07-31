@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item type="id" name="tv_center_title" ></item>
-    <item type="id" name="tv_right_action" ></item>
+    <item type="id" name="tv_center_title" />
+    <item type="id" name="tv_right_action" />
 </resources>

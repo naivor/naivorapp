@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2022. Naivor. All rights reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/group_item_github"
+            android:icon="@drawable/ic_baseline_account_balance"
+            android:title="主页" />
+        <item
+            android:id="@+id/group_item_more"
+            android:icon="@drawable/ic_baseline_cast_connected"
+            android:title="投射" />
+        <item
+            android:id="@+id/group_item_qr_code"
+            android:icon="@drawable/ic_baseline_qr_code"
+            android:title="二维码" />
+        <item
+            android:id="@+id/group_item_share_project"
+            android:icon="@drawable/ic_baseline_share"
+            android:title="分享" />
+    </group>
+    <item android:title="选项">
+        <menu>
+            <item
+                android:id="@+id/item_model"
+                android:icon="@drawable/ic_baseline_settings"
+                android:title="设置" />
+            <item
+                android:id="@+id/item_about"
+                android:icon="@drawable/ic_baseline_info"
+                android:title="关于" />
+        </menu>
+    </item>
+</menu>

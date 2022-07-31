@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation android:id="@+id/nav_graph_login"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/LoginFragment">
+
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.jingyou.kamp.domain.login.ui.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_LoginFragment_to_UserShuntFragment"
+            app:destination="@id/UserShuntFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/UserShuntFragment"
+        android:name="com.jingyou.kamp.domain.login.ui.shunt.UserShuntFragment"
+        android:label="UserShuntFragment"
+        tools:layout="@layout/fragment_user_shunt">
+
+        <action
+            android:id="@+id/action_UserShuntFragment_to_mainActivity"
+            app:destination="@id/MainActivity" />
+        <argument
+            android:name="jumpName"
+            app:argType="string" />
+        <argument
+            android:name="subCategory"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_UserShuntFragment_to_publishActivity"
+            app:destination="@id/publishActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/MainActivity"
+        android:name="com.jingyou.kamp.domain.MainActivity"
+        android:label="MainActivity" />
+    <activity
+        android:id="@+id/publishActivity"
+        android:name="com.jingyou.kamp.domain.publish.PublishActivity"
+        android:label="activity_publish"
+        tools:layout="@layout/activity_publish" />
+
+</navigation>

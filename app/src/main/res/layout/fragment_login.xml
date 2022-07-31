@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_login"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="用户登录"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edt_account"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:maxLength="20"
+        android:singleLine="true"
+        android:textColor="@color/font_black_light"
+        android:textColorHint="@color/hint_color"
+        android:hint="@string/hint_account"
+        android:layout_marginTop="60dp"
+        android:background="@color/white" />
+
+    <EditText
+        android:id="@+id/edt_psw"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:paddingLeft="8dp"
+        android:singleLine="true"
+        android:paddingRight="8dp"
+        android:maxLength="16"
+        android:textColor="@color/font_black_light"
+        android:textColorHint="@color/hint_color"
+        android:hint="@string/hint_psw"
+        android:layout_marginTop="20dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_btn_round_green_5"
+        android:gravity="center"
+        android:text="@string/login_now"
+        android:textColor="@color/white_smoke"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn_round_green_5"
+        android:gravity="center"
+        android:text="@string/register_now"
+        android:textColor="@color/white_smoke"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_forgetpsw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/forget_psw"
+        android:textColor="@color/aqua"
+        android:textSize="14sp" />
+
+</LinearLayout>

@@ -1,0 +1,146 @@
+[versions]
+
+gradle = '7.2.1'
+kotlin = '1.6.21'
+ktlintVersion = '0.38.1'
+
+compileSdk = "31"
+minSdk = "21"
+targetSdk = "31"
+
+# JetPack Foundationy
+appCompat = "1.4.1"
+
+ktx = "1.7.0"
+coroutines = "1.6.2"
+
+coreTesting = "2.1.0"
+espresso = "3.4.0"
+junit = "4.13.2"
+testExtJunit = "1.1.3"
+uiAutomator = "2.2.0"
+truth = "1.1.3"
+
+# JetPack Architecture
+hilt="2.42"
+lifecycle = "2.3.1"
+extensions = "2.2.0"
+navigation = "2.4.1"
+paging = "3.1.1"
+room = "2.4.2"
+work = "2.7.1"
+
+# JetPack UI
+fragment = "1.4.1"
+constraintLayout = "2.1.3"
+material = "1.6.0"
+swiperefresh = "1.1.0"
+recyclerView = "1.2.1"
+flexbox = "3.0.0"
+viewPager = "1.0.0"
+
+# JetPack Behavior
+
+# Google Others
+glide = "4.13.2"
+gson = "2.9.0"
+
+# ThirdPart Library
+okhttpLogging = "5.0.0-alpha.7"
+retrofit = "2.9.0"
+timber = "5.0.1"
+banner = "2.2.2"
+player = "0.8.8"
+superTextView = "3.2.6.99"
+tinyPinyin = "2.0.2"
+
+leakcanary="2.9.1"
+mockito="2.7.22"
+robolectric= "3.3.2"
+
+
+
+[plugins]
+
+spotless = { id = "com.diffplug.spotless", version = "6.3.0" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version = "1.6.21" }
+
+
+
+[libraries]
+
+# JetPack Foundationy
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat" }
+ktxCore = { module = "androidx.core:core-ktx", version.ref = "ktx" }
+
+coroutinesAndroid = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
+# JetPack Architecture
+hiltCompiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hiltAndroid = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+
+roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+roomKtx = { module = "androidx.room:room-ktx", version.ref = "room" }
+roomRuntime = { module = "androidx.room:room-runtime", version.ref = "room" }
+
+lifecycle = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "extensions" }
+livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
+viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+
+navigationFragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigationUi = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+
+workManager = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
+
+# JetPack UI
+fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
+constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
+recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerView" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+viewpager = { module = "androidx.viewpager2:viewpager2", version.ref = "viewPager" }
+flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
+swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefresh" }
+
+# Google Others
+glideCompiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+
+# ThirdPart Library
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+converterGson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttpLogging" }
+
+adapter = { module = "com.naivor:adapter", version = "1.0.8" }
+loadmore = { module = "com.naivor:loadmore", version = "1.0.2" }
+
+leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
+
+# Test
+coreTest = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
+
+espressoContrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
+espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+espressoIntents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espresso" }
+
+extJunit = { module = "androidx.test.ext:junit", version.ref = "testExtJunit" }
+junit = { module = "junit:junit", version.ref = "junit" }
+
+uiAutomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "uiAutomator" }
+
+workTest = { module = "androidx.work:work-testing", version.ref = "work" }
+
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+
+hiltTest = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
+
+coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+
+mockitoCore = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockitoAndroid = { module = "org.mockito:mockito-android", version.ref = "mockito" }
+
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }

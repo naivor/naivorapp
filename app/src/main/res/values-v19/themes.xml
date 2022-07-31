@@ -1,0 +1,44 @@
+<resources>
+    <style name="Theme.App" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/black_overlay</item>
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/overlay</item>
+
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/white</item>
+
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="Theme.App.NoActionBar" parent="Theme.App">
+        <item name="android:windowAnimationStyle">@style/Animation</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <!--沉浸式状态栏-->
+
+    <style name="Theme.App.TranslucentStatus" parent="Theme.App.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="Theme.App.TranslucentStatusAndNavigation" parent="Theme.App.TranslucentStatus">
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+
+</resources>

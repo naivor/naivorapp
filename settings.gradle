@@ -1,1 +1,35 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        maven { url 'https://jitpack.io' }
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        maven { url 'https://jitpack.io' }
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+        mavenLocal()
+        mavenCentral()
+
+
+    }
+    versionCatalogs {
+        create("libs") {
+            from(files("gradle/android.versions.toml"))
+        }
+    }
+}
+
 include ':app'
