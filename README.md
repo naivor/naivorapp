@@ -2,19 +2,19 @@ naivorapp
 ===========
 自己打算维护的一个Android项目模板
 
-尚不完善，有些功能正在努力添加中。。。。
+尚不十分完善，更多功能正在努力添加中。。。。
 
 特点
 ===========
 ### 1.使用比较前沿的一些开发技术和库
 
-    dagger2   rxJava   retrofit   butterknife   okhttp  lombok  timber  ultra-ptr  leakcanary
+    Jetpack官方套件   retrofit     okhttp    timber   leakcanary
     
-### 2.结合clean架构思想和MVP开发模式，进行app结构分层和代码解耦，方便扩展和维护
+### 2.结合 Clean 架构思想和 MVVM 开发模式，进行app分层和代码解耦，方便扩展和维护，同时为模块化留下余地
     
-### 3.采用流行的Activity+Fragment+ViewPager搭建应用的主框架，常用工具类集成
+### 3.采用流行的 多Activity+多Fragment 搭建应用的主框架，常用工具类集成
     
-### 4.会一直维护和完善，因为自己项目会用
+### 4.会一直维护和完善，作为Android项目模板，因为能减少新项目架构时间
 
 最后
 =========
@@ -24,7 +24,7 @@ naivorapp
 License
 =========
 
-    Copyright (c) 2016. Naivor.All rights reserved. 
+    Copyright (c) 2016-2022. Naivor.All rights reserved. 
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

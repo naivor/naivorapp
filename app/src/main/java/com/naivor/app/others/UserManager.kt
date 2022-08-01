@@ -50,13 +50,13 @@ object UserManager {
 
     }
 
-    fun update(account:String?) {
-        account?.let { it->
+    fun update(account: String?) {
+        account?.let { it ->
             if (it.isNotEmpty()) {
                 CoroutineScope(Dispatchers.Default).launch {
-                    user =   if (it.contains("@")) {
+                    user = if (it.contains("@")) {
                         userRepo.local!!.optUserByEmail(it).firstOrNull()
-                    }else{
+                    } else {
                         userRepo.local!!.optUserByName(it).firstOrNull()
                     }
                 }
@@ -69,10 +69,10 @@ object UserManager {
 
     fun update(newUser: User) {
         newUser.run {
-            if (id != user?.id && user?.email!=email) {
+            if (id != user?.id && user?.email != email) {
                 AppSetting.app.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE)
                     .edit().run {
-                        val account = if (name.isEmpty()) email else name
+                        val account = name.ifEmpty { email }
                         putString(LAST_LOGIN_ACCOUNT, account)
                         commit()
                     }
@@ -88,5 +88,9 @@ object UserManager {
 
     fun isLogin(): Boolean {
         return user?.isLogin ?: false
+    }
+
+    fun clear() {
+        user = null
     }
 }

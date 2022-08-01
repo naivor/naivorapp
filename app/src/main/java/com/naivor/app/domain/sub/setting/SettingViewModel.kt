@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.naivor.app.domain.login.ui
+package com.naivor.app.domain.sub.setting
 
 import androidx.lifecycle.viewModelScope
 import com.naivor.app.common.base.BaseViewModel
-import com.naivor.app.embedder.logger.Logger
 import com.naivor.app.embedder.repo.UserRepo
 import com.naivor.app.others.catch
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,21 +27,20 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(val userRepo: UserRepo) : BaseViewModel() {
+class SettingViewModel @Inject constructor(val userRepo: UserRepo) : BaseViewModel() {
 
     override fun initPage() {
     }
 
 
-    fun login(account: String, passwd: String, callback: ((Boolean) -> Unit)? = null) {
+    fun logout(callback: ((Boolean) -> Unit)? = null) {
         viewModelScope.launch {
-            userRepo.login(account, passwd)
+            userRepo.logout()
                 .catch(true) { e ->
                     callback?.invoke(false)
                 }
                 .collect {
-                    Logger.i("$it")
-                    callback?.invoke(true)
+                    callback?.invoke(it)
                 }
         }
     }

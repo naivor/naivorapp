@@ -18,7 +18,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/alice_blue"
-    android:gravity="center"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -26,18 +25,18 @@
         android:id="@+id/customTitle"
         layout="@layout/toolbar_layout" />
 
-    <FrameLayout
+    <TextView
+        android:id="@+id/tv_logout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="设置页面"
-            android:textSize="18sp" />
-
-    </FrameLayout>
+        android:layout_height="48dp"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_white_shap_bottom_grey_line"
+        android:text="退出登录"
+        android:textColor="@color/font_black_normal"
+        android:textSize="@dimen/font_normal_little" />
 
 
 </LinearLayout>

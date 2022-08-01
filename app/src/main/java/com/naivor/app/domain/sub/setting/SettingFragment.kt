@@ -18,38 +18,49 @@ package com.naivor.app.domain.sub.setting
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import com.naivor.app.common.base.BaseFragment
 import com.naivor.app.common.base.BaseViewModel
 import com.naivor.app.databinding.FragmentMineBinding
 import com.naivor.app.databinding.FragmentSettingBinding
+import com.naivor.app.others.UserManager
+import com.naivor.app.others.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by Naivor on 16-3-18.
  */
 @AndroidEntryPoint
-class SettingFragment : BaseFragment<FragmentSettingBinding, BaseViewModel>() {
-    override val viewModel: BaseViewModel?=null
+class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>() {
+    override val viewModel: SettingViewModel by viewModels()
 
-    override val pageTitle: String="设置"
+    override val pageTitle: String = "设置"
 
-    override var isToolbarWhite: Boolean=false
+    override var isToolbarWhite: Boolean = false
 
-    override val inflateRootView: (ViewGroup?) -> View={
-        __binding= FragmentSettingBinding.inflate(layoutInflater,it,false)
+    override val inflateRootView: (ViewGroup?) -> View = {
+        __binding = FragmentSettingBinding.inflate(layoutInflater, it, false)
         binding.root
     }
 
     override fun initTitle(activity: AppCompatActivity) {
         binding.customTitle.run {
-            toolbarView=toolbar
-            titleView=tvCenter
+            toolbarView = toolbar
+            titleView = tvCenter
+            navigationView=imgNavigation
 
         }
         super.initTitle(activity)
     }
 
     override fun initPageView() {
+        with(binding) {
+            tvLogout.setOnClickListener {
+                viewModel.logout() {
+                    showToast(if (it) "退出登录成功" else "退出登录失败")
+                }
+            }
+        }
     }
 
 }

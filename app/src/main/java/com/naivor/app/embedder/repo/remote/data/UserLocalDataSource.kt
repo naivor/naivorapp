@@ -22,6 +22,7 @@ import com.naivor.app.common.repo.remote.data.NetError
 import com.naivor.app.embedder.repo.local.bean.User
 import com.naivor.app.embedder.repo.local.db.AppDatabase
 import com.naivor.app.others.Constants
+import com.naivor.app.others.UserManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
@@ -60,23 +61,24 @@ class UserLocalDataSource @Inject constructor(val database: AppDatabase) :
         }.flowOn(io)
     }
 
+    fun logout(): Flow<Boolean> {
+        return flow {
+            val logout = UserManager.getUser()?.run {
+                isLogin = false
+                save(this)
+                true
+            } ?: true
+            UserManager.clear()
+            emit(logout)
+        }
+    }
+
     fun register(name: String, email: String, passwd: String): Flow<User> {
         return flow {
-            val user = User(
-                0,
-                name,
-                "",
-                Constants.Gender.UNKNOWN,
-                "",
-                email,
-                0L,
-                "",
-                "",
-                "",
-                passwd,
-                "",
-                true
-            )
+            val user = User(0, name, "", Constants.Gender.UNKNOWN,
+                "", email, 0L, "", "", "",
+                passwd, "", true)
+
             save(user)
             emit(user)
         }.flowOn(io)
@@ -85,19 +87,20 @@ class UserLocalDataSource @Inject constructor(val database: AppDatabase) :
     fun validateEmail(email: String): Flow<Boolean> {
         return flow {
             val user = optUserByEmail(email).firstOrNull()
-            emit(user == null)
+            emit(user != null)
         }.flowOn(io)
     }
 
-    fun resetPasswd(email: String,passwd: String): Flow<Boolean> {
+    fun resetPasswd(email: String, passwd: String): Flow<Boolean> {
         return flow {
             val user = optUserByEmail(email).firstOrNull()
-            user?.run {
-                this.passwd=passwd
+            val reset = user?.run {
+                this.passwd = passwd
                 save(this)
-                emit(true)
-            } ?: emit(false)
+                true
+            } ?: false
 
+            emit(reset)
         }.flowOn(io)
     }
 

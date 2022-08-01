@@ -56,6 +56,10 @@ class UserRepo @Inject constructor(local: UserLocalDataSource, remote: UserRemot
             }
     }
 
+    fun logout():Flow<Boolean>{
+        return local!!.logout()
+    }
+
     fun register(name:String,email:String,passwd: String):Flow<User>{
         return local!!.register(name, email, passwd)
             .transform {
