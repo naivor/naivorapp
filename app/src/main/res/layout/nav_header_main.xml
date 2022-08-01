@@ -26,6 +26,7 @@
         android:id="@+id/movingImageView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:background="@color/dark_khaki"
         android:scaleType="centerCrop" />
 
     <ImageView
@@ -33,6 +34,7 @@
         android:layout_height="100dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="30dp"
+        android:src="@drawable/ic_account_circle"
         android:paddingTop="16dp" />
 
     <TextView
@@ -44,7 +46,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="16dp"
         android:paddingLeft="5dp"
-        android:text="Learn and live."
+        android:text="人生如逆旅，我亦是行人。 "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18sp" />
 </FrameLayout>

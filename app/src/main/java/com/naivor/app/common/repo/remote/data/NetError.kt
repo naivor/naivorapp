@@ -39,5 +39,6 @@ open class NetError(
 enum class NetCode(var code: Int, var message: String?, var description: String? = "") {
     OK(0, "请求成功", "网络请求成功，返回数据无异常"),
     NOT_LOGIN(100, "用户未登录", "未登录，请立即登录"),
+    ACCOUNT_INFO_ERROR(101, "用户名或密码错误", "用户名或密码错误"),
     UNKNOWN(Int.MIN_VALUE, "未知状态", "未知状态")
 }

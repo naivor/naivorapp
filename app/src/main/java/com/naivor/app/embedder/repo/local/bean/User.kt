@@ -29,7 +29,7 @@ import com.naivor.app.others.Constants
  */
 @Entity(tableName = Constants.DB.TABLE_USER)
 data class User(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     var name: String,
     var icon: String,
@@ -40,7 +40,9 @@ data class User(
     var desc: String,
     var image: String,
     var profession: String,
+    var passwd: String,
     var address: String? = null,
+    var isLogin:Boolean=false
 ) : Data {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -50,6 +52,7 @@ data class User(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readLong(),
+        parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -68,6 +71,7 @@ data class User(
         parcel.writeString(desc)
         parcel.writeString(image)
         parcel.writeString(profession)
+        parcel.writeString(passwd)
         parcel.writeString(address)
     }
 

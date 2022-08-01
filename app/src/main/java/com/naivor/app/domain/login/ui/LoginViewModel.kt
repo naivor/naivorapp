@@ -16,15 +16,32 @@
 
 package com.naivor.app.domain.login.ui
 
+import androidx.lifecycle.viewModelScope
 import com.naivor.app.common.base.BaseViewModel
 import com.naivor.app.embedder.repo.UserRepo
+import com.naivor.app.others.catch
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(val userRepo: UserRepo) : BaseViewModel() {
 
     override fun initPage() {
-        TODO("Not yet implemented")
+    }
+
+
+    fun login(account: String, passwd: String, callback: ((Boolean) -> Unit)? = null) {
+        viewModelScope.launch {
+            userRepo.login(account, passwd)
+                .catch(true) { e ->
+                    callback?.invoke(false)
+                }
+                .collect {
+                    callback?.invoke(true)
+                }
+        }
     }
 }

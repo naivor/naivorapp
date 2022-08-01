@@ -16,11 +16,13 @@
 package com.naivor.app.embedder.repo
 
 import com.naivor.app.common.repo.Repository
+import com.naivor.app.common.repo.remote.data.NetCode
+import com.naivor.app.common.repo.remote.data.NetError
 import com.naivor.app.embedder.repo.local.bean.User
 import com.naivor.app.embedder.repo.remote.data.UserLocalDataSource
 import com.naivor.app.embedder.repo.remote.data.UserRemoteDataSource
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.transform
+import com.naivor.app.others.UserManager
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 /**
@@ -36,15 +38,38 @@ class UserRepo @Inject constructor(local: UserLocalDataSource, remote: UserRemot
     /**
      * 登录请求
      *
-     * @param mobile
+     * @param account
      * @param psw
      * @return
      */
-    fun login(mobile: String, psw: String): Flow<User> {
-        return remote!!.login(mobile, psw)
+    fun login(account: String, passwd: String): Flow<User> {
+//        return remote!!.login(account, psw)
+//            .transform {
+//                local!!.save(it)
+//                emit(it)
+//            }
+
+        return local!!.login(account, passwd)
             .transform {
-                local!!.save(it)
+                UserManager.update(it)
                 emit(it)
             }
+    }
+
+    fun register(name:String,email:String,passwd: String):Flow<User>{
+        return local!!.register(name, email, passwd)
+            .transform {
+                UserManager.update(it)
+                emit(it)
+            }
+    }
+
+    fun validateEmail(email: String):Flow<Boolean>{
+        return local!!.validateEmail(email)
+
+    }
+
+    fun resetPasswd(email: String,passwd: String): Flow<Boolean> {
+        return local!!.resetPasswd(email,passwd)
     }
 }

@@ -16,17 +16,9 @@
 
 package com.naivor.app.embedder.logger
 
-import android.app.Activity
-import android.app.Application
-import android.content.Context
-import android.os.Bundle
 import com.naivor.app.BuildConfig
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import com.naivor.app.AppSetting
 import com.naivor.app.embedder.logger.LogLevel.*
+import com.naivor.app.others.AppSetting
 import timber.log.Timber
 
 enum class LogLevel(val value: Int) {
@@ -39,17 +31,11 @@ object Logger {
     const val TAG = "Naivor-Log"
     const val TAG_PAGE = "Naivor-Pages"
     const val TAG_NET = "Naivor-Network"
+    const val TAG_CRASH = "Naivor-Crash"
 
-    const val SEGMENT =1024  //分段大小，避免过长丢失
+    const val SEGMENT =1024*2  //分段大小，避免过长丢失
 
-    private lateinit var application: Application
-
-    fun context(): Context {
-        return application.applicationContext
-    }
-
-    fun init(app: Application) {
-        application = app
+    fun init() {
 
         resetLogLevel(AppSetting.logLevel)
 
@@ -59,17 +45,6 @@ object Logger {
             Timber.plant(CrashReport())
         }
 
-        //全局捕获异常
-        Thread.setDefaultUncaughtExceptionHandler { t, e ->
-            Logger.e(
-                """  exception thread: ${t.name}
-                |       stack: ${e.stackTraceToString()}
-            """.trimMargin()
-            )
-        }
-
-        //监控页面状态
-        watchActivityStatus(app)
     }
 
     fun d(content: String, tag: String = TAG) {
@@ -130,111 +105,7 @@ object Logger {
         }
     }
 
-    private fun logStatus(page: Any, methord: String) {
-        val message = "|            ${page.javaClass.simpleName}.$methord()            |"
-        val divider = "-".repeat(message.length)
-        Timber.tag(TAG_PAGE).d(divider)
-        Timber.tag(TAG_PAGE).d(message)
-        Timber.tag(TAG_PAGE).d(divider)
-    }
 
-    private fun watchActivityStatus(app: Application) {
-        //仅debug
-        if (level == DEBUG) {
-
-            app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-                override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-                    logStatus(activity, "onActivityCreated")
-                    watchFragmentStatus(activity)
-                }
-
-                override fun onActivityStarted(activity: Activity) {
-                    logStatus(activity, "onActivityStarted")
-                }
-
-                override fun onActivityResumed(activity: Activity) {
-                    logStatus(activity, "onActivityResumed")
-                }
-
-                override fun onActivityPaused(activity: Activity) {
-                    logStatus(activity, "onActivityPaused")
-                }
-
-                override fun onActivityStopped(activity: Activity) {
-                    logStatus(activity, "onActivityStopped")
-                }
-
-                override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-                    logStatus(activity, "onActivitySaveInstanceState")
-                }
-
-                override fun onActivityDestroyed(activity: Activity) {
-                    logStatus(activity, "onActivityDestroyed")
-                }
-            })
-        }
-    }
-
-    private fun watchFragmentStatus(activity: Activity) {
-        if (activity is FragmentActivity) {
-            activity.supportFragmentManager.registerFragmentLifecycleCallbacks(object : FragmentManager.FragmentLifecycleCallbacks() {
-                override fun onFragmentAttached(fm: FragmentManager, f: Fragment, context: Context) {
-                    super.onFragmentAttached(fm, f, context)
-                    logStatus(f, "onFragmentAttached")
-                }
-
-                override fun onFragmentCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
-                    super.onFragmentCreated(fm, f, savedInstanceState)
-                    logStatus(f, "onFragmentCreated")
-                }
-
-                override fun onFragmentViewCreated(
-                    fm: FragmentManager,
-                    f: Fragment,
-                    v: View,
-                    savedInstanceState: Bundle?
-                ) {
-                    super.onFragmentViewCreated(fm, f, v, savedInstanceState)
-                    logStatus(f, "onFragmentViewCreated")
-                }
-
-                override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
-                    super.onFragmentResumed(fm, f)
-                    logStatus(f, "onFragmentResumed")
-                }
-
-                override fun onFragmentPaused(fm: FragmentManager, f: Fragment) {
-                    super.onFragmentPaused(fm, f)
-                    logStatus(f, "onFragmentPaused")
-                }
-
-                override fun onFragmentStopped(fm: FragmentManager, f: Fragment) {
-                    super.onFragmentStopped(fm, f)
-                    logStatus(f, "onFragmentStopped")
-                }
-
-                override fun onFragmentViewDestroyed(fm: FragmentManager, f: Fragment) {
-                    super.onFragmentViewDestroyed(fm, f)
-                    logStatus(f, "onFragmentViewDestroyed")
-                }
-
-                override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
-                    super.onFragmentDestroyed(fm, f)
-                    logStatus(f, "onFragmentDestroyed")
-                }
-
-                override fun onFragmentDetached(fm: FragmentManager, f: Fragment) {
-                    super.onFragmentDetached(fm, f)
-                    logStatus(f, "onFragmentDetached")
-                }
-
-                override fun onFragmentStarted(fm: FragmentManager, f: Fragment) {
-                    super.onFragmentStarted(fm, f)
-                    logStatus(f, "onFragmentStarted")
-                }
-            }, true)
-        }
-    }
 }
 
 class CrashReport : Timber.Tree() {

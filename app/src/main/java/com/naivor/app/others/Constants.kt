@@ -21,6 +21,15 @@ object Constants {
     const val EXTRA_VALUE="extra_value"
 
     const val DATABASE_NAME = "app-database"
+    const val SHARED_PREF_NAME = "app-shared_preference"
+
+    const val  LAST_LOGIN_ACCOUNT="login_account"
+
+    const val API_URL_DEBUG ="https://api.github.com"
+    const val API_URL_RELEASE="https://api.github.com"
+
+    const val CRASH_PATH="/naivor/crash"
+    const val CACHE_PATH="/naivor/cache"
 
     //数据库
     object DB {

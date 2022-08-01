@@ -16,15 +16,14 @@
 
 package com.naivor.app.embedder.di
 
-import android.content.Context
 import com.google.gson.GsonBuilder
-import com.naivor.app.AppSetting
 import com.naivor.app.BuildConfig
-import com.naivor.app.R
 import com.naivor.app.common.repo.remote.util.CommonParamInterceptor
 import com.naivor.app.common.repo.remote.util.FlowCallAdapterFactory
 import com.naivor.app.common.repo.remote.util.GsonConverterFactory
 import com.naivor.app.common.repo.remote.util.HttpLoggingInterceptor
+import com.naivor.app.others.Constants.API_URL_DEBUG
+import com.naivor.app.others.Constants.API_URL_RELEASE
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,7 +48,7 @@ class NetworkModule {
         val gson = GsonBuilder().setLenient().create()
 
         return Retrofit.Builder()
-            .baseUrl(getBaseUrl(AppSetting.app))
+            .baseUrl(getBaseUrl())
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(FlowCallAdapterFactory.create())
@@ -70,16 +69,14 @@ class NetworkModule {
      *
      * @return
      */
-    private fun getBaseUrl(context: Context): String {
-        var apiResId = 0
-        apiResId = if (BuildConfig.DEBUG) {
+    private fun getBaseUrl(): String {
+        return if (BuildConfig.DEBUG) {
             //测试接口
-            R.string.api_url_test
+            API_URL_DEBUG
         } else {
             //正式接口
-            R.string.api_url_release
+            API_URL_RELEASE
         }
 
-        return context.getString(apiResId)
     }
 }

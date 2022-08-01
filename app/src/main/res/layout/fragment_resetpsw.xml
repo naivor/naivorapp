@@ -13,41 +13,109 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="fill_parent">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    <include android:id="@+id/customTitle" layout="@layout/toolbar_layout" />
 
-    <include layout="@layout/toolbar_layout" />
-
-    <EditText
-        android:id="@+id/edt_email"
+    <LinearLayout
+        android:id="@+id/layout_email"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="50dp"
-        android:background="@color/white"
-        android:hint="@string/hint_registeremail"
-        android:maxLength="16"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:singleLine="true"
-        android:textColor="@color/font_black_light"
-        android:textColorHint="@color/hint_color" />
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_sendemail"
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="100dp"
+            android:background="@color/white"
+            android:hint="@string/hint_registeremail"
+            android:maxLength="16"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textColor="@color/font_black_light"
+            android:textColorHint="@color/hint_color" />
+
+        <TextView
+            android:id="@+id/tv_sendemail"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_btn_round_green_5"
+            android:gravity="center"
+            android:text="@string/resetpsw_submit"
+            android:textColor="@color/white_smoke"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_passwd"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/bg_btn_round_green_5"
-        android:gravity="center"
-        android:text="@string/resetpsw_submit"
-        android:textColor="@color/white_smoke"
-        android:textSize="18sp" />
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_psw"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="100dp"
+            android:background="@color/white"
+            android:hint="@string/hint_psw"
+            android:maxLength="16"
+            android:inputType="textPassword"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textColor="@color/font_black_light"
+            android:textColorHint="@color/hint_color" />
+
+        <EditText
+            android:id="@+id/edt_pswagain"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:hint="@string/hint_pswagain"
+            android:maxLength="16"
+            android:paddingLeft="8dp"
+            android:inputType="textPassword"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textColor="@color/font_black_light"
+            android:textColorHint="@color/hint_color" />
+
+        <TextView
+            android:id="@+id/tv_reset"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_btn_round_green_5"
+            android:gravity="center"
+            android:text="@string/resetpsw_reset"
+            android:textColor="@color/white_smoke"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</FrameLayout>
+

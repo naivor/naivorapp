@@ -15,11 +15,15 @@
  */
 package com.naivor.app.domain.hot
 
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.naivor.app.common.base.BaseFragment
 import com.naivor.app.common.base.BaseViewModel
 import com.naivor.app.databinding.FragmentHotBinding
+import com.naivor.app.domain.MainActivity
+import com.naivor.app.embedder.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -31,12 +35,31 @@ class HotFragment : BaseFragment<FragmentHotBinding, BaseViewModel>() {
 
     override val pageTitle: String="热点"
 
-    override val setRootView: (ViewGroup?) -> View={
+    override var isToolbarWhite: Boolean=false
+
+    override val inflateRootView: (ViewGroup?) -> View={
         __binding=FragmentHotBinding.inflate(layoutInflater,it,false)
         binding.root
     }
 
+    override fun initTitle(activity: AppCompatActivity) {
+        binding.customTitle.run {
+            toolbarView=toolbar
+            titleView=tvCenter
+
+        }
+
+        super.initTitle(activity)
+
+        (activity as MainActivity).setupDrawerToggle(toolbarView!!)
+    }
+
     override fun initPageView() {
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).syncDrawerToggleState()
     }
 
 }

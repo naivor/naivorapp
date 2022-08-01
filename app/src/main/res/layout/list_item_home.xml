@@ -15,15 +15,17 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:paddingLeft="10dp"
-    android:background="@color/green"
+    android:background="@color/peach_puff"
     android:paddingRight="15dp"
     android:layout_height="60dp"
     android:paddingTop="20dp"
+    android:gravity="center"
+    android:orientation="horizontal"
     android:paddingBottom="20dp"
     android:layout_marginTop="5dp">
 
@@ -36,4 +38,4 @@
         android:gravity="center"
         tools:text="路径"/>
 
-</RelativeLayout>
+</LinearLayout>

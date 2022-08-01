@@ -18,28 +18,85 @@ package com.naivor.app.domain.login.ui.register
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.naivor.app.R
 import com.naivor.app.common.base.BaseFragment
 import com.naivor.app.common.base.BaseViewModel
 import com.naivor.app.databinding.FragmentRegisterBinding
+import com.naivor.app.others.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by Naivor on 16-4-2.
  */
 @AndroidEntryPoint
-class RegisterFragment : BaseFragment<FragmentRegisterBinding, BaseViewModel>() {
-    override val viewModel: BaseViewModel?=null
+class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel>() {
+    override val viewModel: RegisterViewModel by viewModels()
 
-    override val pageTitle: String="注册"
+    override val pageTitle: String="用户注册"
 
-    override val setRootView: (ViewGroup?) -> View={
+    override var isToolbarWhite: Boolean=false
+
+    override val inflateRootView: (ViewGroup?) -> View={
         __binding=FragmentRegisterBinding.inflate(layoutInflater,it,false)
         binding.root
     }
 
-    override fun initArguments(bundle: Bundle?) {
+    override fun initTitle(activity: AppCompatActivity) {
+        binding.customTitle.run {
+            toolbarView=toolbar
+            titleView=tvCenter
+            navigationView=imgNavigation
+
+        }
+        super.initTitle(activity)
     }
 
     override fun initPageView() {
+        with(binding){
+            tvRegister.setOnClickListener {
+                val userName = edtName.text?.toString()
+                val email = edtEmail.text?.toString()
+                val passwd = edtPsw.text?.toString()
+                val passwdAgain = edtPswagain.text?.toString()
+                performRegister(userName,email,passwd,passwdAgain)
+            }
+        }
+    }
+
+    private fun performRegister(userName: String?, email: String?, passwd: String?, passwdAgain: String?) {
+        if (userName.isNullOrEmpty()){
+            showToast("请填写用户名")
+            return
+        }
+        if (email.isNullOrEmpty()){
+            showToast("请填写您的邮箱")
+            return
+        }
+        if (passwd.isNullOrEmpty()){
+            showToast("请填写密码")
+            return
+        }
+        if (passwdAgain.isNullOrEmpty()){
+            showToast("请再次填写密码")
+            return
+        }
+
+        if (passwd==passwdAgain){
+            viewModel.register(userName,email,passwd){
+                if (it) {
+                    showToast("注册账号成功")
+                    findNavController().navigate(R.id.action_registerFragment_to_mainActivity)
+                    activity?.finish()
+                }else{
+                    showToast("注册账号失败，请稍后再试")
+                }
+            }
+        }else{
+            showToast("两次输入的密码不一致")
+        }
+
     }
 }

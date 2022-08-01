@@ -31,7 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding, BaseViewModel>() {
     override val viewModel: BaseViewModel? = null
 
-    override val setContentView: () -> View = {
+    override val inflateRootView: () -> View = {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         binding.root
     }

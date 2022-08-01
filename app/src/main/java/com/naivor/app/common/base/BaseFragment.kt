@@ -56,7 +56,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment(), 
     open var isToolbarWhite = true
     open var isUseWhiteNavigation = false
 
-    abstract val setRootView: (ViewGroup?) -> View
+    abstract val inflateRootView: (ViewGroup?) -> View
 
     protected val requestKey = "result_from_another_fragment"
 
@@ -75,7 +75,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment(), 
         savedInstanceState: Bundle?
     ): View? {
 
-        rootView = setRootView(container)
+        rootView = inflateRootView(container)
         initTitle(activity as AppCompatActivity)
         initPageView()
         // 当从下一个Fragment返回会触发onViewCreated，因此初始化数据放到这里，如果返回需要刷新页面，可在onViewCreated中再次调用

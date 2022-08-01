@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022. Naivor. All rights reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/hotFragment">
+
+    <fragment
+        android:id="@+id/hotFragment"
+        tools:layout="@layout/fragment_hot"
+        android:name="com.naivor.app.domain.hot.HotFragment"
+        android:label="HotFragment" >
+        <action
+            android:id="@+id/action_hotFragment_to_plantFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/plantFragment" />
+        <action
+            android:id="@+id/action_hotFragment_to_messageFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/messageFragment" />
+        <action
+            android:id="@+id/action_hotFragment_to_mineFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/mineFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/plantFragment"
+        tools:layout="@layout/fragment_plant"
+        android:name="com.naivor.app.domain.plant.PlantFragment"
+        android:label="PlantFragment" >
+        <action
+            android:id="@+id/action_plantFragment_to_messageFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/messageFragment" />
+        <action
+            android:id="@+id/action_plantFragment_to_mineFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/mineFragment" />
+        <action
+            android:id="@+id/action_plantFragment_to_hotFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/hotFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/messageFragment"
+        tools:layout="@layout/fragment_msg"
+        android:name="com.naivor.app.domain.message.MessageFragment"
+        android:label="MessageFragment" >
+        <action
+            android:id="@+id/action_messageFragment_to_plantFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/plantFragment" />
+        <action
+            android:id="@+id/action_messageFragment_to_mineFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/mineFragment" />
+        <action
+            android:id="@+id/action_messageFragment_to_hotFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/hotFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mineFragment"
+        tools:layout="@layout/fragment_mine"
+        android:name="com.naivor.app.domain.mine.MineFragment"
+        android:label="MineFragment" >
+        <action
+            android:id="@+id/action_mineFragment_to_messageFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/messageFragment" />
+        <action
+            android:id="@+id/action_mineFragment_to_plantFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/plantFragment" />
+        <action
+            android:id="@+id/action_mineFragment_to_hotFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="false"
+            app:launchSingleTop="true"
+            app:destination="@id/hotFragment" />
+    </fragment>
+</navigation>

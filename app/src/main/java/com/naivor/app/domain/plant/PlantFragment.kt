@@ -17,6 +17,7 @@ package com.naivor.app.domain.plant
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.naivor.app.common.base.BaseFragment
 import com.naivor.app.common.base.BaseViewModel
 import com.naivor.app.databinding.FragmentPlantBinding
@@ -31,9 +32,20 @@ class PlantFragment : BaseFragment<FragmentPlantBinding, BaseViewModel>() {
 
     override val pageTitle: String="植物"
 
-    override val setRootView: (ViewGroup?) -> View={
+    override var isToolbarWhite: Boolean=false
+
+    override val inflateRootView: (ViewGroup?) -> View={
         __binding= FragmentPlantBinding.inflate(layoutInflater,it,false)
         binding.root
+    }
+
+    override fun initTitle(activity: AppCompatActivity) {
+        binding.customTitle.run {
+            toolbarView=toolbar
+            titleView=tvCenter
+
+        }
+        super.initTitle(activity)
     }
 
     override fun initPageView() {

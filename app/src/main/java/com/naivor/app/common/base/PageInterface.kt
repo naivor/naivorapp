@@ -16,9 +16,13 @@
 
 package com.naivor.app.common.base
 
+import android.view.View
+import android.view.ViewGroup
+
 interface PageInterface {
 
     fun initPageView()
 
     fun initPageData()
+
 }

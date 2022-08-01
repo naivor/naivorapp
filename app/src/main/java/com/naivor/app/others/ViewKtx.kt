@@ -14,16 +14,5 @@
  * limitations under the License.
  */
 
-package com.naivor.app
+package com.naivor.app.others
 
-import android.app.Application
-import com.naivor.app.embedder.logger.LogLevel
-
-object AppSetting {
-    lateinit var app: Application
-    var logLevel = LogLevel.ERROR
-
-    fun init(app: Application) {
-        this.app = app
-    }
-}

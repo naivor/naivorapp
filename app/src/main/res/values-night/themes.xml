@@ -8,12 +8,12 @@
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/black_overlay</item>
+        <item name="android:statusBarColor">@color/statusBarColor</item>
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/overlay</item>
+        <item name="android:navigationBarColor">@color/navigationBarColor</item>
 
         <item name="android:windowIsTranslucent">true</item>
     </style>

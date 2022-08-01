@@ -17,11 +17,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/group_item_github"
+            android:id="@+id/group_item_profile"
             android:icon="@drawable/ic_baseline_account_balance"
             android:title="主页" />
         <item
-            android:id="@+id/group_item_more"
+            android:id="@+id/group_item_cast"
             android:icon="@drawable/ic_baseline_cast_connected"
             android:title="投射" />
         <item
@@ -29,14 +29,14 @@
             android:icon="@drawable/ic_baseline_qr_code"
             android:title="二维码" />
         <item
-            android:id="@+id/group_item_share_project"
+            android:id="@+id/group_item_share"
             android:icon="@drawable/ic_baseline_share"
             android:title="分享" />
     </group>
     <item android:title="选项">
         <menu>
             <item
-                android:id="@+id/item_model"
+                android:id="@+id/item_setting"
                 android:icon="@drawable/ic_baseline_settings"
                 android:title="设置" />
             <item

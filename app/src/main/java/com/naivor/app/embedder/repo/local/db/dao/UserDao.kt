@@ -31,7 +31,16 @@ interface UserDao {
     fun getUsers(): Flow<List<User>>
 
     @Query("SELECT * FROM ${Constants.DB.TABLE_USER} WHERE id=:uid")
-    fun getUser(uid: Int): Flow<User>
+    fun getUserByUid(uid: Int): Flow<User>
+
+    @Query("SELECT * FROM ${Constants.DB.TABLE_USER} WHERE passwd=:passwd")
+    fun getUserByPasswd(passwd: String): Flow<User>
+
+    @Query("SELECT * FROM ${Constants.DB.TABLE_USER} WHERE email=:email")
+    fun getUserByEmail(email: String): Flow<User>
+
+    @Query("SELECT * FROM ${Constants.DB.TABLE_USER} WHERE name=:name")
+    fun getUserByName(name: String): Flow<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(user: User)

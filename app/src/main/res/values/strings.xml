@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">naivorAPP</string>
+    <string name="app_name">naivorapp</string>
+
+    <string name="drawer_open">打开</string>
+    <string name="drawer_close">关闭</string>
 
     <string name="login_tip">用户登录</string>
     <string name="forget_psw"><u>忘记密码？</u></string>
@@ -17,7 +20,8 @@
     <string name="hint_pswagain">再次输入密码</string>
 
 
-    <string name="resetpsw_submit">发送邮件</string>
+    <string name="resetpsw_submit">验证邮箱</string>
+    <string name="resetpsw_reset">重置密码</string>
     <string name="hint_registeremail">注册邮箱</string>
 
     <string name="empty_message">暂时没有数据</string>

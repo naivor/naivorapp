@@ -50,6 +50,7 @@ data class UserResult(
             "",
             "",
             safe(blog),
+            "",
             location
         )
     }

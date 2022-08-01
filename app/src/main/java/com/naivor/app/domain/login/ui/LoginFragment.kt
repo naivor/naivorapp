@@ -16,13 +16,17 @@
 
 package com.naivor.app.domain.login.ui
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.naivor.app.R
 import com.naivor.app.common.base.BaseFragment
+import com.naivor.app.common.utils.ToastUtil.show
 import com.naivor.app.databinding.FragmentLoginBinding
+import com.naivor.app.others.showToast
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
@@ -30,14 +34,68 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override val pageTitle: String = "登录"
 
-    override val setRootView: (ViewGroup?) -> View = {
+    override val inflateRootView: (ViewGroup?) -> View = {
         __binding = FragmentLoginBinding.inflate(layoutInflater,it,false)
         binding.root
     }
 
-    override fun initArguments(bundle: Bundle?) {
+    override fun initPageView() {
+        with(binding){
+            tvSkip.setOnClickListener {
+                pageToMain()
+            }
+
+            tvLogin.setOnClickListener {
+                val account=edtAccount.text?.toString()
+                val passwd=edtPsw.text?.toString()
+
+                val validate = validateInput(account, passwd)
+                if (validate){
+                    viewModel.login(account!!,passwd!!){
+                        if (it) {
+                            showToast("登录成功")
+                            pageToMain()
+                        }
+                    }
+                }
+
+            }
+
+            tvForgetpsw.setOnClickListener {
+                findNavController().navigate(R.id.action_LoginFragment_to_resetPswFragment)
+            }
+
+            tvRegister.setOnClickListener {
+                findNavController().navigate(R.id.action_LoginFragment_to_registerFragment)
+            }
+        }
+
     }
 
-    override fun initPageView() {
+    private fun pageToMain() {
+        findNavController().navigate(R.id.action_LoginFragment_to_mainActivity)
+        activity?.finish()
+    }
+
+    /**
+     * 验证输入
+     *
+     * @param account
+     * @param psw
+     * @return
+     */
+    private fun validateInput(account: String?, psw: String?): Boolean {
+        //检查账号是否合法
+        if (account.isNullOrEmpty()) {
+            show("请输入用户名或邮箱")
+            return false
+        }
+
+        //检查密码是否合法
+        if (psw.isNullOrEmpty()) {
+            show("请输入密码")
+            return false
+        }
+        return true
     }
 }

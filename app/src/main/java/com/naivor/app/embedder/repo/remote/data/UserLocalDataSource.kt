@@ -17,19 +17,88 @@
 package com.naivor.app.embedder.repo.remote.data
 
 import com.naivor.app.common.repo.local.LocalDataSource
+import com.naivor.app.common.repo.remote.data.NetCode
+import com.naivor.app.common.repo.remote.data.NetError
 import com.naivor.app.embedder.repo.local.bean.User
 import com.naivor.app.embedder.repo.local.db.AppDatabase
+import com.naivor.app.others.Constants
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class UserLocalDataSource @Inject constructor(val database: AppDatabase) :
     LocalDataSource(database) {
 
-    suspend fun optUser(uid: Int) = database.userDao().getUser(uid)
+    fun optUser(uid: Int) = database.userDao().getUserByUid(uid)
 
-    suspend fun optUsers() = database.userDao().getUsers()
+    fun optUserByPasswd(passwd: String) = database.userDao().getUserByPasswd(passwd)
+
+    fun optUserByEmail(email: String) = database.userDao().getUserByEmail(email)
+
+    fun optUserByName(name: String) = database.userDao().getUserByName(name)
+
+    fun optUsers() = database.userDao().getUsers()
 
     suspend fun save(user: User) {
         database.userDao().insertAll(listOf(user))
+    }
+
+    fun login(account: String, passwd: String): Flow<User> {
+        return flow {
+            val user = optUserByPasswd(passwd).firstOrNull()
+            user?.run {
+                if (name == account || email == account || phone == account) { //登录成功
+                    isLogin = true
+                    save(this)
+                    emit(this)
+                } else {
+                    throw NetError(NetCode.ACCOUNT_INFO_ERROR, "用户名或密码错误")
+                }
+            } ?: throw NetError(NetCode.ACCOUNT_INFO_ERROR, "用户名或密码错误")
+        }.flowOn(io)
+    }
+
+    fun register(name: String, email: String, passwd: String): Flow<User> {
+        return flow {
+            val user = User(
+                0,
+                name,
+                "",
+                Constants.Gender.UNKNOWN,
+                "",
+                email,
+                0L,
+                "",
+                "",
+                "",
+                passwd,
+                "",
+                true
+            )
+            save(user)
+            emit(user)
+        }.flowOn(io)
+    }
+
+    fun validateEmail(email: String): Flow<Boolean> {
+        return flow {
+            val user = optUserByEmail(email).firstOrNull()
+            emit(user == null)
+        }.flowOn(io)
+    }
+
+    fun resetPasswd(email: String,passwd: String): Flow<Boolean> {
+        return flow {
+            val user = optUserByEmail(email).firstOrNull()
+            user?.run {
+                this.passwd=passwd
+                save(this)
+                emit(true)
+            } ?: emit(false)
+
+        }.flowOn(io)
     }
 
 }

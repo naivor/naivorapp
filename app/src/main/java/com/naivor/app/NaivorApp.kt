@@ -17,11 +17,11 @@ package com.naivor.app
 
 import com.naivor.app.embedder.logger.Logger
 import com.naivor.app.embedder.repo.UserRepo
+import com.naivor.app.others.AppSetting
+import com.naivor.app.others.CrashHandler
+import com.naivor.app.others.PageWatcher
 import com.naivor.app.others.UserManager
 import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -39,13 +39,19 @@ class NaivorApp : android.app.Application() {
     override fun onCreate() {
         super.onCreate()
 
-        CoroutineScope(Dispatchers.Default).launch {
-            UserManager.init(repo)
-        }
+        //应用设置
+        AppSetting.init(this)
+
+        //用户信息
+        UserManager.init(repo)
 
         //初始化日志系统
-        Logger.init(this)
+        Logger.init()
 
-        AppSetting.init(this)
+        //全局捕获异常
+        CrashHandler.init()
+
+        //监控页面
+        PageWatcher.init(this)
     }
 }

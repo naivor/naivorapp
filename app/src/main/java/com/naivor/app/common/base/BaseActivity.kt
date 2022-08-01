@@ -17,9 +17,11 @@ package com.naivor.app.common.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.naivor.app.others.Constants
 
 /**
  * BaseActivity 是所有activity的基类，把一些公共的方法放到里面
@@ -35,11 +37,12 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
 
     protected lateinit var rootView: View
 
-    abstract val setContentView: () -> View
+    abstract val inflateRootView: () -> View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rootView = setContentView()
+        rootView = inflateRootView()
+        setContentView(rootView)
         initPageView()
         initPageData()
     }
@@ -52,5 +55,24 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
         val intent = Intent(this, target)
         if (bundle != null) intent.putExtras(bundle)
         startActivity(intent)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    open fun generateBundle(target: String?, data: Any?): Bundle {
+        return Bundle().apply {
+            putString(Constants.EXTRA_KEY, target)
+            data?.let {
+                viewModel?.dataToBus(it)
+                when (it) {
+                    is String -> putString(Constants.EXTRA_VALUE, it)
+                    is Parcelable -> putParcelable(Constants.EXTRA_VALUE, it)
+                    is List<*> -> putParcelableArrayList(
+                        Constants.EXTRA_VALUE,
+                        it as ArrayList<out Parcelable>
+                    )
+                }
+            }
+
+        }
     }
 }

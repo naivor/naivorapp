@@ -29,9 +29,9 @@ import retrofit2.http.Query
  */
 interface UserApis {
 
-    @GET("/users/{username}")
+    @GET("/users/{account}")
     fun login(
-        @Path("username") username: String?,
+        @Path("account") account: String?,
         @Query("password") psw: String?
     ): Flow<UserResult>
 }

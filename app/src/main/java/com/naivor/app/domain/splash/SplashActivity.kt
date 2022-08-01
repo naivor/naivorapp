@@ -16,10 +16,14 @@
 package com.naivor.app.domain.splash
 
 import android.view.View
+import androidx.activity.viewModels
 import com.naivor.app.common.base.BaseActivity
 import com.naivor.app.common.base.BaseViewModel
 import com.naivor.app.databinding.ActivitySplashBinding
+import com.naivor.app.domain.MainActivity
+import com.naivor.app.domain.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 /**
  * SplashActivity app的欢迎页面
@@ -28,16 +32,26 @@ import dagger.hilt.android.AndroidEntryPoint
  * Created by Naivor on 16-3-3.
  */
 @AndroidEntryPoint
-class SplashActivity : BaseActivity<ActivitySplashBinding, BaseViewModel>() {
-    override val viewModel: BaseViewModel? = null
+class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
+    override val viewModel: SplashViewModel by viewModels()
 
-    override val setContentView: () -> View = {
+    override val inflateRootView: () -> View = {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         binding.root
     }
 
 
     override fun initPageView() {
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                if (viewModel.isLogin()){
+                    pageTo(MainActivity::class.java)
+                }else{
+                    pageTo(LoginActivity::class.java)
+                }
+
+            }
+        },3600)
     }
 
 }

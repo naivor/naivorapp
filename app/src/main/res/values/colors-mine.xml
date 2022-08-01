@@ -27,6 +27,9 @@
     <color name="textColorPrimary">#FFFFFB</color>
     <color name="textColorPrimaryInverse">#1C1C1C</color>
 
+    <color name="statusBarColor">#883F51B5</color>
+    <color name="navigationBarColor">#88000000</color>
+
     <color name="overlay">#AA1C1C1C</color>
     <color name="divider">#333333</color>
 
@@ -58,4 +61,5 @@
 
     <color name="bg_login" >#e7298729</color>
 
+    <color name="ic_launcher_background">#830C13</color>
 </resources>

@@ -18,11 +18,10 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph_main"
             android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            />
 
 
         <RadioGroup
@@ -43,10 +42,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@drawable/ic_baseline_whatshot_48"
+                android:drawableTop="@drawable/ic_selector_hot"
                 android:gravity="center"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
+                android:checked="true"
                 android:text="热点"
                 android:textColor="@color/selector_blue_gray"
                 android:textSize="@dimen/font_small" />
@@ -57,7 +57,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@drawable/ic_baseline_local_florist_48"
+                android:drawableTop="@drawable/ic_selector_plant"
                 android:gravity="center"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
@@ -71,7 +71,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@drawable/ic_baseline_notifications_48"
+                android:drawableTop="@drawable/ic_selector_message"
                 android:gravity="center"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
@@ -85,7 +85,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@drawable/ic_baseline_person_48"
+                android:drawableTop="@drawable/ic_selector_mine"
                 android:gravity="center"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
