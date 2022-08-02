@@ -1,0 +1,3 @@
+[submodule "adapter"]
+	path = adapter
+	url = git@github.com:naivor/recycler-adapter.git

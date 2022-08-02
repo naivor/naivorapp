@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/naivor/workspace/studio/naivorapp/widget/src/main/assets"/><source path="/home/naivor/workspace/studio/naivorapp/widget/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/home/naivor/workspace/studio/naivorapp/widget/src/release/assets"/></dataSet></merger>

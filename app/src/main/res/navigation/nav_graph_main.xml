@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/hotFragment"
         tools:layout="@layout/fragment_hot"
-        android:name="com.naivor.app.domain.hot.HotFragment"
+        android:name="com.naivor.android.app.domain.hot.HotFragment"
         android:label="HotFragment" >
         <action
             android:id="@+id/action_hotFragment_to_plantFragment"
@@ -48,7 +48,7 @@
     <fragment
         android:id="@+id/plantFragment"
         tools:layout="@layout/fragment_plant"
-        android:name="com.naivor.app.domain.plant.PlantFragment"
+        android:name="com.naivor.android.app.domain.plant.PlantFragment"
         android:label="PlantFragment" >
         <action
             android:id="@+id/action_plantFragment_to_messageFragment"
@@ -72,7 +72,7 @@
     <fragment
         android:id="@+id/messageFragment"
         tools:layout="@layout/fragment_msg"
-        android:name="com.naivor.app.domain.message.MessageFragment"
+        android:name="com.naivor.android.app.domain.message.MessageFragment"
         android:label="MessageFragment" >
         <action
             android:id="@+id/action_messageFragment_to_plantFragment"
@@ -96,7 +96,7 @@
     <fragment
         android:id="@+id/mineFragment"
         tools:layout="@layout/fragment_mine"
-        android:name="com.naivor.app.domain.mine.MineFragment"
+        android:name="com.naivor.android.app.domain.mine.MineFragment"
         android:label="MineFragment" >
         <action
             android:id="@+id/action_mineFragment_to_messageFragment"

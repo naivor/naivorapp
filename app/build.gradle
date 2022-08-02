@@ -11,7 +11,7 @@ android {
     def version = 1
 
     defaultConfig {
-        applicationId "com.naivor.app.sample"
+        applicationId "com.naivor.android.app"
         minSdkVersion libs.versions.minSdk.get().toInteger()
         targetSdkVersion libs.versions.targetSdk.get().toInteger()
         versionCode getVersionWithGitCommit(version)
@@ -86,16 +86,18 @@ dependencies {
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    // JetPack Foundationy
+    implementation project(path: ':adapter')
+    implementation project(path: ':widget')
+
+    //  JetPack Foundationy
     implementation(libs.appcompat)
     implementation(libs.ktxCore)
 
     implementation(libs.coroutinesAndroid)
     implementation(libs.coroutinesCore)
-    implementation 'androidx.appcompat:appcompat:1.3.0'
 
 
-//  JetPack Architecture
+    //  JetPack Architecture
     kapt(libs.hiltCompiler)
     implementation(libs.hiltAndroid)
 
@@ -112,7 +114,7 @@ dependencies {
 
     implementation(libs.workManager)
 
-//  JetPack UI
+    //  JetPack UI
     implementation(libs.fragment)
     implementation(libs.constraintlayout)
     implementation(libs.recyclerview)
@@ -121,25 +123,22 @@ dependencies {
     implementation(libs.flexbox)
     implementation(libs.swiperefreshlayout)
 
-//  Google Others
+    //  Google Others
     kapt(libs.glideCompiler)
     implementation(libs.glide)
 
     implementation(libs.gson)
 
-//  ThirdPart Library
+    //  ThirdPart Library
     implementation(libs.timber)
 
     implementation(libs.retrofit)
     implementation(libs.converterGson)
     implementation(libs.loggingInterceptor)
 
-//    implementation(libs.adapter)
-//    implementation(libs.loadmore)
 
 
-
-//  Test
+    //  Test
     kaptAndroidTest(libs.hiltCompiler)
 
     androidTestImplementation(libs.coreTest)

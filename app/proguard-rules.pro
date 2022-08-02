@@ -315,6 +315,6 @@
 
 ### Data类不混淆
 
-    -keepclassmembers class com.naivor.app.embedder.repo.remote.responce.**{
+    -keepclassmembers class com.naivor.android.app.embedder.repo.remote.responce.**{
         <fields>;
     }

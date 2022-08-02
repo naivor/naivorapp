@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/subFragment"
-        android:name="com.naivor.app.domain.sub.SubFragment"
+        android:name="com.naivor.android.app.domain.sub.SubFragment"
         android:label="SubFragment"
         tools:layout="@layout/fragment_sub">
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.naivor.app.domain.sub.setting.SettingFragment"
+        android:name="com.naivor.android.app.domain.sub.setting.SettingFragment"
         android:label="SettingFragment"
         tools:layout="@layout/fragment_setting" />
 </navigation>
