@@ -15,7 +15,7 @@
  */
 package com.naivor.android.app.common.repo
 
-import com.naivor.android.app.common.base.TaskDispatchers
+import com.naivor.android.app.common.base.KotlinTask
 import com.naivor.android.app.common.repo.local.LocalDataSource
 import com.naivor.android.app.common.repo.remote.RemoteDataSource
 
@@ -30,5 +30,5 @@ open class Repository<out T : LocalDataSource, out R : RemoteDataSource<*>>(
     val remote: R?
 ) {
 
-    protected val compute = TaskDispatchers.compute
+    protected val compute = KotlinTask.compute
 }

@@ -32,4 +32,5 @@ dependencyResolutionManagement {
     }
 }
 
-include ':app','widget','adapter'
+include ':app','widget','adapter','kotlinex'
+

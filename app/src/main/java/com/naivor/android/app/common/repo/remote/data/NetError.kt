@@ -16,6 +16,11 @@
 
 package com.naivor.android.app.common.repo.remote.data
 
+import com.naivor.android.app.embedder.logger.Logger
+import com.naivor.android.app.others.showToast
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+
 open class NetError(
     private val status: NetCode,
     message: String?
@@ -41,4 +46,25 @@ enum class NetCode(var code: Int, var message: String?, var description: String?
     NOT_LOGIN(100, "用户未登录", "未登录，请立即登录"),
     ACCOUNT_INFO_ERROR(101, "用户名或密码错误", "用户名或密码错误"),
     UNKNOWN(Int.MIN_VALUE, "未知状态", "未知状态")
+}
+
+/**
+ * Flow默认异常捕获
+ */
+fun <T> Flow<T>.catch(showMessage: Boolean = true, custom: ((Throwable) -> Unit)? = null): Flow<T> {
+    return this.catch { cause: Throwable ->
+
+        custom?.invoke(cause)
+
+        if (showMessage) {
+            if (cause is NetError) {
+                showToast("${cause.message}")
+            } else {
+                showToast("抱歉，出了点状况 ！")
+            }
+        }
+
+
+        Logger.e("发生异常： ${cause.stackTraceToString()}")
+    }
 }

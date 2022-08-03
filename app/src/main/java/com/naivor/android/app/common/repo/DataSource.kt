@@ -16,8 +16,8 @@
 
 package com.naivor.android.app.common.repo
 
-import com.naivor.android.app.common.base.TaskDispatchers
+import com.naivor.android.app.common.base.KotlinTask
 
 open class DataSource {
-    protected val io = TaskDispatchers.io
+    protected val io = KotlinTask.io
 }

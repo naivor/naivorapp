@@ -87,7 +87,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation project(path: ':adapter')
-    implementation project(path: ':widget')
+    implementation project(path: ':kotlinex')
+//    implementation project(path: ':widget')
 
     //  JetPack Foundationy
     implementation(libs.appcompat)

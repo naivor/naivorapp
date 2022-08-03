@@ -17,7 +17,7 @@ package com.naivor.android.app.others
 
 import android.os.Build
 import com.naivor.android.app.BuildConfig
-import com.naivor.android.app.common.base.TaskDispatchers
+import com.naivor.android.app.common.base.KotlinTask
 import com.naivor.android.app.common.utils.DateUtil.currentTime
 import com.naivor.android.app.common.utils.SDCardUtil.checkSDCardAvailable
 import com.naivor.android.app.common.utils.SDCardUtil.saveFileToSDCard
@@ -78,7 +78,7 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
      * @return true:如果处理了该异常信息;否则返回false.
      */
     private fun handleException(ex: Throwable): Boolean {
-        CoroutineScope(TaskDispatchers.compute).launch {
+        CoroutineScope(KotlinTask.compute).launch {
             // 收集设备参数信息
             collectDeviceInfo()
             // 保存日志文件

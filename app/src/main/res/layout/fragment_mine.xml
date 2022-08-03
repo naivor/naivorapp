@@ -14,8 +14,11 @@
         android:background="@color/deep_sky_blue">
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:background="@color/white"
             android:layout_gravity="center"
             android:text="我的页面"
             android:textSize="18sp" />

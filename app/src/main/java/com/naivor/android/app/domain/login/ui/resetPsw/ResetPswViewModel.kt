@@ -18,8 +18,8 @@ package com.naivor.android.app.domain.login.ui.resetPsw
 
 import androidx.lifecycle.viewModelScope
 import com.naivor.android.app.common.base.BaseViewModel
+import com.naivor.android.app.common.repo.remote.data.catch
 import com.naivor.android.app.embedder.repo.UserRepo
-import com.naivor.android.app.others.catch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

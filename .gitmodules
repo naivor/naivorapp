@@ -1,3 +1,7 @@
 [submodule "adapter"]
 	path = adapter
 	url = git@github.com:naivor/recycler-adapter.git
+
+[submodule "kotlinex"]
+	path = kotlinex
+	url = git@github.com:naivor/kotlinex.git

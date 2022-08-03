@@ -28,7 +28,7 @@ plugins {
 
     id 'checkstyle'
     id 'maven-publish'
-    
+
 }
 
 

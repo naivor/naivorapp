@@ -1,0 +1,115 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+
+    exclude "**/R.class"
+    exclude "**/BuildConfig.class"
+}
+
+def versionName = "0.0.1"
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def SONATYPE_USER = properties.getProperty('SONATYPE_USER')
+def SONATYPE_KEY = properties.getProperty('SONATYPE_KEY')
+
+publishing {
+    publications {
+        // 定义一个名为 Production 的发布
+        Production(MavenPublication) {
+            // 使用方引用 implementation 'io.github.naivor:adapter:2.x'
+            groupId = "io.github.naivor"
+            artifactId = "kotlinex"
+
+            version = versionName
+
+            // 必须有这个 否则不会上传AAR包
+            afterEvaluate {
+                artifact(tasks.getByName("bundleReleaseAar"))
+            }
+
+            // 上传source，这样使用方可以看到方法注释
+            artifact generateSourcesJar
+
+            pom {
+                name = 'KotlinExtension'
+                description = 'Kotlin Extensions for Android Development'
+
+                def siteUrl = 'https://github.com/naivor/kotlinex'      // 项目的主页
+                def gitUrl = 'https://github.com/naivor/kotlinex.git'   // Git仓库的url
+
+                url = siteUrl
+                inceptionYear = "${new Date().format("yyyy", TimeZone.getTimeZone("UTC"))}"
+
+                packaging = 'aar'
+
+                licenses {
+                    license {
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution = 'repo'
+                    }
+                }
+                scm {
+                    connection = gitUrl
+                    url = siteUrl
+
+                }
+                developers {
+                    developer {
+                        id = 'naivor'     //填写的一些基本信息
+                        name = 'naivor'
+                        email = 'naivortang@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        // 定义一个 maven 仓库
+        maven {
+            // This is an arbitrary name, you may also use "mavencentral" or
+            // any other name that's descriptive for you
+            name = "mavenCentral"
+
+            def RELEASE_REPOSITORY_URL = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def SNAPSHOT_REPOSITORY_URL = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            // You only need this if you want to publish snapshots, otherwise just set the URL
+            // to the release repo directly
+
+            // 根据 versionName 来判断仓库地址
+            url = versionName.endsWith('SNAPSHOT') ? SNAPSHOT_REPOSITORY_URL : RELEASE_REPOSITORY_URL
+
+            // 仓库用户名密码
+            credentials {
+                username = SONATYPE_USER
+                password = SONATYPE_KEY
+            }
+        }
+
+    }
+}
+
+signing {
+    sign publishing.publications.Production
+    sign configurations.archives
+}
+
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives generateSourcesJar
+}

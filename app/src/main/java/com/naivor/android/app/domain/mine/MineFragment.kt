@@ -49,6 +49,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, BaseViewModel>() {
     }
 
     override fun initPageView() {
+//        binding.tvName
     }
 
 }

@@ -17,10 +17,7 @@ package com.naivor.android.app
 
 import com.naivor.android.app.embedder.logger.Logger
 import com.naivor.android.app.embedder.repo.UserRepo
-import com.naivor.android.app.others.AppSetting
-import com.naivor.android.app.others.CrashHandler
-import com.naivor.android.app.others.PageWatcher
-import com.naivor.android.app.others.UserManager
+import com.naivor.android.app.others.*
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -53,5 +50,8 @@ class NaivorApp : android.app.Application() {
 
         //监控页面
         PageWatcher.init(this)
+
+        //Toast
+        ToastUtil.init(this)
     }
 }
