@@ -31,10 +31,21 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_graph_sub"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_subFragment_to_plantDetailFragment"
+            app:destination="@id/plantDetailFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph_sub"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.naivor.android.app.domain.sub.setting.SettingFragment"
         android:label="SettingFragment"
         tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/plantDetailFragment"
+        android:name="com.naivor.android.app.domain.plant.ui.detail.PlantDetailFragment"
+        android:label="fragment_plant_detail"
+        tools:layout="@layout/fragment_plant_detail" />
 </navigation>

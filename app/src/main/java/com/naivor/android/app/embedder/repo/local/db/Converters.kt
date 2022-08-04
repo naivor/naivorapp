@@ -18,6 +18,7 @@ package com.naivor.android.app.embedder.repo.local.db
 
 import androidx.room.TypeConverter
 import com.naivor.android.app.others.Constants
+import java.util.*
 
 class Converters {
 
@@ -26,4 +27,9 @@ class Converters {
 
     @TypeConverter
     fun stringToSexType(gender: String): Constants.Gender = Constants.Gender.valueOf(gender)
+
+    @TypeConverter fun calendarToDatestamp(calendar: Calendar): Long = calendar.timeInMillis
+
+    @TypeConverter fun datestampToCalendar(value: Long): Calendar =
+        Calendar.getInstance().apply { timeInMillis = value }
 }

@@ -32,7 +32,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, BaseViewModel>() {
 
     override val pageTitle: String="我的"
 
-    override var isToolbarWhite: Boolean=false
+    override var hideNavigation: Boolean=true
 
     override val inflateRootView: (ViewGroup?) -> View={
         __binding= FragmentMineBinding.inflate(layoutInflater,it,false)
@@ -42,7 +42,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, BaseViewModel>() {
     override fun initTitle(activity: AppCompatActivity) {
         binding.customTitle.run {
             toolbarView=toolbar
-            titleView=tvCenter
+            titleView=tvTitle
 
         }
         super.initTitle(activity)

@@ -20,7 +20,6 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -31,6 +30,7 @@ import androidx.viewbinding.ViewBinding
 import com.naivor.android.app.R
 import com.naivor.android.app.others.Constants.EXTRA_KEY
 import com.naivor.android.app.others.Constants.EXTRA_VALUE
+
 
 /**
  * BaseFragment 是所有activity的基类，把一些公共的方法放到里面
@@ -51,10 +51,14 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment(), 
     protected lateinit var rootView: View
     protected var toolbarView: Toolbar? = null
     protected var titleView: TextView? = null
-    protected var navigationView: View? = null
 
-    open var isToolbarWhite = true
+    open var toolbarColorPrimary = R.color.colorPrimary
+    open var isToolbarColorPrimary = true
+
+    open var hideNavigation = false
     open var isUseWhiteNavigation = false
+    open var whiteNavigation = R.drawable.ic_nav_back_white
+    open var blackNavigation = R.drawable.ic_nav_back_black
 
     abstract val inflateRootView: (ViewGroup?) -> View
 
@@ -76,10 +80,14 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment(), 
     ): View? {
 
         rootView = inflateRootView(container)
+
         initTitle(activity as AppCompatActivity)
+
         initPageView()
+
         // 当从下一个Fragment返回会触发onViewCreated，因此初始化数据放到这里，如果返回需要刷新页面，可在onViewCreated中再次调用
         initPageData()
+
         return rootView
     }
 
@@ -87,28 +95,36 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment(), 
         activity.run {
             toolbarView?.run {
                 setSupportActionBar(this)
-                if (isToolbarWhite) setBackgroundResource(R.color.white)
-            }
-            titleView?.run {
-                text = pageTitle
-            }
-            supportActionBar?.setDisplayShowTitleEnabled(false)
 
-            navigationView?.run {
-                if (this is ImageView) {
-                    if (isUseWhiteNavigation) {
-                        setImageResource(R.drawable.ic_nav_back_white)
-                    } else {
-                        setImageResource(R.drawable.ic_nav_back_black)
+                //背景
+                if (isToolbarColorPrimary) setBackgroundResource(toolbarColorPrimary)
+
+                //标题
+                supportActionBar?.setDisplayShowTitleEnabled(false)
+                titleView?.run { text = pageTitle }
+
+
+                //返回
+                if (!hideNavigation) {
+
+                    setNavigationIcon(
+                        if (isUseWhiteNavigation) {
+                            whiteNavigation
+                        } else {
+                            blackNavigation
+                        }
+                    )
+
+                    setNavigationOnClickListener {
+                        this@BaseFragment.onBackPressed()
                     }
                 }
-
-                setOnClickListener {
-                    this@BaseFragment.onBackPressed()
-                }
             }
+
+
         }
     }
+
 
     override fun initPageData() {
         viewModel?.initPage()

@@ -21,6 +21,7 @@ import com.naivor.android.app.R
 import com.naivor.android.app.common.base.BaseActivity
 import com.naivor.android.app.common.base.BaseViewModel
 import com.naivor.android.app.databinding.ActivitySubBinding
+import com.naivor.android.app.domain.plant.ui.detail.PlantDetailFragment
 import com.naivor.android.app.domain.sub.setting.SettingFragment
 import com.naivor.android.app.others.Constants.EXTRA_KEY
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SubActivity : BaseActivity<ActivitySubBinding, BaseViewModel>() {
     companion object {
         val SKIP_SETTING = SettingFragment::class.qualifiedName
+        val SKIP_PLANT_DETAIL = PlantDetailFragment::class.qualifiedName
     }
 
     override val viewModel: BaseViewModel? = null
@@ -58,8 +60,9 @@ class SubActivity : BaseActivity<ActivitySubBinding, BaseViewModel>() {
 
     private fun dealSkipPage() {
         skipPage?.run {
-         val action =  when (this) {
-                SKIP_SETTING->  R.id.action_subFragment_to_settingFragment
+            val action = when (this) {
+                SKIP_SETTING -> R.id.action_subFragment_to_settingFragment
+                SKIP_PLANT_DETAIL -> R.id.action_subFragment_to_plantDetailFragment
                 else -> throw IllegalArgumentException("no such skip page destination defined:$this")
             }
 

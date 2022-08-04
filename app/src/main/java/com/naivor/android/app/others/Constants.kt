@@ -23,6 +23,8 @@ object Constants {
     const val DATABASE_NAME = "app-database"
     const val SHARED_PREF_NAME = "app-shared_preference"
 
+    const val PLANT_DATA_FILENAME = "plants.json"
+
     const val  LAST_LOGIN_ACCOUNT="login_account"
 
     const val API_URL_DEBUG ="https://api.github.com"

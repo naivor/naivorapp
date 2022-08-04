@@ -3,24 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="@color/colorPrimary"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    app:layout_collapseMode="pin"
+    tools:background="@color/colorPrimary">
 
-    <ImageView
-        android:id="@+id/img_navigation"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
-        tools:src="@drawable/ic_nav_back_white" />
 
     <TextView
-        android:id="@+id/tv_center"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -29,7 +22,7 @@
     <TextView
         android:id="@+id/tv_right"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="right"
         android:layout_marginRight="13dp"
         tools:text="更多"

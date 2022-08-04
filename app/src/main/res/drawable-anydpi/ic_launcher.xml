@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/ic_launcher_background"/>
-    <item android:drawable="@mipmap/ic_launcher_foreground"/>
+    <item
+        android:bottom="4dp"
+        android:drawable="@color/ic_launcher_background"
+        android:end="4dp"
+        android:start="4dp"
+        android:top="4dp" />
+    <item android:drawable="@mipmap/ic_launcher_foreground" />
 </layer-list>

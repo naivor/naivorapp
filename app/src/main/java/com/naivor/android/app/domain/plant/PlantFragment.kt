@@ -18,9 +18,14 @@ package com.naivor.android.app.domain.plant
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayoutMediator
+import com.naivor.android.app.R
 import com.naivor.android.app.common.base.BaseFragment
 import com.naivor.android.app.common.base.BaseViewModel
 import com.naivor.android.app.databinding.FragmentPlantBinding
+import com.naivor.android.app.domain.plant.adapter.MY_GARDEN_PAGE_INDEX
+import com.naivor.android.app.domain.plant.adapter.PLANT_LIST_PAGE_INDEX
+import com.naivor.android.app.domain.plant.adapter.SunflowerPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -30,9 +35,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class PlantFragment : BaseFragment<FragmentPlantBinding, BaseViewModel>() {
     override val viewModel: BaseViewModel?=null
 
-    override val pageTitle: String="植物"
+    override val pageTitle: String="Sunflower"
 
-    override var isToolbarWhite: Boolean=false
+    override var hideNavigation: Boolean=true
 
     override val inflateRootView: (ViewGroup?) -> View={
         __binding= FragmentPlantBinding.inflate(layoutInflater,it,false)
@@ -42,13 +47,36 @@ class PlantFragment : BaseFragment<FragmentPlantBinding, BaseViewModel>() {
     override fun initTitle(activity: AppCompatActivity) {
         binding.customTitle.run {
             toolbarView=toolbar
-            titleView=tvCenter
-
+            titleView=tvTitle
         }
         super.initTitle(activity)
     }
 
     override fun initPageView() {
+        with(binding){
+            viewPager.adapter=SunflowerPagerAdapter(this@PlantFragment)
+            // Set the icon and text for each tab
+            TabLayoutMediator(tabs, viewPager) { tab, position ->
+                tab.setIcon(getTabIcon(position))
+                tab.text = getTabTitle(position)
+            }.attach()
+        }
+    }
+
+    private fun getTabIcon(position: Int): Int {
+        return when (position) {
+            MY_GARDEN_PAGE_INDEX -> R.drawable.garden_tab_selector
+            PLANT_LIST_PAGE_INDEX -> R.drawable.plant_list_tab_selector
+            else -> throw IndexOutOfBoundsException()
+        }
+    }
+
+    private fun getTabTitle(position: Int): String? {
+        return when (position) {
+            MY_GARDEN_PAGE_INDEX -> getString(R.string.my_garden_title)
+            PLANT_LIST_PAGE_INDEX -> getString(R.string.plant_list_title)
+            else -> null
+        }
     }
 
 }

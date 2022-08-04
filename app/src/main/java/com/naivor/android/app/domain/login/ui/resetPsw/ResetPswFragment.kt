@@ -34,8 +34,6 @@ class ResetPswFragment : BaseFragment<FragmentResetpswBinding, ResetPswViewModel
 
     override val pageTitle: String = "重置密码"
 
-    override var isToolbarWhite: Boolean=false
-
     override val inflateRootView: (ViewGroup?) -> View = {
         __binding = FragmentResetpswBinding.inflate(layoutInflater, it, false)
         binding.root
@@ -45,8 +43,7 @@ class ResetPswFragment : BaseFragment<FragmentResetpswBinding, ResetPswViewModel
     override fun initTitle(activity: AppCompatActivity) {
         binding.customTitle.run {
             toolbarView=toolbar
-            titleView=tvCenter
-            navigationView=imgNavigation
+            titleView=tvTitle
 
         }
         super.initTitle(activity)

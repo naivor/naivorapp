@@ -35,8 +35,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     override val pageTitle: String="用户注册"
 
-    override var isToolbarWhite: Boolean=false
-
     override val inflateRootView: (ViewGroup?) -> View={
         __binding=FragmentRegisterBinding.inflate(layoutInflater,it,false)
         binding.root
@@ -45,8 +43,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     override fun initTitle(activity: AppCompatActivity) {
         binding.customTitle.run {
             toolbarView=toolbar
-            titleView=tvCenter
-            navigationView=imgNavigation
+            titleView=tvTitle
 
         }
         super.initTitle(activity)

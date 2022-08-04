@@ -34,7 +34,7 @@ class HotFragment : BaseFragment<FragmentHotBinding, BaseViewModel>() {
 
     override val pageTitle: String="热点"
 
-    override var isToolbarWhite: Boolean=false
+    override var hideNavigation: Boolean=true
 
     override val inflateRootView: (ViewGroup?) -> View={
         __binding=FragmentHotBinding.inflate(layoutInflater,it,false)
@@ -44,7 +44,7 @@ class HotFragment : BaseFragment<FragmentHotBinding, BaseViewModel>() {
     override fun initTitle(activity: AppCompatActivity) {
         binding.customTitle.run {
             toolbarView=toolbar
-            titleView=tvCenter
+            titleView=tvTitle
 
         }
 

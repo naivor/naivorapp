@@ -17,6 +17,8 @@ android {
         versionCode getVersionWithGitCommit(version)
         versionName "1.0.0"
         vectorDrawables.useSupportLibrary true
+
+        buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"" + getUnsplashAccess() + "\"")
     }
 
 
@@ -174,4 +176,8 @@ static def getVersionWithGitCommit(version) {
     process.waitFor()
     int commitCount = process.getText().toInteger()
     version * 100 + commitCount
+}
+
+def getUnsplashAccess() {
+    return project.findProperty("unsplash_access_key")
 }

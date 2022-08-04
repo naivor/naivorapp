@@ -23,13 +23,18 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.naivor.android.app.embedder.logger.Logger
+import com.naivor.android.app.embedder.repo.local.bean.GardenPlanting
+import com.naivor.android.app.embedder.repo.local.bean.Plant
 import com.naivor.android.app.embedder.repo.local.bean.User
+import com.naivor.android.app.embedder.repo.local.db.dao.GardenPlantingDao
+import com.naivor.android.app.embedder.repo.local.db.dao.PlantDao
 import com.naivor.android.app.embedder.repo.local.db.dao.UserDao
 import com.naivor.android.app.others.Constants.DATABASE_NAME
 
 @Database(
-    entities = [ User::class],
+    entities = [ User::class, GardenPlanting::class, Plant::class],
     version = 1,
     exportSchema = false
 )
@@ -37,6 +42,10 @@ import com.naivor.android.app.others.Constants.DATABASE_NAME
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
+
+    abstract fun gardenPlantingDao(): GardenPlantingDao
+
+    abstract fun plantDao(): PlantDao
 
     companion object {
 
@@ -56,7 +65,7 @@ abstract class AppDatabase : RoomDatabase() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
                             val request = OneTimeWorkRequestBuilder<DatabaseWorker>().build()
-//                            WorkManager.getInstance(context).enqueue(request)
+                            WorkManager.getInstance(context).enqueue(request)
                             Logger.d(request.toString())
                         }
                     }

@@ -63,3 +63,5 @@ build/
 *.ipk
 
 
+/adapter/
+/kotlinex/

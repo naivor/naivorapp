@@ -33,8 +33,6 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
     override val pageTitle: String = "设置"
 
-    override var isToolbarWhite: Boolean = false
-
     override val inflateRootView: (ViewGroup?) -> View = {
         __binding = FragmentSettingBinding.inflate(layoutInflater, it, false)
         binding.root
@@ -43,8 +41,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override fun initTitle(activity: AppCompatActivity) {
         binding.customTitle.run {
             toolbarView = toolbar
-            titleView = tvCenter
-            navigationView=imgNavigation
+            titleView = tvTitle
 
         }
         super.initTitle(activity)
